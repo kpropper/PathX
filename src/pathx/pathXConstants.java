@@ -165,4 +165,45 @@ public class pathXConstants {
     public static final Font FONT_STATS = new Font(Font.MONOSPACED, Font.BOLD, 20);
     public static final Font FONT_ALGORITHM_HEADER = new Font(Font.SERIF, Font.PLAIN, 25);
     
+    
+    //USED FOR LEVEL RENDERING
+    public static final int INTERSECTION_RADIUS = 20;
+    public static final int INT_STROKE = 3;
+    public static final int ONE_WAY_TRIANGLE_HEIGHT = 40;
+    public static final int ONE_WAY_TRIANGLE_WIDTH = 60;
+
+    // INITIAL START/DEST LOCATIONS
+    public static final int DEFAULT_START_X = 32;
+    public static final int DEFAULT_START_Y = 100;
+    public static final int DEFAULT_DEST_X = 650;
+    public static final int DEFAULT_DEST_Y = 100;
+    
+    // FOR INITIALIZING THE SPINNERS
+    public static final int MIN_BOTS_PER_LEVEL = 0;
+    public static final int MAX_BOTS_PER_LEVEL = 50;
+    public static final int BOTS_STEP = 1;
+    public static final int MIN_MONEY = 100;
+    public static final int MAX_MONEY = 10000;
+    public static final int STEP_MONEY = 100;
+    public static final int DEFAULT_MONEY = 100;
+    
+    // AND FOR THE ROAD SPEED LIMITS
+    public static final int DEFAULT_SPEED_LIMIT = 30;
+    public static final int MIN_SPEED_LIMIT = 10;
+    public static final int MAX_SPEED_LIMIT = 100;
+    public static final int SPEED_LIMIT_STEP = 10;
+    
+    // DEFAULT COLORS
+    public static final Color   INT_OUTLINE_COLOR   = Color.BLACK;
+    public static final Color   HIGHLIGHTED_COLOR = Color.YELLOW;
+    public static final Color   OPEN_INT_COLOR      = Color.GREEN;
+    public static final Color   CLOSED_INT_COLOR    = Color.RED;
+    
+    // FOR RENDERING STATS
+    public static final Color STATS_TEXT_COLOR = Color.ORANGE;
+    public static final Font STATS_TEXT_FONT = new Font("Monospace", Font.BOLD, 16);
+    public static final String MOUSE_SCREEN_POSITION_TITLE = "Screen Mouse Position: ";
+    public static final String MOUSE_LEVEL_POSITION_TITLE = "Level Mouse Position: ";
+    public static final String VIEWPORT_POSITION_TITLE = "Viewport Position: ";
+    
 }

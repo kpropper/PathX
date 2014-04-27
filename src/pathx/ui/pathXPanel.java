@@ -19,7 +19,6 @@ import static pathx.pathXConstants.*;
 import pathx.PathX.pathXPropertyType;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JViewport;
 
 //import pathx.data.pathXRecord;
 

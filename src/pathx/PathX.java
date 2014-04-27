@@ -68,7 +68,7 @@ public class PathX {
         PATH_IMG,
         
         // LOADED FROM THE GAME FLAVOR PROPERTIES XML FILE
-           // pathXproperties.xml
+        // pathXproperties.xml
                 
         /* IMAGE FILE NAMES */
         IMAGE_BUTTON_DELETE_ME,//////////////////////////////////////DELETE ME/////////////////////////////////////////////
@@ -134,7 +134,5 @@ public class PathX {
         AUDIO_CUE_WIN,
         SONG_CUE_GAME_SCREEN,
         SONG_CUE_MENU_SCREEN,    
-    }
-
-    
+    }  
 }
