@@ -1,5 +1,6 @@
 package pathx.ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,6 +18,8 @@ import properties_manager.PropertiesManager;
 import pathx.data.pathXDataModel;
 import static pathx.pathXConstants.*;
 import pathx.PathX.pathXPropertyType;
+import pathx.level.view.pathXLevelCanvas;
+import pathx.level.model.pathXLevelModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -35,6 +38,9 @@ public class pathXPanel extends JPanel{
     // AND HERE IS ALL THE GAME DATA THAT WE NEED TO RENDER
     private pathXDataModel data;
     
+    private pathXLevelModel model;
+    
+    pathXLevelCanvas canvas;
     
     
     /**
@@ -79,6 +85,14 @@ public class pathXPanel extends JPanel{
             if(map.isEnabled())
             {
                 renderMap(g);
+            }
+            else
+            {
+                Sprite isGame = game.getGUIButtons().get(GAME_HOME_BUTTON_TYPE);
+                if(isGame.isEnabled())
+                {
+                    renderGame(g);
+                }
             }
 
             //RENDER THE DIALOGS
@@ -151,6 +165,13 @@ public class pathXPanel extends JPanel{
            img = game.loadImage(imgPath + props.getProperty(pathXPropertyType.IMAGE_MAP));
            tmp = img.getSubimage(x, y, MAP_WIDTH, MAP_HEIGHT);
            g.drawImage(tmp, 0, 100, null);
+    }
+    
+    public void renderGame(Graphics g)
+    {
+       // INIT THE RENDER AREA
+   //     canvas = new pathXLevelCanvas(model);
+   //     this.add(canvas, BorderLayout.WEST);
     }
        
     /**

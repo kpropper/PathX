@@ -3,6 +3,10 @@ package pathx.level.model;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
+import mini_game.MiniGame;
+import pathx.PathX;
+import static pathx.pathXConstants.*;
+import properties_manager.PropertiesManager;
 
 /**
  *
@@ -18,7 +22,9 @@ public class pathXLevelModel {
 
     // DATA FOR RENDERING
     pathXLevelViewport viewport;
-
+    
+    private MiniGame game;
+    
     // WE ONLY NEED TO TURN THIS ON ONCE
     boolean levelBeingEdited;
     Image backgroundImage;
@@ -37,13 +43,17 @@ public class pathXLevelModel {
     int lastMouseX;
     int lastMouseY; 
     
+    //GETS THE LOCATION OF IMAGES
+    PropertiesManager props = PropertiesManager.getPropertiesManager();
+    String imgPath = props.getProperty(PathX.pathXPropertyType.PATH_IMG);
+    
     public pathXLevelModel()
     {
         level = new pathXLevel();
 //        editMode = PXLE_EditMode.NOTHING_SELECTED;
         viewport = new pathXLevelViewport();
 //        levelBeingEdited = false;
-//        startRoadIntersection = null;
+        startRoadIntersection = null;
     }
     
         // ACCESSOR METHODS
@@ -83,5 +93,50 @@ public class pathXLevelModel {
     {
         ArrayList<Road> roads = level.roads;
         return roads.iterator();
+    }
+    
+    public void updateBackgroundImage(String newBgImage)
+    {
+
+        // UPDATE THE LEVEL TO FIT THE BACKGROUDN IMAGE SIZE
+        level.backgroundImageFileName = newBgImage;
+        backgroundImage = game.loadImage(imgPath + level.backgroundImageFileName);//view.loadImage(LEVELS_PATH + level.backgroundImageFileName);
+        int levelWidth = backgroundImage.getWidth(null);
+        int levelHeight = backgroundImage.getHeight(null);
+        viewport.setLevelDimensions(levelWidth, levelHeight);
+   //     view.getCanvas().repaint();
+    }
+
+    /**
+     * Updates the image used for the starting location and forces rendering.
+     */
+    public void updateStartingLocationImage(String newStartImage)
+    {
+        level.startingLocationImageFileName = newStartImage;
+        startingLocationImage = game.loadImage(imgPath + level.startingLocationImageFileName);
+  //      view.getCanvas().repaint();
+    }
+
+    /**
+     * Updates the image used for the destination and forces rendering.
+     */
+    public void updateDestinationImage(String newDestImage)
+    {
+        level.destinationImageFileName = newDestImage;
+        destinationImage = game.loadImage(imgPath + level.destinationImageFileName);
+ //       view.getCanvas().repaint();
+    }
+
+    /**
+     * Used for scrolling the viewport by (incX, incY). Note that it won't
+     * let the viewport scroll off the level.
+     */
+    public void moveViewport(int incX, int incY)
+    {
+        // MOVE THE VIEWPORT
+        viewport.move(incX, incY);
+
+        // AND NOW FORCE A REDRAW
+ //       view.getCanvas().repaint();
     }
 }

@@ -33,6 +33,9 @@ import pathx.PathX.pathXPropertyType;
 //import pathx.data.pathXRecord;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import java.io.File;
+import pathx.file.pathXFileIO;
+import pathx.level.model.pathXLevelModel;
 
 /**
  *
@@ -349,6 +352,10 @@ public class pathXMiniGame extends MiniGame{
      */
     public void switchToGameScreen()
     {
+        
+        File testFile = new File("C:\\Users\\karl.PROPPERENT\\Documents\\NetBeansProjects\\pathX\\pathXLevelEditor\\data\\levels\\Cali.bin");
+       // levelIO.loadLevel(testFile, model);
+        
         PropertiesManager props = PropertiesManager.getPropertiesManager();
      
         //DEACTIVATE LEVEL SELECT CONTROLS
@@ -387,8 +394,7 @@ public class pathXMiniGame extends MiniGame{
         // AND CHANGE THE SCREEN STATE
         currentScreenState = GAME_SCREEN_STATE;
         
-      
-
+        
         // PLAY THE GAMEPLAY SCREEN SONG
   //      audio.stop(path.SONG_CUE_MENU_SCREEN.toString()); 
 //        audio.play(SortingHatPropertyType.SONG_CUE_GAME_SCREEN.toString(), true);        
