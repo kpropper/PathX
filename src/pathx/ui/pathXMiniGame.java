@@ -34,6 +34,7 @@ import pathx.PathX.pathXPropertyType;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.io.File;
+import pathx.file.pathXLevelIO;
 import pathx.file.pathXFileIO;
 import pathx.level.model.pathXLevelModel;
 
@@ -59,6 +60,9 @@ public class pathXMiniGame extends MiniGame{
     // THE SCREEN CURRENTLY BEING PLAYED
     private String currentScreenState;
 
+    pathXFileIO levelIO = new pathXFileIO();
+    pathXLevelModel model = new pathXLevelModel();
+    
     // ACCESSOR METHODS
         // - getPlayerRecord
         // - getErrorHandler
@@ -353,8 +357,11 @@ public class pathXMiniGame extends MiniGame{
     public void switchToGameScreen()
     {
         
-        File testFile = new File("C:\\Users\\karl.PROPPERENT\\Documents\\NetBeansProjects\\pathX\\pathXLevelEditor\\data\\levels\\Cali.bin");
-       // levelIO.loadLevel(testFile, model);
+        File testFile = new File("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+        if(testFile.canRead())
+        {
+            levelIO.loadLevel(testFile, model);
+        }
         
         PropertiesManager props = PropertiesManager.getPropertiesManager();
      

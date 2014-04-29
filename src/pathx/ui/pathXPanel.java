@@ -40,7 +40,8 @@ public class pathXPanel extends JPanel{
     
     private pathXLevelModel model;
     
-    pathXLevelCanvas canvas;
+  //  pathXLevelCanvas canvas = new pathXLevelCanvas(model);
+
     
     
     /**
@@ -158,10 +159,10 @@ public class pathXPanel extends JPanel{
            int x  = viewport.getViewportX();
            int y = viewport.getViewportY();
            
-            BufferedImage img;
-            BufferedImage tmp;
-            PropertiesManager props = PropertiesManager.getPropertiesManager();
-            String imgPath = props.getProperty(pathXPropertyType.PATH_IMG);
+           BufferedImage img;
+           BufferedImage tmp;
+           PropertiesManager props = PropertiesManager.getPropertiesManager();
+           String imgPath = props.getProperty(pathXPropertyType.PATH_IMG);
            img = game.loadImage(imgPath + props.getProperty(pathXPropertyType.IMAGE_MAP));
            tmp = img.getSubimage(x, y, MAP_WIDTH, MAP_HEIGHT);
            g.drawImage(tmp, 0, 100, null);
@@ -170,7 +171,7 @@ public class pathXPanel extends JPanel{
     public void renderGame(Graphics g)
     {
        // INIT THE RENDER AREA
-   //     canvas = new pathXLevelCanvas(model);
+    //    canvas.repaint();
    //     this.add(canvas, BorderLayout.WEST);
     }
        

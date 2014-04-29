@@ -1,6 +1,13 @@
 package pathx.level.model;
 
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import mini_game.MiniGame;
@@ -23,7 +30,7 @@ public class pathXLevelModel {
     // DATA FOR RENDERING
     pathXLevelViewport viewport;
     
-    private MiniGame game;
+ //   private MiniGame game;
     
     // WE ONLY NEED TO TURN THIS ON ONCE
     boolean levelBeingEdited;
@@ -45,7 +52,7 @@ public class pathXLevelModel {
     
     //GETS THE LOCATION OF IMAGES
     PropertiesManager props = PropertiesManager.getPropertiesManager();
-    String imgPath = props.getProperty(PathX.pathXPropertyType.PATH_IMG);
+    String imgPath = "./img/";//props.getProperty(PathX.pathXPropertyType.PATH_IMG);
     
     public pathXLevelModel()
     {
@@ -99,8 +106,14 @@ public class pathXLevelModel {
     {
 
         // UPDATE THE LEVEL TO FIT THE BACKGROUDN IMAGE SIZE
-        level.backgroundImageFileName = newBgImage;
-        backgroundImage = game.loadImage(imgPath + level.backgroundImageFileName);//view.loadImage(LEVELS_PATH + level.backgroundImageFileName);
+        level.backgroundImageFileName = "D:\\Development\\NetBeansProjects\\PathX\\img\\DeathValleyBackground.png";//newBgImage;
+   //     BufferedImage img = null;
+        try
+        {
+            backgroundImage = ImageIO.read(new File(level.backgroundImageFileName));
+        } catch (IOException e) {
+        }
+  //      backgroundImage = game.loadImage(/*imgPath +*/ level.backgroundImageFileName);//view.loadImage(LEVELS_PATH + level.backgroundImageFileName);
         int levelWidth = backgroundImage.getWidth(null);
         int levelHeight = backgroundImage.getHeight(null);
         viewport.setLevelDimensions(levelWidth, levelHeight);
@@ -113,7 +126,12 @@ public class pathXLevelModel {
     public void updateStartingLocationImage(String newStartImage)
     {
         level.startingLocationImageFileName = newStartImage;
-        startingLocationImage = game.loadImage(imgPath + level.startingLocationImageFileName);
+        try
+        {
+            startingLocationImage = ImageIO.read(new File(imgPath + level.startingLocationImageFileName));
+        } catch (IOException e) {
+        }
+  //      startingLocationImage = game.loadImage(imgPath + level.startingLocationImageFileName);
   //      view.getCanvas().repaint();
     }
 
@@ -123,7 +141,12 @@ public class pathXLevelModel {
     public void updateDestinationImage(String newDestImage)
     {
         level.destinationImageFileName = newDestImage;
-        destinationImage = game.loadImage(imgPath + level.destinationImageFileName);
+        try
+        {
+            startingLocationImage = ImageIO.read(new File(imgPath + level.destinationImageFileName));
+        } catch (IOException e) {
+        }
+ //       destinationImage = game.loadImage(imgPath + level.destinationImageFileName);
  //       view.getCanvas().repaint();
     }
 
