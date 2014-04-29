@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import static pathx.pathXConstants.GAME_SCREEN_STATE;
 import static pathx.pathXConstants.MENU_SCREEN_STATE;
-//import static pathx.pathXConstants.VIEWPORT_INC;
+import static pathx.pathXConstants.*;
 import pathx.PathX;
 import pathx.data.pathXDataModel;
 //import pathx.file.pathXFileManager;
@@ -93,22 +93,22 @@ public class pathXEventHandler {
     
     public void respondToUpRequest()
     {
-        game.moveViewport(0,-5);
+        game.moveViewport(0,-LEVEL_VIEWPORT_INC);
     }
     
     public void respondToDownRequest()
     {
-        game.moveViewport(0,5);
+        game.moveViewport(0,LEVEL_VIEWPORT_INC);
     }
         
     public void respondToLeftRequest()
     {
-        game.moveViewport(-5,0);
+        game.moveViewport(-LEVEL_VIEWPORT_INC,0);
     }
             
     public void respondToRightRequest()
     {
-        game.moveViewport(5,0);
+        game.moveViewport(LEVEL_VIEWPORT_INC,0);
     }
             
     public void respondToSoundRequest()

@@ -91,11 +91,11 @@ public class pathXLevelCanvas extends JPanel {
         // IT HASN'T BEEN SIZED YET, SO JUMP OUT
         else
         {
-            return;
+ //           return;
         }
 
         // MAKE SURE WE'VE STARTED EDITING
-        if (model.isLevelBeingEdited())
+        if (/*model.isLevelBeingEdited()*/1==1)
         {
             // RENDER THE BACKGROUND IMAGE
             renderLevelBackground(g2);
@@ -104,7 +104,7 @@ public class pathXLevelCanvas extends JPanel {
             renderRoads(g2);
 
             // RENDER THE INTERSECTIONS
-            renderIntersections(g2);
+           renderIntersections(g2);
 
             // RENDERING STATS CAN HELP FIGURE OUT WHAT'S GOING ON
 //            renderStats(g2);

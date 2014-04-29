@@ -16,6 +16,7 @@ import static pathx.pathXConstants.*;
 import pathx.ui.pathXMiniGame;
 import pathx.ui.pathXPanel;
 import pathx.ui.pathXTileState;
+import pathx.level.model.pathXLevelModel;
 
 
 /**
@@ -26,8 +27,7 @@ public class pathXDataModel extends MiniGameDataModel {
     // THIS CLASS HAS A REFERERENCE TO THE MINI GAME SO THAT IT
     // CAN NOTIFY IT TO UPDATE THE DISPLAY WHEN THE DATA MODEL CHANGES
     private MiniGame miniGame;
-
-
+    
 
 
     /**

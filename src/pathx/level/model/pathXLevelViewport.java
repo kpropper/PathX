@@ -25,8 +25,8 @@ public class pathXLevelViewport {
      */
     public pathXLevelViewport()
     {
-        width = 0;
-        height = 0;
+        width = 0;  ///ChangeMe all 0's
+        height = 0; ///ChangeMe;
         x = 0;
         y = 0;
         levelWidth = width;
@@ -58,7 +58,7 @@ public class pathXLevelViewport {
     }
 
     /**
-     * Sets the level's dimensions, which shoudl be larger than the viewport.
+     * Sets the level's dimensions, which should be larger than the viewport.
      */
     public void setLevelDimensions(int initLevelWidth, int initLevelHeight)
     {

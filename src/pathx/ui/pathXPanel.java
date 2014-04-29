@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +15,7 @@ import mini_game.MiniGame;
 import mini_game.Sprite;
 import mini_game.SpriteType;
 import mini_game.Viewport;
+import pathx.ui.pathXMiniGame;
 import properties_manager.PropertiesManager;
 import pathx.data.pathXDataModel;
 import static pathx.pathXConstants.*;
@@ -22,6 +24,7 @@ import pathx.level.view.pathXLevelCanvas;
 import pathx.level.model.pathXLevelModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import pathx.file.pathXFileIO;
 
 //import pathx.data.pathXRecord;
 
@@ -38,10 +41,13 @@ public class pathXPanel extends JPanel{
     // AND HERE IS ALL THE GAME DATA THAT WE NEED TO RENDER
     private pathXDataModel data;
     
-    private pathXLevelModel model;
-    
-  //  pathXLevelCanvas canvas = new pathXLevelCanvas(model);
+    pathXFileIO levelIO = new pathXFileIO();
+    pathXLevelModel model = new pathXLevelModel();
 
+    
+    private int renderCanvas = 0;
+    pathXLevelCanvas canvas;
+    
     
     
     /**
@@ -170,9 +176,29 @@ public class pathXPanel extends JPanel{
     
     public void renderGame(Graphics g)
     {
+        if (renderCanvas == 0)
+        {
+            renderCanvas++;
+            File testFile = new File("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+            if(testFile.canRead())
+            {
+             levelIO.loadLevel(testFile, model);
+            }
+            model.getViewport().setViewportDimensions(400, 480);
+  //        model.updateDestinationImage("D:\\Development\\NetBeansProjects\\PathX\\img\\DefaultStartLocation.png");
+  //        model.updateStartingLocationImage("D:\\Development\\NetBeansProjects\\PathX\\img\\DefaultStartLocation.png");
+            
+            
+            
+            canvas = new pathXLevelCanvas(model);
+    //        this.add(canvas, 100,100);
+    //                canvas.paintComponent(g);
+        }
        // INIT THE RENDER AREA
-    //    canvas.repaint();
+        canvas.repaint();
    //     this.add(canvas, BorderLayout.WEST);
+         canvas.paintComponent(g);
+
     }
        
     /**

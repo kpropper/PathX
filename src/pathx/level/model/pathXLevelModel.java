@@ -52,7 +52,7 @@ public class pathXLevelModel {
     
     //GETS THE LOCATION OF IMAGES
     PropertiesManager props = PropertiesManager.getPropertiesManager();
-    String imgPath = "./img/";//props.getProperty(PathX.pathXPropertyType.PATH_IMG);
+    String imgPath = props.getProperty(PathX.pathXPropertyType.PATH_IMG);
     
     public pathXLevelModel()
     {
@@ -128,10 +128,10 @@ public class pathXLevelModel {
         level.startingLocationImageFileName = newStartImage;
         try
         {
-            startingLocationImage = ImageIO.read(new File(imgPath + level.startingLocationImageFileName));
+            startingLocationImage = ImageIO.read(new File("./img/pathX/DefaultStartLocation.png"/*imgPath + level.startingLocationImageFileName*/));
         } catch (IOException e) {
         }
-  //      startingLocationImage = game.loadImage(imgPath + level.startingLocationImageFileName);
+  //      startingLocationImage = //game.loadImage(imgPath + level.startingLocationImageFileName);
   //      view.getCanvas().repaint();
     }
 
@@ -143,7 +143,7 @@ public class pathXLevelModel {
         level.destinationImageFileName = newDestImage;
         try
         {
-            startingLocationImage = ImageIO.read(new File(imgPath + level.destinationImageFileName));
+            destinationImage = ImageIO.read(new File("./img/pathX/DefaultStartLocation.png"/*imgPath + level.destinationImageFileName*/));
         } catch (IOException e) {
         }
  //       destinationImage = game.loadImage(imgPath + level.destinationImageFileName);

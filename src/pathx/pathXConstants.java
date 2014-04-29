@@ -127,6 +127,7 @@ public class pathXConstants {
     public static final int LEFT_BUTTON_Y = UP_BUTTON_Y + 50;
     public static final int RIGHT_BUTTON_Y = LEFT_BUTTON_Y;
     public static final int RIGHT_BUTTON_X = LEFT_BUTTON_X + 100;
+    public static final int LEVEL_VIEWPORT_INC = 10;
     
     // UI CONTROLS POSITIONS IN THE GAME SCREEN
     public static final int GAME_CLOSE_BUTTON_X = 70;

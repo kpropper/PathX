@@ -16,6 +16,7 @@ public class PathX {
     // HANDLING MODE, BASICALLY IT BECOMES THE FOCAL
     // POINT, RUNNING THE UI AND EVERYTHING ELSE
     static pathXMiniGame miniGame = new pathXMiniGame();
+    
 
     /**
      * This is where the pathX game application starts execution. We'll
