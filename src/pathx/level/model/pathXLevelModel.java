@@ -28,7 +28,7 @@ public class pathXLevelModel {
 //    PXLE_EditMode editMode;
 
     // DATA FOR RENDERING
-    pathXLevelViewport viewport;
+//    pathXLevelViewport viewport;
     
  //   private MiniGame game;
     
@@ -37,6 +37,7 @@ public class pathXLevelModel {
     Image backgroundImage;
     Image startingLocationImage;
     Image destinationImage;
+    
     
     // THE SELECTED INTERSECTION OR ROAD MIGHT BE EDITED OR DELETED
     // AND IS RENDERED DIFFERENTLY
@@ -58,7 +59,7 @@ public class pathXLevelModel {
     {
         level = new pathXLevel();
 //        editMode = PXLE_EditMode.NOTHING_SELECTED;
-        viewport = new pathXLevelViewport();
+//        viewport = new pathXLevelViewport();
 //        levelBeingEdited = false;
         startRoadIntersection = null;
     }
@@ -66,9 +67,10 @@ public class pathXLevelModel {
         // ACCESSOR METHODS
     public pathXLevel       getLevel()                  {   return level;                   }
 //    public PXLE_View        getView()                   {   return view;                    }
-    public pathXLevelViewport         getViewport()               {   return viewport;                }
+//    public pathXLevelViewport         getViewport()               {   return viewport;                }
 //    public PXLE_EditMode    getEditMode()               {   return editMode;                }
     public boolean          isLevelBeingEdited()        {   return levelBeingEdited;        }
+    public String           getBackgroundImageName()    {   return level.backgroundImageFileName;       }
     public Image            getBackgroundImage()        {   return backgroundImage;         }
     public Image            getStartingLocationImage()  {   return startingLocationImage;   }
     public Image            getDesinationImage()        {   return destinationImage;        }
@@ -116,7 +118,7 @@ public class pathXLevelModel {
   //      backgroundImage = game.loadImage(/*imgPath +*/ level.backgroundImageFileName);//view.loadImage(LEVELS_PATH + level.backgroundImageFileName);
         int levelWidth = backgroundImage.getWidth(null);
         int levelHeight = backgroundImage.getHeight(null);
-        viewport.setLevelDimensions(levelWidth, levelHeight);
+   //     viewport.setLevelDimensions(levelWidth, levelHeight);
    //     view.getCanvas().repaint();
     }
 
@@ -157,7 +159,7 @@ public class pathXLevelModel {
     public void moveViewport(int incX, int incY)
     {
         // MOVE THE VIEWPORT
-        viewport.move(incX, incY);
+    //    viewport.move(incX, incY);
 
         // AND NOW FORCE A REDRAW
  //       view.getCanvas().repaint();

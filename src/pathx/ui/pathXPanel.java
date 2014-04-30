@@ -198,9 +198,6 @@ public class pathXPanel extends JPanel{
     {
         viewport = data.getViewport();
         BufferedImage img;
-        img = game.loadImage("./img/pathX/DeathValleyBackground.png");//(imgPath + props.getProperty(pathXPropertyType.IMAGE_MAP));
-        
-        
         if (renderCanvas == 0)
         {
             renderCanvas++;
@@ -209,33 +206,19 @@ public class pathXPanel extends JPanel{
             {
              levelIO.loadLevel(testFile, model);
             }
+            img = game.loadImage(/*GAME_IMG_PATH + */model.getBackgroundImageName());/*("./img/pathX/DeathValleyBackground.png")*/
             initGameRender();
-       //     Viewport viewport = data.getViewport();
             viewport.setGameWorldSize(img.getWidth(), img.getHeight());
             viewport.setViewportSize(440, 480);
             while(viewport.getViewportX() != 0) viewport.scroll(-1, 0);
             while(viewport.getViewportY() != 0) viewport.scroll(0, -1);
-            
-       //    int x  = viewport.getViewportX();
-       //    int y = viewport.getViewportY();
-
-      //     BufferedImage img;
-      //     BufferedImage tmp;
-//           PropertiesManager props = PropertiesManager.getPropertiesManager();
-//           String imgPath = props.getProperty(pathXPropertyType.PATH_IMG);
-     //      img = game.loadImage("./image/pathX/DeathValleyBackground.png");//(imgPath + props.getProperty(pathXPropertyType.IMAGE_MAP));
-     //      tmp = img.getSubimage(x, y, 1107, 653);
-     //      g.drawImage(tmp, 0, 100, null);
-            //canvas = new pathXLevelCanvas(model);
-            //this.add(canvas = new pathXLevelCanvas(model),BorderLayout.EAST);
         }
         
         int x  = viewport.getViewportX();
         int y = viewport.getViewportY();
         
+        img = game.loadImage(/*GAME_IMG_PATH + */model.getBackgroundImageName());/*("./img/pathX/DeathValleyBackground.png")*/
         BufferedImage tmp;
-//           PropertiesManager props = PropertiesManager.getPropertiesManager();
-//           String imgPath = props.getProperty(pathXPropertyType.PATH_IMG);
         tmp = img.getSubimage(x, y, 440, 480);
         g.drawImage(tmp, 200, 0, null);
         
@@ -243,8 +226,10 @@ public class pathXPanel extends JPanel{
         // THE ACTUAL TYPE OF THE g OBJECT
         Graphics2D g2 = (Graphics2D) g;
         
+        //RENDER THE ROADS TODO:CLEAN UP DISPLAY
         renderRoads(g2);
         
+        //RENDERS THE INTERSECTIONS
         renderIntersections(g2);
 
     }
@@ -269,20 +254,7 @@ public class pathXPanel extends JPanel{
      */
     public void renderTile(Graphics g, pathXTile tileToRender)
     {
-   //     // ONLY RENDER VISIBLE TILES
-   //     if (!tileToRender.getState().equals(pathXTileState.INVISIBLE_STATE.toString()))
-   //     {
-   //         Viewport viewport = data.getViewport();
-    //        int correctedTileX = (int)(tileToRender.getX());
-      //     int correctedTileY = (int)(tileToRender.getY());
 
-            // THEN THE TILE IMAGE
-        //    SpriteType bgST = tileToRender.getSpriteType();
-    //        Image img = bgST.getStateImage(tileToRender.getState());
-    //        g.drawImage(img,    correctedTileX, 
-    //                            correctedTileY, 
-    //                            bgST.getWidth(), bgST.getHeight(), null); 
-    //    }
     }
     
     /**
@@ -363,55 +335,6 @@ public class pathXPanel extends JPanel{
         };
         recyclableTriangle.closePath();
     }
-
-    /**
-     * Here's where all rendering happens.
-     */
- //   @Override
- //   public void paintComponent(Graphics g)
-//    {
-        // WE'LL USE THE Graphics2D FEATURES, WHICH IS 
-        // THE ACTUAL TYPE OF THE g OBJECT
- //       Graphics2D g2 = (Graphics2D) g;
-
-        // FIRST CLEAR ALL THE BACKGROUND
-//        super.paintComponent(g);
-
-        // MAKE SURE THE CANVAS HAS BEEN SIZED
-  //      if (getWidth() > 0)
- //       {
- //           viewport.width = getWidth();
- //           viewport.height = getHeight();
-//        }
-        // IT HASN'T BEEN SIZED YET, SO JUMP OUT
-//        else
-//        {
-//            return;
-//        }
-
-        // MAKE SURE WE'VE STARTED EDITING
-//        if (/*model.isLevelBeingEdited()*/1==1)
- //       {
-            // RENDER THE BACKGROUND IMAGE
-//            renderLevelBackground(g2);
-
-            // RENDER THE ROADS
- //           renderRoads(g2);
-
-            // RENDER THE INTERSECTIONS
- //          renderIntersections(g2);
-
-            // RENDERING STATS CAN HELP FIGURE OUT WHAT'S GOING ON
-//            renderStats(g2);
-//        }
-//    }
-
-    // HELPER METHOD FOR RENDERING THE LEVEL BACKGROUND
- //   private void renderLevelBackground(Graphics2D g2)
- //   {
- //       Image backgroundImage = model.getBackgroundImage();
- //       g2.drawImage(backgroundImage, 0, 0, viewport.width, viewport.height, viewport.x, viewport.y, viewport.x + viewport.width, viewport.y + viewport.height, null);
- //   }
 
     // HELPER METHOD FOR RENDERING THE LEVEL ROADS
     private void renderRoads(Graphics2D g2)
@@ -542,23 +465,6 @@ public class pathXPanel extends JPanel{
             g2.drawImage(img, x1 - viewport.getViewportX() + VIEWABLE_GAMEWORLD_OFFSET, y1 - viewport.getViewportY(), null);
         }        
     }
-
-    // HELPER METHOD FOR RENDERING SOME SCREEN STATS, WHICH CAN
-    // HELP WITH DEBUGGING
-//    private void renderStats(Graphics2D g2)
-//    {
-//        Viewport viewport = model.getViewport();
-//        g2.setColor(STATS_TEXT_COLOR);
-//        g2.setFont(STATS_TEXT_FONT);
-//        g2.drawString(MOUSE_SCREEN_POSITION_TITLE + model.getLastMouseX() + ", " + model.getLastMouseY(),
-//                STATS_X, MOUSE_SCREEN_POSITION_Y);
-//        int levelMouseX = model.getLastMouseX() + viewport.x;
-//        int levelMouseY = model.getLastMouseY() + viewport.y;
-//        g2.drawString(MOUSE_LEVEL_POSITION_TITLE + levelMouseX + ", " + levelMouseY,
-//                STATS_X, MOUSE_LEVEL_POSITION_Y);
-//        g2.drawString(VIEWPORT_POSITION_TITLE + viewport.x + ", " + viewport.y,
-//                STATS_X, VIEWPORT_POSITION_Y);
-//    }
     
     // YOU'LL LIKELY AT THE VERY LEAST WANT THIS ONE. IT RENDERS A NICE
     // LITTLE POINTING TRIANGLE ON ONE-WAY ROADS

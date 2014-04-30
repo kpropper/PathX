@@ -47,7 +47,7 @@ public class pathXLevelCanvas extends JPanel {
     {
         // KEEP THESE FOR LATER
         model = initModel;
-        viewport = model.getViewport();
+  //      viewport = model.getViewport();
 
         // MAKE THE RENDER OBJECTS TO BE RECYCLED
         recyclableCircle = new Ellipse2D.Double(0, 0, INTERSECTION_RADIUS * 2, INTERSECTION_RADIUS * 2);
@@ -123,7 +123,7 @@ public class pathXLevelCanvas extends JPanel {
     {
         // GO THROUGH THE ROADS AND RENDER ALL OF THEM
   
-        pathXLevelViewport viewport = model.getViewport();
+    //    pathXLevelViewport viewport = model.getViewport();
         Iterator<Road> it = model.roadsIterator();
         g2.setStroke(recyclableStrokes.get(INT_STROKE));
         while (it.hasNext())
