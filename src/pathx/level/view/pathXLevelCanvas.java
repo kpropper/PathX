@@ -91,7 +91,7 @@ public class pathXLevelCanvas extends JPanel {
         // IT HASN'T BEEN SIZED YET, SO JUMP OUT
         else
         {
- //           return;
+//            return;
         }
 
         // MAKE SURE WE'VE STARTED EDITING
@@ -122,13 +122,14 @@ public class pathXLevelCanvas extends JPanel {
     private void renderRoads(Graphics2D g2)
     {
         // GO THROUGH THE ROADS AND RENDER ALL OF THEM
+  
         pathXLevelViewport viewport = model.getViewport();
         Iterator<Road> it = model.roadsIterator();
         g2.setStroke(recyclableStrokes.get(INT_STROKE));
         while (it.hasNext())
         {
             Road road = it.next();
-            if (!model.isSelectedRoad(road))
+            if (/*!model.isSelectedRoad(road)*/1 == 1)
                 renderRoad(g2, road, INT_OUTLINE_COLOR);
         }
         

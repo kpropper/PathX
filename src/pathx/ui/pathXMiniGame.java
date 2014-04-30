@@ -133,32 +133,39 @@ public class pathXMiniGame extends MiniGame{
     public void moveViewport(int x, int y)
     {
         Viewport viewport = data.getViewport();
-        if((viewport.getViewportX() + x >= 0 && viewport.getViewportX() + x <= (viewport.getGameWorldWidth()- WINDOW_WIDTH))
-                && (viewport.getViewportY() + y >= 0 && viewport.getViewportY() + y <= (viewport.getGameWorldHeight()-380)))
+        if(currentScreenState == LEVEL_SELECT_SCREEN_STATE)
         {
-            viewport.scroll(x, y);
-            
-            Sprite temp = guiButtons.get(DELETEME_BUTTON_TYPE);
-            temp.setX(temp.getX()- x);
-            temp.setY(temp.getY() - y);
-            if(temp.getY() < 100)
+            if((viewport.getViewportX() + x >= 0 && viewport.getViewportX() + x <= (viewport.getGameWorldWidth()- WINDOW_WIDTH))
+                && (viewport.getViewportY() + y >= 0 && viewport.getViewportY() + y <= (viewport.getGameWorldHeight()-380)))
             {
-                temp.setState("INVISIBLE_STATE");
-                temp.setEnabled(false);
+                viewport.scroll(x, y);    
+                Sprite temp = guiButtons.get(DELETEME_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }        
+ 
             }
-            
-            if(temp.getY() > 100)
+        }
+        else if(currentScreenState == GAME_SCREEN_STATE)
+        {
+            if((viewport.getViewportX() + x >= 0 && viewport.getViewportX() + x <= (viewport.getGameWorldWidth()- 440))
+                && (viewport.getViewportY() + y >= 0 && viewport.getViewportY() + y <= (viewport.getGameWorldHeight()-480)))
             {
-                temp.setState("VISIBLE_STATE");
-                temp.setEnabled(true);
+                viewport.scroll(x, y); 
             }
         }
     }
     
-    public void moveGameViewport(int x,int y)
-    {
-        
-    }
 
      // SERVICE METHODS
         // - displayStats

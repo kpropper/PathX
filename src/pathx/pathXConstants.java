@@ -136,6 +136,7 @@ public class pathXConstants {
     public static final int GAME_HOME_BUTTON_Y = GAME_CLOSE_BUTTON_Y;
     public static final int BACK_BUTTON_X = GAME_HOME_BUTTON_X + 26;
     public static final int BACK_BUTTON_Y = GAME_HOME_BUTTON_Y + 50;
+    public static final int VIEWABLE_GAMEWORLD_OFFSET = 220;
     
     
     //LEVEL INFO DIALOG COORDINATES
