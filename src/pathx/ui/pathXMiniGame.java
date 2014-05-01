@@ -250,7 +250,207 @@ public class pathXMiniGame extends MiniGame{
                     temp.setState("VISIBLE_STATE");
                     temp.setEnabled(true);
                 }
+                
+                temp = guiButtons.get(SD_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
  
+                temp = guiButtons.get(DALL_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(SJ_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(AUS_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(JAC_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(IND_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(SF_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(CO_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(FW_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(CHAR_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(DET_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(EP_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(MEM_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
             }
         }
         else if(currentScreenState == GAME_SCREEN_STATE)
@@ -339,8 +539,45 @@ public class pathXMiniGame extends MiniGame{
         guiDecor.get(MAP_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiDecor.get(MAP_TYPE).setEnabled(false);
         
-        guiButtons.get(DELETEME_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
-        guiButtons.get(DELETEME_BUTTON_TYPE).setEnabled(false);
+        // AND THE LEVEL BUTTONS
+        guiButtons.get(LA_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(LA_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(NY_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(NY_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(HOU_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(HOU_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(SA_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(SA_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(PHIL_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(PHIL_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(PHE_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(PHE_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(SD_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(SD_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(DALL_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(DALL_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(SJ_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(SJ_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(AUS_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(AUS_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(JAC_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(JAC_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(IND_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(IND_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(SF_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(SF_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(CO_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(CO_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(FW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(FW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(CHAR_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(CHAR_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(DET_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(DET_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(EP_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(EP_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(MEM_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(MEM_BUTTON_TYPE).setEnabled(false);
         
         
         //ACTIVATE THE SPLASH SCREEN CONTROLS
@@ -440,10 +677,36 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(HOU_BUTTON_TYPE).setY(HOU_Y);
         guiButtons.get(SA_BUTTON_TYPE).setX(SA_X);
         guiButtons.get(SA_BUTTON_TYPE).setY(SA_Y);
-        guiButtons.get(PHIL_BUTTON_TYPE).setX(SA_X);
-        guiButtons.get(PHIL_BUTTON_TYPE).setY(SA_Y);
-        guiButtons.get(PHE_BUTTON_TYPE).setX(SA_X);
-        guiButtons.get(PHE_BUTTON_TYPE).setY(SA_Y);
+        guiButtons.get(PHIL_BUTTON_TYPE).setX(PHIL_X);
+        guiButtons.get(PHIL_BUTTON_TYPE).setY(PHIL_Y);
+        guiButtons.get(PHE_BUTTON_TYPE).setX(PHE_X);
+        guiButtons.get(PHE_BUTTON_TYPE).setY(PHE_Y);
+        guiButtons.get(SD_BUTTON_TYPE).setX(SD_X);
+        guiButtons.get(SD_BUTTON_TYPE).setY(SD_Y);
+        guiButtons.get(DALL_BUTTON_TYPE).setX(DALL_X);
+        guiButtons.get(DALL_BUTTON_TYPE).setY(DALL_Y);
+        guiButtons.get(SJ_BUTTON_TYPE).setX(SJ_X);
+        guiButtons.get(SJ_BUTTON_TYPE).setY(SJ_Y);
+        guiButtons.get(AUS_BUTTON_TYPE).setX(AUS_X);
+        guiButtons.get(AUS_BUTTON_TYPE).setY(AUS_Y);
+        guiButtons.get(JAC_BUTTON_TYPE).setX(JAC_X);
+        guiButtons.get(JAC_BUTTON_TYPE).setY(JAC_Y);
+        guiButtons.get(IND_BUTTON_TYPE).setX(IND_X);
+        guiButtons.get(IND_BUTTON_TYPE).setY(IND_Y);
+        guiButtons.get(SF_BUTTON_TYPE).setX(SF_X);
+        guiButtons.get(SF_BUTTON_TYPE).setY(SF_Y);
+        guiButtons.get(CO_BUTTON_TYPE).setX(CO_X);
+        guiButtons.get(CO_BUTTON_TYPE).setY(CO_Y);
+        guiButtons.get(FW_BUTTON_TYPE).setX(FW_X);
+        guiButtons.get(FW_BUTTON_TYPE).setY(FW_Y);
+        guiButtons.get(CHAR_BUTTON_TYPE).setX(CHAR_X);
+        guiButtons.get(CHAR_BUTTON_TYPE).setY(CHAR_Y);
+        guiButtons.get(DET_BUTTON_TYPE).setX(DET_X);
+        guiButtons.get(DET_BUTTON_TYPE).setY(DET_Y);
+        guiButtons.get(EP_BUTTON_TYPE).setX(EP_X);
+        guiButtons.get(EP_BUTTON_TYPE).setY(EP_Y);
+        guiButtons.get(MEM_BUTTON_TYPE).setX(MEM_X);
+        guiButtons.get(MEM_BUTTON_TYPE).setY(MEM_Y);
         
         //ACTIVATE BUTTONS
         guiButtons.get(HOME_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
@@ -473,6 +736,32 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(PHIL_BUTTON_TYPE).setEnabled(true);
         guiButtons.get(PHE_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(PHE_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(SD_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(SD_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(DALL_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(DALL_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(SJ_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(SJ_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(AUS_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(AUS_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(JAC_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(JAC_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(IND_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(IND_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(SF_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(SF_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(CO_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(CO_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(FW_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(FW_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(CHAR_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(CHAR_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(DET_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(DET_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(EP_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(EP_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(MEM_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(MEM_BUTTON_TYPE).setEnabled(true);
         
         
         // AND CHANGE THE SCREEN STATE
@@ -500,8 +789,6 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(HOME_BUTTON_TYPE).setEnabled(false);
         guiButtons.get(CLOSE_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(CLOSE_BUTTON_TYPE).setEnabled(false);
-        guiButtons.get(DELETEME_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
-        guiButtons.get(DELETEME_BUTTON_TYPE).setEnabled(false);
         guiDecor.get(MAP_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(UP_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(UP_ARROW_BUTTON_TYPE).setEnabled(false);
@@ -512,6 +799,46 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(RIGHT_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(RIGHT_ARROW_BUTTON_TYPE).setEnabled(false);
         guiDecor.get(MAP_TYPE).setEnabled(false);
+        
+        // AND THE LEVEL BUTTONS
+        guiButtons.get(LA_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(LA_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(NY_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(NY_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(HOU_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(HOU_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(SA_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(SA_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(PHIL_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(PHIL_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(PHE_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(PHE_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(SD_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(SD_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(DALL_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(DALL_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(SJ_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(SJ_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(AUS_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(AUS_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(JAC_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(JAC_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(IND_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(IND_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(SF_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(SF_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(CO_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(CO_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(FW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(FW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(CHAR_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(CHAR_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(DET_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(DET_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(EP_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(EP_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(MEM_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(MEM_BUTTON_TYPE).setEnabled(false);
         
         //ACTIVATE GAME SCREEN CONTROLS
         guiButtons.get(GAME_HOME_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
@@ -869,7 +1196,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(RIGHT_ARROW_BUTTON_TYPE).setEnabled(false);
         
 //////////////////////////////DELETE ME BUTTON/////////////////////////////////////////////////// 
-        String cityButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_DELETE_ME);
+        String cityButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_LOCATION_MARKER);
         img = loadImage(imgPath + cityButton);
         sT = new SpriteType(LA_BUTTON_TYPE);
         sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
@@ -919,7 +1246,98 @@ public class pathXMiniGame extends MiniGame{
         s = new Sprite(sT, PHE_X, PHE_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.put(PHE_BUTTON_TYPE, s);
         guiButtons.get(PHE_BUTTON_TYPE).setEnabled(false);
-
+        
+        sT = new SpriteType(SD_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, SD_X, SD_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(SD_BUTTON_TYPE, s);
+        guiButtons.get(SD_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(DALL_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, DALL_X, DALL_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(DALL_BUTTON_TYPE, s);
+        guiButtons.get(DALL_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(SJ_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, SJ_X, SJ_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(SJ_BUTTON_TYPE, s);
+        guiButtons.get(SJ_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(AUS_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, AUS_X, AUS_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(AUS_BUTTON_TYPE, s);
+        guiButtons.get(AUS_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(JAC_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, JAC_X, JAC_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(JAC_BUTTON_TYPE, s);
+        guiButtons.get(JAC_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(IND_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, IND_X, IND_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(IND_BUTTON_TYPE, s);
+        guiButtons.get(IND_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(SF_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, SF_X, SF_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(SF_BUTTON_TYPE, s);
+        guiButtons.get(SF_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(CO_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, CO_X, CO_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(CO_BUTTON_TYPE, s);
+        guiButtons.get(CO_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(FW_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, FW_X, FW_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(FW_BUTTON_TYPE, s);
+        guiButtons.get(FW_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(CHAR_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, CHAR_X, CHAR_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(CHAR_BUTTON_TYPE, s);
+        guiButtons.get(CHAR_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(DET_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, DET_X, DET_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(DET_BUTTON_TYPE, s);
+        guiButtons.get(DET_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(EP_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, EP_X, EP_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(EP_BUTTON_TYPE, s);
+        guiButtons.get(EP_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(MEM_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, MEM_X, MEM_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(MEM_BUTTON_TYPE, s);
+        guiButtons.get(MEM_BUTTON_TYPE).setEnabled(false);
+        
         // NOW ADD THE DIALOGS
         
         // THE LEVEL INFORMATION DISPLAY

@@ -112,6 +112,7 @@ public class PathX {
         IMAGE_BUTTON_ARROW_RIGHT_MOUSE_OVER,
         IMAGE_WINDOW_ICON,
         IMAGE_MAP,
+        IMAGE_BUTTON_LOCATION_MARKER,
         
         /* GAME TEXT */
         TEXT_ERROR_LOADING_AUDIO,

@@ -42,6 +42,8 @@
         <property name="IMAGE_BUTTON_BACK"                  value="./pathX/ButtonBack.png"></property>
         <property name="IMAGE_BUTTON_BACK_MOUSE_OVER"       value="./pathX/ButtonBackMouseOver.png"></property>
         <property name="IMAGE_MAP"                          value="./pathX/Map.png"></property>
+        <property name="IMAGE_BUTTON_LOCATION_MARKER"       value="./pathX/ButtonLocationMarker.png"></property>
+        
         
         
         
