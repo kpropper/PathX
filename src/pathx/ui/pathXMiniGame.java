@@ -146,7 +146,7 @@ public class pathXMiniGame extends MiniGame{
                 && (viewport.getViewportY() + y >= 0 && viewport.getViewportY() + y <= (viewport.getGameWorldHeight()-380)))
             {
                 viewport.scroll(x, y);    
-                Sprite temp = guiButtons.get(DELETEME_BUTTON_TYPE);
+                Sprite temp = guiButtons.get(LA_BUTTON_TYPE);
                 temp.setX(temp.getX()- x);
                 temp.setY(temp.getY() - y);
                 if(temp.getY() < 100)
@@ -159,7 +159,97 @@ public class pathXMiniGame extends MiniGame{
                 {
                     temp.setState("VISIBLE_STATE");
                     temp.setEnabled(true);
-                }        
+                }
+                
+                temp = guiButtons.get(NY_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(CH_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(HOU_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(SA_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(PHIL_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
+                
+                temp = guiButtons.get(PHE_BUTTON_TYPE);
+                temp.setX(temp.getX()- x);
+                temp.setY(temp.getY() - y);
+                if(temp.getY() < 100)
+                {
+                    temp.setState("INVISIBLE_STATE");
+                    temp.setEnabled(false);
+                }
+            
+                if(temp.getY() > 100)
+                {
+                    temp.setState("VISIBLE_STATE");
+                    temp.setEnabled(true);
+                }
  
             }
         }
@@ -340,16 +430,26 @@ public class pathXMiniGame extends MiniGame{
         initMapViewport();
         
         //RESET LEVEL POSITIONS
-        guiButtons.get(DELETEME_BUTTON_TYPE).setX(200);
-        guiButtons.get(DELETEME_BUTTON_TYPE).setY(675);
+        guiButtons.get(LA_BUTTON_TYPE).setX(LA_X);
+        guiButtons.get(LA_BUTTON_TYPE).setY(LA_Y);
+        guiButtons.get(NY_BUTTON_TYPE).setX(NY_X);
+        guiButtons.get(NY_BUTTON_TYPE).setY(NY_Y);
+        guiButtons.get(CH_BUTTON_TYPE).setX(CH_X);
+        guiButtons.get(CH_BUTTON_TYPE).setY(CH_Y);
+        guiButtons.get(HOU_BUTTON_TYPE).setX(HOU_X);
+        guiButtons.get(HOU_BUTTON_TYPE).setY(HOU_Y);
+        guiButtons.get(SA_BUTTON_TYPE).setX(SA_X);
+        guiButtons.get(SA_BUTTON_TYPE).setY(SA_Y);
+        guiButtons.get(PHIL_BUTTON_TYPE).setX(SA_X);
+        guiButtons.get(PHIL_BUTTON_TYPE).setY(SA_Y);
+        guiButtons.get(PHE_BUTTON_TYPE).setX(SA_X);
+        guiButtons.get(PHE_BUTTON_TYPE).setY(SA_Y);
         
         //ACTIVATE BUTTONS
         guiButtons.get(HOME_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(HOME_BUTTON_TYPE).setEnabled(true);
         guiButtons.get(CLOSE_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(CLOSE_BUTTON_TYPE).setEnabled(true);
-        guiButtons.get(DELETEME_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
-        guiButtons.get(DELETEME_BUTTON_TYPE).setEnabled(true);
         guiButtons.get(UP_ARROW_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(UP_ARROW_BUTTON_TYPE).setEnabled(true);
         guiButtons.get(DOWN_ARROW_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
@@ -359,6 +459,21 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(RIGHT_ARROW_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(RIGHT_ARROW_BUTTON_TYPE).setEnabled(true);
         guiDecor.get(MAP_TYPE).setEnabled(true);
+        
+        // AND THE LEVEL BUTTONS
+        guiButtons.get(LA_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(LA_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(NY_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(NY_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(HOU_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(HOU_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(SA_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(SA_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(PHIL_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(PHIL_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(PHE_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(PHE_BUTTON_TYPE).setEnabled(true);
+        
         
         // AND CHANGE THE SCREEN STATE
         currentScreenState = LEVEL_SELECT_SCREEN_STATE;
@@ -692,7 +807,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.put(BACK_BUTTON_TYPE, s);
         guiButtons.get(BACK_BUTTON_TYPE).setEnabled(false);
         
-                //BACK BUTTON FOR GAMESCREEN
+        //BACK BUTTON FOR GAMESCREEN
         String levelInfoCloseButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_LEVEL_INFO_CLOSE);
         sT = new SpriteType(BACK_BUTTON_TYPE);
 	img = loadImage(imgPath + levelInfoCloseButton);
@@ -754,15 +869,56 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(RIGHT_ARROW_BUTTON_TYPE).setEnabled(false);
         
 //////////////////////////////DELETE ME BUTTON/////////////////////////////////////////////////// 
-        String deleteMeButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_DELETE_ME);
-        sT = new SpriteType(DELETEME_BUTTON_TYPE);
-	img = loadImage(imgPath + deleteMeButton);
+        String cityButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_DELETE_ME);
+        img = loadImage(imgPath + cityButton);
+        sT = new SpriteType(LA_BUTTON_TYPE);
         sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
         sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
-        s = new Sprite(sT, 200, 675, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
-        guiButtons.put(DELETEME_BUTTON_TYPE, s);
-        guiButtons.get(DELETEME_BUTTON_TYPE).setEnabled(false);
+        s = new Sprite(sT, LA_X, LA_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(LA_BUTTON_TYPE, s);
+        guiButtons.get(LA_BUTTON_TYPE).setEnabled(false);
         
+        sT = new SpriteType(NY_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, NY_X, NY_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(NY_BUTTON_TYPE, s);
+        guiButtons.get(NY_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(CH_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, CH_X, CH_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(CH_BUTTON_TYPE, s);
+        guiButtons.get(CH_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(HOU_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, HOU_X, HOU_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(HOU_BUTTON_TYPE, s);
+        guiButtons.get(HOU_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(SA_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, SA_X, SA_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(SA_BUTTON_TYPE, s);
+        guiButtons.get(SA_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(PHIL_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, PHIL_X, PHIL_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(PHIL_BUTTON_TYPE, s);
+        guiButtons.get(PHIL_BUTTON_TYPE).setEnabled(false);
+        
+        sT = new SpriteType(PHE_BUTTON_TYPE);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, PHE_X, PHE_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(PHE_BUTTON_TYPE, s);
+        guiButtons.get(PHE_BUTTON_TYPE).setEnabled(false);
 
         // NOW ADD THE DIALOGS
         
@@ -903,7 +1059,7 @@ public class pathXMiniGame extends MiniGame{
         
         
         ////////////////////////////////////////////////////DELETE ME???????????????//////////////////////////////////
-            guiButtons.get(DELETEME_BUTTON_TYPE).setActionListener(new ActionListener() {
+            guiButtons.get(LA_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
                 {   eventHandler.respondToGameRequest();  }
         });

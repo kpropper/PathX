@@ -53,6 +53,28 @@ public class pathXConstants {
     public static final String RIGHT_ARROW_BUTTON_TYPE = "RIGHT_ARROW_BUTTON_TYPE";
     
     
+    // LEVEL BUTTONS
+    public static final String LA_BUTTON_TYPE = "LA_BUTTON_TYPE";
+    public static final String NY_BUTTON_TYPE = "NY_BUTTON_TYPE";
+    public static final String CH_BUTTON_TYPE = "CH_BUTTON_TYPE";
+    public static final String HOU_BUTTON_TYPE = "HOU_BUTTON_TYPE";
+    public static final String SA_BUTTON_TYPE = "SA_BUTTON_TYPE";
+    public static final String PHIL_BUTTON_TYPE = "PHIL_BUTTON_TYPE";
+    public static final String PHE_BUTTON_TYPE = "PHE_BUTTON_TYPE";
+    public static final String SD_BUTTON_TYPE = "SD_BUTTON_TYPE";
+    public static final String DALL_BUTTON_TYPE = "DALL_BUTTON_TYPE";
+    public static final String SJ_BUTTON_TYPE = "SJ_BUTTON_TYPE";
+    public static final String AUS_BUTTON_TYPE = "AUS_BUTTON_TYPE";
+    public static final String JAC_BUTTON_TYPE = "JAC_BUTTON_TYPE";
+    public static final String IND_BUTTON_TYPE = "IND_BUTTON_TYPE";
+    public static final String SF_BUTTON_TYPE = "SF_BUTTON_TYPE";
+    public static final String CO_BUTTON_TYPE = "CO_BUTTON_TYPE";
+    public static final String FW_BUTTON_TYPE = "FW_BUTTON_TYPE";
+    public static final String CHAR_BUTTON_TYPE = "CHAR_BUTTON_TYPE";
+    public static final String DET_BUTTON_TYPE = "DET_BUTTON_TYPE";
+    public static final String EP_BUTTON_TYPE = "EP_BUTTON_TYPE";
+    public static final String MEM_BUTTON_TYPE = "MEM_BUTTON_TYPE";
+    
     
         public static final String DELETEME_BUTTON_TYPE = "DELETEME_BUTTON_TYPE";////////////////////////////////////DELETE ME
 
@@ -128,6 +150,20 @@ public class pathXConstants {
     public static final int RIGHT_BUTTON_Y = LEFT_BUTTON_Y;
     public static final int RIGHT_BUTTON_X = LEFT_BUTTON_X + 100;
     public static final int LEVEL_VIEWPORT_INC = 10;
+    public static final int LA_X = 200;
+    public static final int LA_Y = 625;
+    public static final int NY_X = 1560;
+    public static final int NY_Y = 420;
+    public static final int CH_X = 1120;
+    public static final int CH_Y = 375;
+    public static final int HOU_X = 885;
+    public static final int HOU_Y = 850;
+    public static final int SA_X = 795;
+    public static final int SA_Y = 865;
+    public static final int PHIL_X = 1500;
+    public static final int PHIL_Y = 450;
+    public static final int PHE_X = 400;
+    public static final int PHE_Y = 630;
     
     // UI CONTROLS POSITIONS IN THE GAME SCREEN
     public static final String GAME_IMG_PATH = "./img/pathX/";
