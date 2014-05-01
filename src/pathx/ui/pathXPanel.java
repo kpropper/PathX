@@ -64,7 +64,7 @@ public class pathXPanel extends JPanel{
 
     
     private int renderCanvas = 0;
-    pathXLevelCanvas canvas;
+ //   pathXLevelCanvas canvas;
     
     private Viewport viewport;
     
@@ -100,6 +100,7 @@ public class pathXPanel extends JPanel{
         {
             // MAKE SURE WE HAVE EXCLUSIVE ACCESS TO THE GAME DATA
             game.beginUsingData();
+     
         
             // CLEAR THE PANEL
             super.paintComponent(g);
@@ -111,15 +112,13 @@ public class pathXPanel extends JPanel{
             Sprite map = game.getGUIDecor().get(MAP_TYPE);
             if(map.isEnabled())
             {
+                renderCanvas = 0;
                 renderMap(g);
+
             }
-            else
+            else if(data.inProgress())
             {
-                Sprite isGame = game.getGUIButtons().get(GAME_HOME_BUTTON_TYPE);
-                if(isGame.isEnabled())
-                {
                     renderGame(g);
-                }
             }
 
             //RENDER THE DIALOGS
@@ -128,7 +127,7 @@ public class pathXPanel extends JPanel{
 
             // AND THE BUTTONS AND DECOR
             renderGUIControls(g);
-            
+
         }
         finally
         {
@@ -206,12 +205,17 @@ public class pathXPanel extends JPanel{
             {
              levelIO.loadLevel(testFile, model);
             }
+            data.initLevel(model);
             img = game.loadImage(/*GAME_IMG_PATH + */model.getBackgroundImageName());/*("./img/pathX/DeathValleyBackground.png")*/
             initGameRender();
             viewport.setGameWorldSize(img.getWidth(), img.getHeight());
             viewport.setViewportSize(440, 480);
             while(viewport.getViewportX() != 0) viewport.scroll(-1, 0);
             while(viewport.getViewportY() != 0) viewport.scroll(0, -1);
+            
+            pathXGameController editLevelHandler = new pathXGameController(model);
+            this.addMouseListener(editLevelHandler);
+            this.addMouseMotionListener(editLevelHandler);
         }
         
         int x  = viewport.getViewportX();
@@ -225,6 +229,10 @@ public class pathXPanel extends JPanel{
         // WE'LL USE THE Graphics2D FEATURES, WHICH IS 
         // THE ACTUAL TYPE OF THE g OBJECT
         Graphics2D g2 = (Graphics2D) g;
+        
+        //BUTTONS AND DIOLOGS ARE RERENDERED DUE TO CLIPPPING OF THE ROADS
+        renderDialogs(g);
+        renderGUIControls(g);
         
         //RENDER THE ROADS TODO:CLEAN UP DISPLAY
         renderRoads(g2);
@@ -298,7 +306,7 @@ public class pathXPanel extends JPanel{
     
     
     
-    
+    //USED FOR RENDERING ROADS AND INTERSECTIONS
     // WE'LL RECYCLE THESE DURING RENDERING
     Ellipse2D.Double recyclableCircle;
     Line2D.Double recyclableLine;
@@ -351,16 +359,6 @@ public class pathXPanel extends JPanel{
                 renderRoad(g2, road, INT_OUTLINE_COLOR);
         }
         
-        // NOW DRAW THE LINE BEING ADDED, IF THERE IS ONE
-//        if (model.isAddingRoadEnd())
-//        {
-//            Intersection startRoadIntersection = model.getStartRoadIntersection();
-//            recyclableLine.x1 = startRoadIntersection.x-viewport.x;
-//            recyclableLine.y1 = startRoadIntersection.y-viewport.y;
-//            recyclableLine.x2 = model.getLastMouseX()-viewport.x;
-//            recyclableLine.y2 = model.getLastMouseY()-viewport.y;
-//            g2.draw(recyclableLine);
-//        }
 
         // AND RENDER THE SELECTED ONE, IF THERE IS ONE
         Road selectedRoad = model.getSelectedRoad();
@@ -388,6 +386,7 @@ public class pathXPanel extends JPanel{
         recyclableLine.y2 = road.getNode2().y-viewport.getViewportY();
 
         // AND DRAW IT
+        g2.setClip(200, 0, 440, 480);
         g2.draw(recyclableLine);
         
         // AND IF IT'S A ONE WAY ROAD DRAW THE MARKER

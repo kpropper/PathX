@@ -61,6 +61,9 @@ public class pathXMiniGame extends MiniGame{
     
     // THE SCREEN CURRENTLY BEING PLAYED
     private String currentScreenState;
+    
+    // THIS IS THE VIEWPORT
+    private Viewport viewport;
 
 //    pathXFileIO levelIO = new pathXFileIO();
 //    pathXLevelModel model = new pathXLevelModel();
@@ -126,13 +129,17 @@ public class pathXMiniGame extends MiniGame{
     
     public void initMapViewport()
     {
-        data.getViewport().setViewportSize(640, 380);
-        data.getViewport().setGameWorldSize(1812, 1000);
+        viewport = data.getViewport();
+        
+        while(viewport.getViewportX() != 0) viewport.scroll(-1, 0);
+        while(viewport.getViewportY() != 0) viewport.scroll(0, -1);
+        viewport.setViewportSize(640, 380);
+        viewport.setGameWorldSize(1812, 1000);
     }
     
     public void moveViewport(int x, int y)
     {
-        Viewport viewport = data.getViewport();
+        viewport = data.getViewport();
         if(currentScreenState == LEVEL_SELECT_SCREEN_STATE)
         {
             if((viewport.getViewportX() + x >= 0 && viewport.getViewportX() + x <= (viewport.getGameWorldWidth()- WINDOW_WIDTH))
@@ -208,6 +215,8 @@ public class pathXMiniGame extends MiniGame{
      */    
     public void switchToSplashScreen()
     {
+        data.setGameState(MiniGameState.NOT_STARTED);
+        
         // CHANGE THE BACKGROUND
         guiDecor.get(BACKGROUND_TYPE).setState(MENU_SCREEN_STATE);
         
@@ -266,23 +275,7 @@ public class pathXMiniGame extends MiniGame{
         // DEACTIVATE THE LEVEL SELECT BUTTONS
         PropertiesManager props = PropertiesManager.getPropertiesManager();
 /*        
-
-        // DEACTIVATE ALL DIALOGS
-        guiDialogs.get(WIN_DIALOG_TYPE).setState(SortingHatTileState.INVISIBLE_STATE.toString());
-        guiDialogs.get(STATS_DIALOG_TYPE).setState(SortingHatTileState.INVISIBLE_STATE.toString());
-
-        // HIDE THE TILES
-        ((SortingHatDataModel)data).enableTiles(false);
-
-        // MAKE THE CURRENT SCREEN THE MENU SCREEN
-        currentScreenState = MENU_SCREEN_STATE;
-        
-        // AND UPDATE THE DATA GAME STATE
-        data.setGameState(MiniGameState.NOT_STARTED);
-        
-        // PLAY THE WELCOME SCREEN SONG
-        audio.play(SortingHatPropertyType.SONG_CUE_MENU_SCREEN.toString(), true); 
-        audio.stop(SortingHatPropertyType.SONG_CUE_GAME_SCREEN.toString());    */
+*/
     }
     
     public void switchToSettingsScreen()
@@ -313,10 +306,14 @@ public class pathXMiniGame extends MiniGame{
         // AND CHANGE THE SCREEN STATE
         currentScreenState = SETTINGS_SCREEN_STATE;
         
+       
+        
     }
     
     public void switchToLevelSelectScreen()
     {
+        data.setGameState(MiniGameState.NOT_STARTED);
+        
         // CHANGE THE BACKGROUND
         guiDecor.get(BACKGROUND_TYPE).setState(LEVEL_SELECT_SCREEN_STATE);
         
@@ -339,7 +336,14 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).setEnabled(false);
         guiDialogs.get(LEVEL_INFO_DIALOG_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         
-        //ACTIVATE THE HOME BUTTON
+        //RESET THE VIEWPORT FOR THE MAP
+        initMapViewport();
+        
+        //RESET LEVEL POSITIONS
+        guiButtons.get(DELETEME_BUTTON_TYPE).setX(200);
+        guiButtons.get(DELETEME_BUTTON_TYPE).setY(675);
+        
+        //ACTIVATE BUTTONS
         guiButtons.get(HOME_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(HOME_BUTTON_TYPE).setEnabled(true);
         guiButtons.get(CLOSE_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
@@ -358,8 +362,6 @@ public class pathXMiniGame extends MiniGame{
         
         // AND CHANGE THE SCREEN STATE
         currentScreenState = LEVEL_SELECT_SCREEN_STATE;
-        
-        initMapViewport();
 
     }
     
@@ -414,7 +416,7 @@ public class pathXMiniGame extends MiniGame{
         // AND CHANGE THE SCREEN STATE
         currentScreenState = GAME_SCREEN_STATE;
         
-        
+        data.setGameState(MiniGameState.IN_PROGRESS);
         // PLAY THE GAMEPLAY SCREEN SONG
   //      audio.stop(path.SONG_CUE_MENU_SCREEN.toString()); 
 //        audio.play(SortingHatPropertyType.SONG_CUE_GAME_SCREEN.toString(), true);        
@@ -773,17 +775,6 @@ public class pathXMiniGame extends MiniGame{
 //        y = (viewport.getScreenHeight()/2) - (img.getHeight(null)/2);
         s = new Sprite(sT, LEVEL_INFO_DIALOG_X, LEVEL_INFO_DIALOG_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
         guiDialogs.put(LEVEL_INFO_DIALOG_TYPE, s);
-/*        
-        // AND THE WIN CONDITION DISPLAY
-        String winDisplay = props.getProperty(SortingHatPropertyType.IMAGE_DIALOG_WIN);
-        sT = new SpriteType(WIN_DIALOG_TYPE);
-        img = loadImageWithColorKey(imgPath + winDisplay, COLOR_KEY);
-        sT.addState(SortingHatTileState.VISIBLE_STATE.toString(), img);
-        x = (viewport.getScreenWidth()/2) - (img.getWidth(null)/2);
-        y = (viewport.getScreenHeight()/2) - (img.getHeight(null)/2);
-        s = new Sprite(sT, x, y, 0, 0, SortingHatTileState.INVISIBLE_STATE.toString());
-        guiDialogs.put(WIN_DIALOG_TYPE, s);
-		    */
     }		
         
     /**

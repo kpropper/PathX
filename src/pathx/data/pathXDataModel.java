@@ -28,6 +28,8 @@ public class pathXDataModel extends MiniGameDataModel {
     // CAN NOTIFY IT TO UPDATE THE DISPLAY WHEN THE DATA MODEL CHANGES
     private MiniGame miniGame;
     
+    private pathXLevelModel model;
+    
 
 
     /**
@@ -46,9 +48,9 @@ public class pathXDataModel extends MiniGameDataModel {
 
 
 
-    public void initLevel()
+    public void initLevel(pathXLevelModel initLevel)
     {
-
+        model = initLevel;
     }
 
     
