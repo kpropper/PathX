@@ -63,10 +63,12 @@ public class pathXPanel extends JPanel{
     pathXLevelModel model = new pathXLevelModel();
 
     
-    private int renderCanvas = 0;
+    private int renderGameField = 0;
  //   pathXLevelCanvas canvas;
     
     private Viewport viewport;
+    
+    private pathXLevelSelector levelPath;
     
     
     
@@ -79,10 +81,11 @@ public class pathXPanel extends JPanel{
      * 
      * @param initData pathX game data.
      */
-    public pathXPanel(MiniGame initGame, pathXDataModel initData)
+    public pathXPanel(MiniGame initGame, pathXDataModel initData, pathXLevelSelector initLevelSelector)
     {
         game = initGame;
         data = initData;
+        levelPath = initLevelSelector;
     }
 
 
@@ -112,7 +115,7 @@ public class pathXPanel extends JPanel{
             Sprite map = game.getGUIDecor().get(MAP_TYPE);
             if(map.isEnabled())
             {
-                renderCanvas = 0;
+                renderGameField = 0;
                 renderMap(g);
 
             }
@@ -197,10 +200,10 @@ public class pathXPanel extends JPanel{
     {
         viewport = data.getViewport();
         BufferedImage img;
-        if (renderCanvas == 0)
+        if (renderGameField == 0)
         {
-            renderCanvas++;
-            File testFile = new File("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+            renderGameField++;
+            File testFile = new File(levelPath.getLevelPath()/*"D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin"*/);
             if(testFile.canRead())
             {
              levelIO.loadLevel(testFile, model);
