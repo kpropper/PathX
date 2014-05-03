@@ -574,6 +574,16 @@ public class pathXMiniGame extends MiniGame{
         guiDecor.get(MAP_TYPE).setEnabled(false);
         guiButtons.get(PLAYER_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(PLAYER_TYPE).setEnabled(false);
+        guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(GAME_DOWN_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(GAME_DOWN_ARROW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(GAME_LEFT_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(GAME_LEFT_ARROW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(GAME_RIGHT_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(GAME_RIGHT_ARROW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(PAUSE_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(PAUSE_BUTTON_TYPE).setEnabled(false);
         
         // AND THE LEVEL BUTTONS
         guiButtons.get(LA_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
@@ -702,6 +712,16 @@ public class pathXMiniGame extends MiniGame{
         guiDialogs.get(LEVEL_INFO_DIALOG_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(PLAYER_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(PLAYER_TYPE).setEnabled(false);
+        guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(GAME_DOWN_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(GAME_DOWN_ARROW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(GAME_LEFT_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(GAME_LEFT_ARROW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(GAME_RIGHT_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(GAME_RIGHT_ARROW_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(PAUSE_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(PAUSE_BUTTON_TYPE).setEnabled(false);
         
         //RESET THE VIEWPORT FOR THE MAP
         initMapViewport();

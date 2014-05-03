@@ -20,7 +20,6 @@ import properties_manager.PropertiesManager;
 import pathx.data.pathXDataModel;
 import static pathx.pathXConstants.*;
 import pathx.PathX.pathXPropertyType;
-import pathx.level.view.pathXLevelCanvas;
 import pathx.level.model.pathXLevelModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
