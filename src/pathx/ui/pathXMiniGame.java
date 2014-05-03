@@ -1637,7 +1637,7 @@ public class pathXMiniGame extends MiniGame{
         //LA (LOS ANGELES)
         guiButtons.get(LA_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "LosAngles.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
