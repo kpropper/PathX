@@ -43,6 +43,12 @@
         <property name="IMAGE_BUTTON_BACK_MOUSE_OVER"       value="./pathX/ButtonBackMouseOver.png"></property>
         <property name="IMAGE_MAP"                          value="./pathX/Map.png"></property>
         <property name="IMAGE_BUTTON_LOCATION_MARKER"       value="./pathX/ButtonLocationMarker.png"></property>
+        <property name="IMAGE_BUTTON_GAME_ARROW_LEFT"       value="./pathX/ButtonGameLeft.png"></property>
+        <property name="IMAGE_BUTTON_GAME_ARROW_RIGHT"      value="./pathX/ButtonGameRight.png"></property>
+        <property name="IMAGE_BUTTON_GAME_ARROW_UP"         value="./pathX/ButtonGameUp.png"></property>
+        <property name="IMAGE_BUTTON_GAME_ARROW_DOWN"       value="./pathX/ButtonGameDown.png"></property>
+        <property name="IMAGE_BUTTON_GAME_PLAY"             value="./pathX/ButtonGamePlay.png"></property>
+        <property name="IMAGE_BUTTON_PAUSE"                 value="./pathX/ButtonPause.png"></property>
         
         
         

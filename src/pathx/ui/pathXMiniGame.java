@@ -466,6 +466,20 @@ public class pathXMiniGame extends MiniGame{
         }
     }
     
+    public void respondToPauseRequest()
+    {
+        if(!data.isPaused())
+        {
+            guiButtons.get(PAUSE_BUTTON_TYPE).setState(pathXTileState.SELECTED_STATE.toString());
+            data.pause();
+        }
+        else
+        {
+            guiButtons.get(PAUSE_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+            data.unpause();
+        }
+    }
+    
 
      // SERVICE METHODS
         // - displayStats
@@ -856,6 +870,16 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(GAME_CLOSE_BUTTON_TYPE).setEnabled(true);
         guiButtons.get(BACK_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(BACK_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(GAME_DOWN_ARROW_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(GAME_DOWN_ARROW_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(GAME_LEFT_ARROW_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(GAME_LEFT_ARROW_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(GAME_RIGHT_ARROW_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(GAME_RIGHT_ARROW_BUTTON_TYPE).setEnabled(true);
+        guiButtons.get(PAUSE_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+        guiButtons.get(PAUSE_BUTTON_TYPE).setEnabled(true);
         guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).setEnabled(true);
         guiDialogs.get(LEVEL_INFO_DIALOG_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
@@ -1157,6 +1181,64 @@ public class pathXMiniGame extends MiniGame{
         s = new Sprite(sT, LEVEL_INFO_CLOSE_BUTTON_X, LEVEL_INFO_CLOSE_BUTTON_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.put(LEVEL_INFO_CLOSE_BUTTON_TYPE, s);
         guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).setEnabled(false);
+        
+        String GameUpButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_GAME_ARROW_UP);
+        sT = new SpriteType(GAME_UP_ARROW_BUTTON_TYPE);
+	img = loadImage(imgPath + GameUpButton);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+//        String upMouseOverButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_ARROW_UP_MOUSE_OVER);
+//        img = loadImage(imgPath + GameUpButton);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, GAME_UP_BUTTON_X, GAME_UP_BUTTON_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(GAME_UP_ARROW_BUTTON_TYPE, s);
+        guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setEnabled(false);
+        
+        String GameRightButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_GAME_ARROW_RIGHT);
+        sT = new SpriteType(GAME_RIGHT_ARROW_BUTTON_TYPE);
+	img = loadImage(imgPath + GameRightButton);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+//        String upMouseOverButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_ARROW_UP_MOUSE_OVER);
+//        img = loadImage(imgPath + GameRightButton);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, GAME_RIGHT_BUTTON_X, GAME_RIGHT_BUTTON_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(GAME_RIGHT_ARROW_BUTTON_TYPE, s);
+        guiButtons.get(GAME_RIGHT_ARROW_BUTTON_TYPE).setEnabled(false);
+        
+        String GameDownButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_GAME_ARROW_DOWN);
+        sT = new SpriteType(GAME_DOWN_ARROW_BUTTON_TYPE);
+	img = loadImage(imgPath + GameDownButton);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+//        String upMouseOverButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_ARROW_UP_MOUSE_OVER);
+//        img = loadImage(imgPath + GameDownButton);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, GAME_DOWN_BUTTON_X, GAME_DOWN_BUTTON_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(GAME_DOWN_ARROW_BUTTON_TYPE, s);
+        guiButtons.get(GAME_DOWN_ARROW_BUTTON_TYPE).setEnabled(false);
+        
+        String GameLeftButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_GAME_ARROW_LEFT);
+        sT = new SpriteType(GAME_LEFT_ARROW_BUTTON_TYPE);
+	img = loadImage(imgPath + GameLeftButton);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+//        String upMouseOverButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_ARROW_UP_MOUSE_OVER);
+//        img = loadImage(imgPath + GameLeftButton);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, GAME_LEFT_BUTTON_X, GAME_LEFT_BUTTON_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(GAME_LEFT_ARROW_BUTTON_TYPE, s);
+        guiButtons.get(GAME_LEFT_ARROW_BUTTON_TYPE).setEnabled(false);
+        
+        String GamePauseButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_PAUSE);
+        sT = new SpriteType(PAUSE_BUTTON_TYPE);
+	img = loadImage(imgPath + GamePauseButton);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+//        String upMouseOverButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_ARROW_UP_MOUSE_OVER);
+//        img = loadImage(imgPath + GamePauseButton);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        String GamePlayButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_GAME_PLAY);
+        img = loadImage(imgPath + GamePlayButton);
+        sT.addState(pathXTileState.SELECTED_STATE.toString(), img);
+        s = new Sprite(sT, GAME_PAUSE_BUTTON_X, GAME_PAUSE_BUTTON_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(PAUSE_BUTTON_TYPE, s);
+        guiButtons.get(PAUSE_BUTTON_TYPE).setEnabled(false);
         
         //MAP NAVIGATION BUTTONS
         //UP BUTTON
@@ -1487,145 +1569,175 @@ public class pathXMiniGame extends MiniGame{
                 {   eventHandler.respondToRightRequest();  }
         });
         
+         //GAME UP ARROW PRESS EVENT HANDLER
+        guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToUpRequest();  }
+        });
+        
+        //GAME DOWN ARROW PRESS EVENT HANDLER
+        guiButtons.get(GAME_DOWN_ARROW_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToDownRequest();  }
+        });
+        
+        //GAME LEFT ARROW PRESS EVENT HANDLER
+        guiButtons.get(GAME_LEFT_ARROW_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToLeftRequest();  }
+        });
+        
+        //GAME RIGHT ARROW PRESS EVENT HANDLER
+        guiButtons.get(GAME_RIGHT_ARROW_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToRightRequest();  }
+        });
+        
+        //PAUSE PRESS EVENT HANDLER
+        guiButtons.get(PAUSE_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToPauseRequest();  }
+        });
+        
         
         //LEVEL BUTTON PRESS EVENT HANDLERS
         //LA (LOS ANGELES)
         guiButtons.get(LA_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //NY (NEW YORK)
         guiButtons.get(NY_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //CH (CHICAGO)
         guiButtons.get(CH_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //HOU (HOUSTON)
         guiButtons.get(HOU_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //SA (SAN ANTONIO)
         guiButtons.get(SA_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //PHIL (PHILADELPHIA)
         guiButtons.get(PHIL_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //PHE (PHOENIX)
         guiButtons.get(PHE_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //SD (SAN DIEGO)
         guiButtons.get(SD_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //DALL (DALLAS)
         guiButtons.get(DALL_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //SJ (SAN JOSE)
         guiButtons.get(SJ_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //AUS (AUSTIN)
         guiButtons.get(AUS_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //JAC (JACKSONVILLE)
         guiButtons.get(JAC_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //IND (INDIANAPOLIS)
         guiButtons.get(IND_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //SF (SAN FRANCISCO)
         guiButtons.get(SF_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //CO (COLUMBUS)
         guiButtons.get(CO_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //FW (FORT WORTH)
         guiButtons.get(FW_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //CHAR (CHARLOTTE)
         guiButtons.get(CHAR_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //DET (DETROIT)
         guiButtons.get(DET_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //EP (EL PASO)
         guiButtons.get(EP_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //MEM (MEMPHIS)
         guiButtons.get(MEM_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
 

@@ -17,6 +17,7 @@ public class pathXConstants {
     public static String PROPERTIES_FILE_NAME = "properties.xml";
     public static String PROPERTIES_SCHEMA_FILE_NAME = "properties_schema.xsd";    
     public static String PATH_DATA = "./data/";
+    public static String PATH_LEVELS = "./data/levels/";
     
     // THESE ARE THE TYPES OF CONTROLS, WE USE THESE CONSTANTS BECAUSE WE'LL
     // STORE THEM BY TYPE, SO THESE WILL PROVIDE A MEANS OF IDENTIFYING THEM
@@ -45,6 +46,11 @@ public class pathXConstants {
     public static final String NEW_GAME_BUTTON_TYPE = "NEW_GAME_BUTTON_TYPE";
     public static final String BACK_BUTTON_TYPE = "BACK_BUTTON_TYPE";
     public static final String LEVEL_INFO_CLOSE_BUTTON_TYPE = "LEVEL_INFO_CLOSE_BUTTON_TYPE";
+    public static final String GAME_UP_ARROW_BUTTON_TYPE = "GAME_UP_ARROW_BUTTON_TYPE";
+    public static final String GAME_DOWN_ARROW_BUTTON_TYPE = "GAME_DOWN_ARROW_BUTTON_TYPE";
+    public static final String GAME_LEFT_ARROW_BUTTON_TYPE = "GAME_LEFT_ARROW_BUTTON_TYPE";
+    public static final String GAME_RIGHT_ARROW_BUTTON_TYPE = "GAME_RIGHT_ARROW_BUTTON_TYPE";
+    public static final String PAUSE_BUTTON_TYPE = "PAUSE_BUTTON_TYPE";
     
     //MAP NAVIGATION BUTTONS
     public static final String UP_ARROW_BUTTON_TYPE = "UP_ARROW_BUTTON_TYPE";
@@ -75,8 +81,6 @@ public class pathXConstants {
     public static final String EP_BUTTON_TYPE = "EP_BUTTON_TYPE";
     public static final String MEM_BUTTON_TYPE = "MEM_BUTTON_TYPE";
     
-    
-        public static final String DELETEME_BUTTON_TYPE = "DELETEME_BUTTON_TYPE";////////////////////////////////////DELETE ME
 
     // DIALOG TYPES
     public static final String LEVEL_INFO_DIALOG_TYPE = "LEVEL_INFO_DIALOG_TYPE";
@@ -199,6 +203,17 @@ public class pathXConstants {
     public static final int GAME_HOME_BUTTON_Y = GAME_CLOSE_BUTTON_Y;
     public static final int BACK_BUTTON_X = GAME_HOME_BUTTON_X + 26;
     public static final int BACK_BUTTON_Y = GAME_HOME_BUTTON_Y + 50;
+    public static final int GAME_UP_BUTTON_X = 70;
+    public static final int GAME_UP_BUTTON_Y = 320;
+    public static final int GAME_DOWN_BUTTON_X = GAME_UP_BUTTON_X;
+    public static final int GAME_DOWN_BUTTON_Y = GAME_UP_BUTTON_Y + 80;
+    public static final int GAME_LEFT_BUTTON_X = GAME_UP_BUTTON_X - 40;
+    public static final int GAME_LEFT_BUTTON_Y = GAME_UP_BUTTON_Y + 40;
+    public static final int GAME_RIGHT_BUTTON_X = GAME_UP_BUTTON_X + 40;
+    public static final int GAME_RIGHT_BUTTON_Y = GAME_LEFT_BUTTON_Y;
+    public static final int GAME_PAUSE_BUTTON_X = GAME_UP_BUTTON_X;
+    public static final int GAME_PAUSE_BUTTON_Y = GAME_UP_BUTTON_Y + 40;
+    
     public static final int VIEWABLE_GAMEWORLD_OFFSET = 220;
     
     

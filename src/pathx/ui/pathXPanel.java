@@ -70,6 +70,8 @@ public class pathXPanel extends JPanel{
     
     private pathXLevelSelector levelPath;
     
+    private String imgPath;
+    
     
     
     /**
@@ -203,13 +205,13 @@ public class pathXPanel extends JPanel{
         if (renderGameField == 0)
         {
             renderGameField++;
-            File testFile = new File(levelPath.getLevelPath()/*"D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin"*/);
+            File testFile = new File(levelPath.getLevelPath());
             if(testFile.canRead())
             {
              levelIO.loadLevel(testFile, model);
             }
             data.initLevel(model);
-            img = game.loadImage(/*GAME_IMG_PATH + */model.getBackgroundImageName());/*("./img/pathX/DeathValleyBackground.png")*/
+            img = game.loadImage(PATH_LEVELS + model.getBackgroundImageName());
             initGameRender();
             viewport.setGameWorldSize(img.getWidth(), img.getHeight());
             viewport.setViewportSize(440, 480);
@@ -224,7 +226,7 @@ public class pathXPanel extends JPanel{
         int x  = viewport.getViewportX();
         int y = viewport.getViewportY();
         
-        img = game.loadImage(/*GAME_IMG_PATH + */model.getBackgroundImageName());/*("./img/pathX/DeathValleyBackground.png")*/
+        img = game.loadImage(PATH_LEVELS + model.getBackgroundImageName());
         BufferedImage tmp;
         tmp = img.getSubimage(x, y, 440, 480);
         g.drawImage(tmp, 200, 0, null);
@@ -323,9 +325,6 @@ public class pathXPanel extends JPanel{
      */
     public void initGameRender()
     {
-        // KEEP THESE FOR LATER
-  //      model = initModel;
-  //      viewport = model.getViewport();
 
         // MAKE THE RENDER OBJECTS TO BE RECYCLED
         recyclableCircle = new Ellipse2D.Double(0, 0, INTERSECTION_RADIUS * 2, INTERSECTION_RADIUS * 2);

@@ -110,6 +110,11 @@ public class pathXEventHandler {
     {
         game.moveViewport(LEVEL_VIEWPORT_INC,0);
     }
+    
+    public void respondToPauseRequest()
+    {
+        game.respondToPauseRequest();
+    }
             
     public void respondToSoundRequest()
     {

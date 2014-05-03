@@ -108,11 +108,11 @@ public class pathXLevelModel {
     {
 
         // UPDATE THE LEVEL TO FIT THE BACKGROUDN IMAGE SIZE
-        level.backgroundImageFileName = "D:\\Development\\NetBeansProjects\\PathX\\img\\DeathValleyBackground.png";//newBgImage;
+        level.backgroundImageFileName = newBgImage;
    //     BufferedImage img = null;
         try
         {
-            backgroundImage = ImageIO.read(new File(level.backgroundImageFileName));
+            backgroundImage = ImageIO.read(new File(imgPath + level.backgroundImageFileName));
         } catch (IOException e) {
         }
   //      backgroundImage = game.loadImage(/*imgPath +*/ level.backgroundImageFileName);//view.loadImage(LEVELS_PATH + level.backgroundImageFileName);
