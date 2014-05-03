@@ -49,6 +49,10 @@
         <property name="IMAGE_BUTTON_GAME_ARROW_DOWN"       value="./pathX/ButtonGameDown.png"></property>
         <property name="IMAGE_BUTTON_GAME_PLAY"             value="./pathX/ButtonGamePlay.png"></property>
         <property name="IMAGE_BUTTON_PAUSE"                 value="./pathX/ButtonPause.png"></property>
+        <property name="IMAGE_PLAYER"                       value="./pathX/ImagePlayer.png"></property>
+        <property name="IMAGE_POLICE"                       value="./pathX/ImagePolice.png"></property>
+        <property name="IMAGE_ZOMBIE"                       value="./pathX/ImageZombie.png"></property>
+        <property name="IMAGE_BANDIT"                       value="./pathX/ImageBandit.png"></property>
         
         
         

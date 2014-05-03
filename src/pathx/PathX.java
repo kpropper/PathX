@@ -119,6 +119,10 @@ public class PathX {
         IMAGE_BUTTON_GAME_ARROW_DOWN,
         IMAGE_BUTTON_GAME_PLAY,
         IMAGE_BUTTON_PAUSE,
+        IMAGE_PLAYER,
+        IMAGE_ZOMBIE,
+        IMAGE_BANDIT,
+        IMAGE_POLICE,
         
         /* GAME TEXT */
         TEXT_ERROR_LOADING_AUDIO,

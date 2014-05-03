@@ -112,7 +112,7 @@ public class pathXLevelModel {
    //     BufferedImage img = null;
         try
         {
-            backgroundImage = ImageIO.read(new File(imgPath + level.backgroundImageFileName));
+            backgroundImage = ImageIO.read(new File(PATH_LEVELS + level.backgroundImageFileName));
         } catch (IOException e) {
         }
   //      backgroundImage = game.loadImage(/*imgPath +*/ level.backgroundImageFileName);//view.loadImage(LEVELS_PATH + level.backgroundImageFileName);
@@ -130,7 +130,7 @@ public class pathXLevelModel {
         level.startingLocationImageFileName = newStartImage;
         try
         {
-            startingLocationImage = ImageIO.read(new File("./img/pathX/DefaultStartLocation.png"/*imgPath + level.startingLocationImageFileName*/));
+            startingLocationImage = ImageIO.read(new File(PATH_LEVELS + level.startingLocationImageFileName));
         } catch (IOException e) {
         }
   //      startingLocationImage = //game.loadImage(imgPath + level.startingLocationImageFileName);
@@ -145,7 +145,7 @@ public class pathXLevelModel {
         level.destinationImageFileName = newDestImage;
         try
         {
-            destinationImage = ImageIO.read(new File("./img/pathX/DefaultStartLocation.png"/*imgPath + level.destinationImageFileName*/));
+            destinationImage = ImageIO.read(new File(PATH_LEVELS + level.destinationImageFileName));
         } catch (IOException e) {
         }
  //       destinationImage = game.loadImage(imgPath + level.destinationImageFileName);

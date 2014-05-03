@@ -197,6 +197,10 @@ public class pathXConstants {
     
     // UI CONTROLS POSITIONS IN THE GAME SCREEN
     public static final String GAME_IMG_PATH = "./img/pathX/";
+    public static final String PLAYER_TYPE = "PLAYER_TYPE";
+    public static final String POLICE_TYPE = "POLICE_TYPE";
+    public static final String ZOMBIE_TYPE = "ZOMBIE_TYPE";
+    public static final String BANDIT_TYPE = "BANDIT_TYPE";
     public static final int GAME_CLOSE_BUTTON_X = 70;
     public static final int GAME_CLOSE_BUTTON_Y = 90;
     public static final int GAME_HOME_BUTTON_X = GAME_CLOSE_BUTTON_X -50;

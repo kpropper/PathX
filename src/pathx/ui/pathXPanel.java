@@ -221,6 +221,11 @@ public class pathXPanel extends JPanel{
             pathXGameController editLevelHandler = new pathXGameController(model);
             this.addMouseListener(editLevelHandler);
             this.addMouseMotionListener(editLevelHandler);
+            
+            Sprite player = game.getGUIButtons().get(PLAYER_TYPE);
+            Intersection start = model.getStartingLocation();
+            player.setX(start.x + VIEWABLE_GAMEWORLD_OFFSET);
+            player.setY(start.y);
         }
         
         int x  = viewport.getViewportX();
