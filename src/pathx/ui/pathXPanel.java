@@ -37,8 +37,11 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.util.HashMap;
 import java.util.Iterator;
+import pathx.PathX;
 import pathx.level.model.Road;
 import pathx.level.model.Intersection;
+import pathx.level.model.Player;
+import pathx.ui.pathXGameController;
 
 
 
@@ -67,9 +70,9 @@ public class pathXPanel extends JPanel{
     
     private Viewport viewport;
     
-    private pathXLevelSelector levelPath;
+    private Player player;
     
-    private String imgPath;
+    private pathXLevelSelector levelPath;
     
     
     
@@ -87,8 +90,16 @@ public class pathXPanel extends JPanel{
         game = initGame;
         data = initData;
         levelPath = initLevelSelector;
+        this.registerLevelController(data, (pathXMiniGame)game);
     }
-
+    
+    // REGISTERS HANDLER FOR EDITING THE LEVEL VIA THE CANVAS
+    public void registerLevelController(pathXDataModel data, pathXMiniGame game)
+    {
+        pathXLevelController pathXLevelHandler = new pathXLevelController(data, game);
+        this.addMouseListener(pathXLevelHandler);
+        this.addMouseMotionListener(pathXLevelHandler);
+    }
 
     /**
      * This is where rendering starts. This method is called each frame, and the
@@ -221,10 +232,19 @@ public class pathXPanel extends JPanel{
             this.addMouseListener(editLevelHandler);
             this.addMouseMotionListener(editLevelHandler);
             
+            /*
             Sprite player = game.getGUIButtons().get(PLAYER_TYPE);
             Intersection start = model.getStartingLocation();
             player.setX(start.x + VIEWABLE_GAMEWORLD_OFFSET);
-            player.setY(start.y);
+            player.setY(start.y); */
+            Intersection start = model.getStartingLocation();
+            player = data.getPlayer();
+            player.setPosition(start.x + VIEWABLE_GAMEWORLD_OFFSET, start.y);
+            PropertiesManager props = PropertiesManager.getPropertiesManager();
+            String imgPath = props.getProperty(PathX.pathXPropertyType.PATH_IMG);   
+            String playerImg = props.getProperty(pathXPropertyType.IMAGE_PLAYER);
+            img = game.loadImage(imgPath + playerImg);
+            player.setImage(img);
         }
         
         int x  = viewport.getViewportX();
@@ -234,6 +254,9 @@ public class pathXPanel extends JPanel{
         BufferedImage tmp;
         tmp = img.getSubimage(x, y, 440, 480);
         g.drawImage(tmp, 200, 0, null);
+        
+        moveAllCharacters();
+        player.checkPosition();
         
         // WE'LL USE THE Graphics2D FEATURES, WHICH IS 
         // THE ACTUAL TYPE OF THE g OBJECT
@@ -248,6 +271,10 @@ public class pathXPanel extends JPanel{
         
         //RENDERS THE INTERSECTIONS
         renderIntersections(g2);
+        
+        renderSprite(g, player);
+        
+        renderStats(g2);
 
     }
        
@@ -525,5 +552,33 @@ public class pathXPanel extends JPanel{
     public boolean isCircleBoundingBoxInsideViewport(int centerX, int centerY, int radius)
     {
         return isRectInsideViewport(centerX-radius, centerY-radius, centerX+radius, centerY+radius);
+    }
+    
+    private void renderStats(Graphics2D g2)
+    {
+      //  Viewport viewport = model.getViewport();
+        g2.setColor(STATS_TEXT_COLOR);
+        g2.setFont(STATS_TEXT_FONT);
+        g2.drawString(MOUSE_SCREEN_POSITION_TITLE + data.getLastMouseX() + ", " + data.getLastMouseY(),
+                300, 30);
+        int levelMouseX = data.getLastMouseX() + viewport.getViewportX();
+        int levelMouseY = data.getLastMouseY() + viewport.getViewportY();
+        g2.drawString(MOUSE_LEVEL_POSITION_TITLE + levelMouseX + ", " + levelMouseY,
+                300, 60);
+        g2.drawString(VIEWPORT_POSITION_TITLE + viewport.getViewportX() + ", " + viewport.getViewportY(),
+                300, 90);
+        g2.drawString("Player Position" + player.getX() + ", " + player.getY(),
+                400, 120);
+        g2.drawString("Player Target" + player.getTargetX() + ", " + player.getTargetY(),
+                300, 150);
+    }
+    
+    private void moveAllCharacters()
+    {
+        if(player.isMoving())
+        {
+            player.setX(player.getX() + player.getVx());
+            player.setY(player.getY() + player.getVy());
+        }
     }
 }

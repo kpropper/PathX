@@ -1,6 +1,7 @@
 package pathx.level.model;
 
 import java.util.ArrayList;
+import static pathx.pathXConstants.*;
 
 /**
  *
@@ -129,5 +130,4 @@ public class pathXLevel {
         numBandits = 0;
         numZombies = 0;
     }
-    
 }

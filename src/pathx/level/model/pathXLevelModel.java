@@ -164,4 +164,24 @@ public class pathXLevelModel {
         // AND NOW FORCE A REDRAW
  //       view.getCanvas().repaint();
     }
+    
+    public Intersection findIntersection(int x, int y)
+    {
+        for(Intersection i : level.intersections)
+        {
+            double distance = calculateDistanceBetweenPoints(i.x, i.y, x, y);
+            if (distance < INTERSECTION_RADIUS)
+            {
+                return i;
+            }
+        }
+        return null;
+    }
+    
+    public double calculateDistanceBetweenPoints(int x1, int y1, int x2, int y2)
+    {
+        double diffXSquared = Math.pow(x1 - x2, 2);
+        double diffYSquared = Math.pow(y1 - y2, 2);
+        return Math.sqrt(diffXSquared + diffYSquared);
+    }
 }

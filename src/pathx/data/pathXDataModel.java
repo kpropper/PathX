@@ -10,6 +10,8 @@ import java.util.Iterator;
 import pathx.PathX.pathXPropertyType;
 import mini_game.MiniGame;
 import mini_game.MiniGameDataModel;
+import mini_game.Viewport;
+import pathx.level.model.Intersection;
 import mini_game.SpriteType;
 import properties_manager.PropertiesManager;
 import static pathx.pathXConstants.*;
@@ -17,6 +19,8 @@ import pathx.ui.pathXMiniGame;
 import pathx.ui.pathXPanel;
 import pathx.ui.pathXTileState;
 import pathx.level.model.pathXLevelModel;
+import pathx.level.model.Player;
+import pathx.ui.pathXTileState;
 
 
 /**
@@ -26,10 +30,11 @@ import pathx.level.model.pathXLevelModel;
 public class pathXDataModel extends MiniGameDataModel {
     // THIS CLASS HAS A REFERERENCE TO THE MINI GAME SO THAT IT
     // CAN NOTIFY IT TO UPDATE THE DISPLAY WHEN THE DATA MODEL CHANGES
-    private MiniGame miniGame;
+    private pathXMiniGame miniGame;
     
     private pathXLevelModel model;
     
+    private Player player;
 
 
     /**
@@ -39,10 +44,14 @@ public class pathXDataModel extends MiniGameDataModel {
      *
      * @param initMiniGame The Sorting Hat game UI.
      */
-    public pathXDataModel(MiniGame initMiniGame)
+    public pathXDataModel(pathXMiniGame initMiniGame)
     {
         // KEEP THE GAME FOR LATER
         miniGame = initMiniGame;
+        
+        //SETUP THE PLAYER
+        SpriteType sT = new SpriteType(PLAYER_TYPE);
+        player = new Player(sT,0,0,0,0,pathXTileState.INVISIBLE_STATE.toString());
 
     }
 
@@ -52,6 +61,8 @@ public class pathXDataModel extends MiniGameDataModel {
     {
         model = initLevel;
     }
+    
+    public Player getPlayer()       {   return player;  }
 
     
 
@@ -70,7 +81,19 @@ public class pathXDataModel extends MiniGameDataModel {
     @Override
     public void checkMousePressOnSprites(MiniGame game, int x, int y)
     {
-
+        Viewport viewport = this.getViewport();
+        if(miniGame.isCurrentScreenState(GAME_SCREEN_STATE))
+        {
+            Intersection guess = model.findIntersection(x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),y + viewport.getViewportY());
+            if(guess != null)
+            {
+               player.setTarget(guess.x + VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),guess.y + viewport.getViewportY());
+               if(!player.isMoving())
+               {
+                    player.move(1);
+               }
+            }
+        }
     }
     
 
