@@ -35,6 +35,8 @@ public class pathXDataModel extends MiniGameDataModel {
     private pathXLevelModel model;
     
     private Player player;
+    
+    private boolean soundEffectsOn = true;
 
 
     /**
@@ -62,6 +64,17 @@ public class pathXDataModel extends MiniGameDataModel {
         model = initLevel;
     }
     
+    public void turnOffSoundEffects()
+    {
+        soundEffectsOn = false;
+    }
+    
+    public void turnOnSoundEffect()
+    {
+        soundEffectsOn = true;
+    }
+    
+    public boolean soundEffectsOn() {   return soundEffectsOn;  }
     public Player getPlayer()       {   return player;  }
 
     
@@ -87,10 +100,11 @@ public class pathXDataModel extends MiniGameDataModel {
             Intersection guess = model.findIntersection(x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),y + viewport.getViewportY());
             if(guess != null)
             {
-               player.setTarget(guess.x + VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),guess.y + viewport.getViewportY());
+          //      player.setTarget(x,y);
+               player.setTarget(guess.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX(),guess.y - viewport.getViewportY());
                if(!player.isMoving())
-               {
-                    player.move(1);
+               {    player.setPath(model.findShortestPathToIntersection(guess));
+  //                  player.startMovingToTarget(4);
                }
             }
         }

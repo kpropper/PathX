@@ -137,6 +137,8 @@ public class PathX {
         TEXT_HELP_DIALOG,
         
         /* AUDIO CUES */
+        TITLE_SONG,
+        GAME_SONG,
         AUDIO_CUE_BAD_MOVE,
         AUDIO_CUE_CHEAT,
         AUDIO_CUE_DESELECT_TILE,

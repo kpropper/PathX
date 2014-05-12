@@ -96,6 +96,8 @@
         <property name="AUDIO_CUE_WIN"                      value="./pathX/Win.mid"></property>
         <property name="SONG_CUE_GAME_SCREEN"               value="./pathX/GameSong.mid"></property>        
         <property name="SONG_CUE_MENU_SCREEN"               value="./pathX/MenuSong.mid"></property>
+        <property name="TITLE_SONG"                         value="./pathX/TitleSong.mid"></property>
+        <property name="GAME_SONG"                          value="./pathX/Ingame_music.mid"></property>
     </property_list>
     
     <!-- PLAYABLE LEVELS CREATED WITH THE LEVEL EDITOR -->

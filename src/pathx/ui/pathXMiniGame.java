@@ -38,6 +38,8 @@ import pathx.file.pathXLevelIO;
 import pathx.file.pathXFileIO;
 import pathx.level.model.pathXLevelViewport;
 import pathx.level.model.pathXLevelModel;
+import pathx.level.model.Player;
+import pathx.level.model.Intersection;
 
 /**
  *
@@ -67,6 +69,11 @@ public class pathXMiniGame extends MiniGame{
     
     //THIS IS THE LEVEL SELECTOR
     private pathXLevelSelector path = new pathXLevelSelector();
+    
+    // THIS IS TO HAVE MUSIC PLAY OR NOT
+    private boolean musicPlaying = true;
+
+    
 
 //    pathXFileIO levelIO = new pathXFileIO();
 //    pathXLevelModel model = new pathXLevelModel();
@@ -462,11 +469,19 @@ public class pathXMiniGame extends MiniGame{
                 && (viewport.getViewportY() + y >= 0 && viewport.getViewportY() + y <= (viewport.getGameWorldHeight()-480)))
             {
                 viewport.scroll(x, y); 
-                Sprite temp;
+                Player temp;
                     pathXDataModel dataModel = (pathXDataModel)data;
                     temp = dataModel.getPlayer();
                     temp.setX(temp.getX()- x);
                     temp.setY(temp.getY() - y);
+                    temp.setTarget(temp.getTargetX() - x,temp.getTargetY()- y);
+                    Iterator playerPath = temp.getPathIterator();
+               //     while(playerPath.hasNext())
+                 //   {
+                   //     Intersection pathNode = (Intersection)playerPath.next();
+                     //   pathNode.setX(pathNode.getX() + x);
+                       // pathNode.setX(pathNode.getY() + y);
+                    //}
                     if(temp.getX() < 200)
                     {
                         temp.setState("INVISIBLE_STATE");
@@ -650,8 +665,17 @@ public class pathXMiniGame extends MiniGame{
         
         // DEACTIVATE THE LEVEL SELECT BUTTONS
         PropertiesManager props = PropertiesManager.getPropertiesManager();
-/*        
-*/
+        
+        // PLAY THE TITLE SONG
+ //       audio.play(path.SONG_CUE_MENU_SCREEN.toString());
+        if(musicPlaying)
+        {
+            if(!audio.isPlaying(pathXPropertyType.TITLE_SONG.toString()))
+            {
+                audio.play(pathXPropertyType.TITLE_SONG.toString(), true);
+            }
+        }
+
     }
     
     public void switchToSettingsScreen()
@@ -674,15 +698,27 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(HOME_BUTTON_TYPE).setEnabled(true);
         guiButtons.get(SOUND_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(SOUND_BUTTON_TYPE).setEnabled(true);
-        guiButtons.get(MUSIC_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
-        guiButtons.get(MUSIC_BUTTON_TYPE).setEnabled(true);
         guiButtons.get(GAME_SPEED_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
         guiButtons.get(GAME_SPEED_BUTTON_TYPE).setEnabled(true);
+        
+        //  WHAT IS THE CURRENT MUSIC STATE
+        if(musicPlaying)
+        {
+            guiButtons.get(MUSIC_BUTTON_TYPE).setState(pathXTileState.SELECTED_STATE.toString());
+            guiButtons.get(MUSIC_BUTTON_TYPE).setEnabled(true);
+        }
+        else
+        {
+            guiButtons.get(MUSIC_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+            guiButtons.get(MUSIC_BUTTON_TYPE).setEnabled(true);
+        }
+        
+        // WHAT IS THE CURRENT SOUND EFFECT STATE
+        
         
         // AND CHANGE THE SCREEN STATE
         currentScreenState = SETTINGS_SCREEN_STATE;
         
-       
         
     }
     
@@ -845,7 +881,9 @@ public class pathXMiniGame extends MiniGame{
 //            levelIO.loadLevel(testFile, model);
 //        }
 //        path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
+        
         PropertiesManager props = PropertiesManager.getPropertiesManager();
+        audio.stop(pathXPropertyType.TITLE_SONG.toString());
      
         //DEACTIVATE LEVEL SELECT CONTROLS
         guiButtons.get(HOME_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
@@ -936,9 +974,13 @@ public class pathXMiniGame extends MiniGame{
         
         data.setGameState(MiniGameState.IN_PROGRESS);
         
-        
+        if(musicPlaying)
+        {
+            audio.stop(pathXPropertyType.TITLE_SONG.toString());
+            audio.play(pathXPropertyType.GAME_SONG.toString(), true);
+        }
         // PLAY THE GAMEPLAY SCREEN SONG
-  //      audio.stop(path.SONG_CUE_MENU_SCREEN.toString()); 
+          audio.stop(pathXPropertyType.TITLE_SONG.toString());
 //        audio.play(SortingHatPropertyType.SONG_CUE_GAME_SCREEN.toString(), true);        
     }
    
@@ -956,44 +998,44 @@ public class pathXMiniGame extends MiniGame{
      */
     public void initAudioContent()
     {
-       /* try
+        try
         {
             PropertiesManager props = PropertiesManager.getPropertiesManager();
-            String audioPath = props.getProperty(SortingHatPropertyType.PATH_AUDIO);
+            String audioPath = props.getProperty(pathXPropertyType.PATH_AUDIO);
 
             // LOAD ALL THE AUDIO
-            loadAudioCue(SortingHatPropertyType.AUDIO_CUE_SELECT_TILE);
-            loadAudioCue(SortingHatPropertyType.AUDIO_CUE_DESELECT_TILE);
-            loadAudioCue(SortingHatPropertyType.AUDIO_CUE_GOOD_MOVE);
-            loadAudioCue(SortingHatPropertyType.AUDIO_CUE_BAD_MOVE);
-            loadAudioCue(SortingHatPropertyType.AUDIO_CUE_CHEAT);
-            loadAudioCue(SortingHatPropertyType.AUDIO_CUE_UNDO);
-            loadAudioCue(SortingHatPropertyType.AUDIO_CUE_WIN);
-            loadAudioCue(SortingHatPropertyType.SONG_CUE_MENU_SCREEN);
-            loadAudioCue(SortingHatPropertyType.SONG_CUE_GAME_SCREEN);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_SELECT_TILE);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_DESELECT_TILE);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_GOOD_MOVE);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_BAD_MOVE);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_CHEAT);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_UNDO);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_WIN);
+            loadAudioCue(pathXPropertyType.TITLE_SONG);
+            loadAudioCue(pathXPropertyType.GAME_SONG);
 
             // PLAY THE WELCOME SCREEN SONG
-            audio.play(SortingHatPropertyType.SONG_CUE_MENU_SCREEN.toString(), true);
+            audio.play(pathXPropertyType.TITLE_SONG.toString(), true);
         }
         catch(UnsupportedAudioFileException | IOException | LineUnavailableException | InvalidMidiDataException | MidiUnavailableException e)
         {
-            errorHandler.processError(SortingHatPropertyType.TEXT_ERROR_LOADING_AUDIO);
-        }*/        
+            errorHandler.processError(pathXPropertyType.TEXT_ERROR_LOADING_AUDIO);
+        }        
     }
 
     /**
      * This helper method loads the audio file associated with audioCueType,
      * which should have been specified via an XML properties file.
-     
-    private void loadAudioCue(SortingHatPropertyType audioCueType) 
+     */
+    private void loadAudioCue(pathXPropertyType audioCueType) 
             throws  UnsupportedAudioFileException, IOException, LineUnavailableException, 
                     InvalidMidiDataException, MidiUnavailableException
     {
         PropertiesManager props = PropertiesManager.getPropertiesManager();
-        String audioPath = props.getProperty(SortingHatPropertyType.PATH_AUDIO);
+        String audioPath = props.getProperty(pathXPropertyType.PATH_AUDIO);
         String cue = props.getProperty(audioCueType.toString());
         audio.loadAudio(audioCueType.toString(), audioPath + cue);        
-    }*/
+    }
     
     /**
      * Initializes the game data used by the application. Note
@@ -1500,6 +1542,31 @@ public class pathXMiniGame extends MiniGame{
         guiDialogs.put(LEVEL_INFO_DIALOG_TYPE, s);
     }		
         
+    
+    // MUSIC AND SOUND EFFECTS
+    public void toggleMusic()
+    {
+        if(musicPlaying)
+        {
+            audio.stop(pathXPropertyType.TITLE_SONG.toString());
+            guiButtons.get(MUSIC_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+            musicPlaying = false;
+        }
+        else
+        {
+            audio.play(pathXPropertyType.TITLE_SONG.toString(), true);
+            guiButtons.get(MUSIC_BUTTON_TYPE).setState(pathXTileState.SELECTED_STATE.toString());
+            musicPlaying = true;
+        }
+    }
+    
+    public void playGameMusic()
+    {
+        if(musicPlaying)
+        {
+            audio.play(pathXPropertyType.GAME_SONG.toString(), true);
+        }
+    }
     /**
      * Initializes the game event handlers for things like
      * game gui buttons.

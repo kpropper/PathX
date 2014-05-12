@@ -62,7 +62,7 @@ public class pathXPanel extends JPanel{
     private pathXDataModel data;
     
     pathXFileIO levelIO = new pathXFileIO();
-    pathXLevelModel model = new pathXLevelModel();
+    pathXLevelModel model;
 
     
     private int renderGameField = 0;
@@ -90,6 +90,7 @@ public class pathXPanel extends JPanel{
         game = initGame;
         data = initData;
         levelPath = initLevelSelector;
+        model = new pathXLevelModel(data);
         this.registerLevelController(data, (pathXMiniGame)game);
     }
     
@@ -225,6 +226,8 @@ public class pathXPanel extends JPanel{
             initGameRender();
             viewport.setGameWorldSize(img.getWidth(), img.getHeight());
             viewport.setViewportSize(440, 480);
+            viewport.updateViewportBoundaries();
+            viewport.initViewportMargins();
             while(viewport.getViewportX() != 0) viewport.scroll(-1, 0);
             while(viewport.getViewportY() != 0) viewport.scroll(0, -1);
             
@@ -237,6 +240,7 @@ public class pathXPanel extends JPanel{
             Intersection start = model.getStartingLocation();
             player.setX(start.x + VIEWABLE_GAMEWORLD_OFFSET);
             player.setY(start.y); */
+            // SETS UP THE PLAYER AND PUTS IT AT START
             Intersection start = model.getStartingLocation();
             player = data.getPlayer();
             player.setPosition(start.x + VIEWABLE_GAMEWORLD_OFFSET, start.y);
@@ -245,6 +249,9 @@ public class pathXPanel extends JPanel{
             String playerImg = props.getProperty(pathXPropertyType.IMAGE_PLAYER);
             img = game.loadImage(imgPath + playerImg);
             player.setImage(img);
+            player.setDataModel(data);
+            
+    //        ((pathXMiniGame)game).playGameMusic();
         }
         
         int x  = viewport.getViewportX();
@@ -255,8 +262,8 @@ public class pathXPanel extends JPanel{
         tmp = img.getSubimage(x, y, 440, 480);
         g.drawImage(tmp, 200, 0, null);
         
-        moveAllCharacters();
-        player.checkPosition();
+        //moveAllCharacters();
+        player.update(game);
         
         // WE'LL USE THE Graphics2D FEATURES, WHICH IS 
         // THE ACTUAL TYPE OF THE g OBJECT
@@ -272,7 +279,8 @@ public class pathXPanel extends JPanel{
         //RENDERS THE INTERSECTIONS
         renderIntersections(g2);
         
-        renderSprite(g, player);
+      //  renderSprite(g, player);
+        renderCharacters(g, player);
         
         renderStats(g2);
 
@@ -333,6 +341,28 @@ public class pathXPanel extends JPanel{
             SpriteType bgST = s.getSpriteType();
             Image img = bgST.getStateImage(s.getState());
             g.drawImage(img, (int)s.getX(), (int)s.getY(), bgST.getWidth(), bgST.getHeight(), null); 
+        }
+    }
+    
+    public void renderCharacters(Graphics g, Sprite s)
+    {
+        // ONLY RENDER THE VISIBLE ONES
+        if (!s.getState().equals(pathXTileState.INVISIBLE_STATE.toString()))
+        {
+            SpriteType bgST = s.getSpriteType();
+            Image img = bgST.getStateImage(s.getState());
+            g.drawImage(img, (int)s.getX(), (int)s.getY(), bgST.getWidth(), bgST.getHeight(), null); 
+        }
+        else if(s.getX() < 200)
+        {
+            s.setState("INVISIBLE_STATE");
+            s.setEnabled(false);
+        }   
+            
+        else if(s.getX() > 200 )//&& !guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled())
+        {
+           s.setState("VISIBLE_STATE");
+           s.setEnabled(true);
         }
     }
     
@@ -494,7 +524,7 @@ public class pathXPanel extends JPanel{
         // ONLY RENDER IF INSIDE THE VIEWPORT
         if (isRectInsideViewport(x1, y1, x2, y2))
         {
-            g2.drawImage(img, x1 - viewport.getViewportX() + VIEWABLE_GAMEWORLD_OFFSET, y1 - viewport.getViewportY(), null);
+            g2.drawImage(img, x1 - viewport.getViewportX()  + VIEWABLE_GAMEWORLD_OFFSET, y1 - viewport.getViewportY(), null);
         }        
     }
     
@@ -571,14 +601,5 @@ public class pathXPanel extends JPanel{
                 400, 120);
         g2.drawString("Player Target" + player.getTargetX() + ", " + player.getTargetY(),
                 300, 150);
-    }
-    
-    private void moveAllCharacters()
-    {
-        if(player.isMoving())
-        {
-            player.setX(player.getX() + player.getVx());
-            player.setY(player.getY() + player.getVy());
-        }
     }
 }

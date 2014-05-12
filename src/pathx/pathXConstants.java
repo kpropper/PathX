@@ -137,10 +137,10 @@ public class pathXConstants {
     public static final int HELP_BUTTON_Y = PLAY_BUTTON_Y;
     
     // UI CONTROLS POSITIONS FOR THE SETTINGS SCREEN
-    public static final int SOUND_BUTTON_X = 200;
-    public static final int SOUND_BUTTON_Y = 210;
-    public static final int MUSIC_BUTTON_X = SOUND_BUTTON_X;
-    public static final int MUSIC_BUTTON_Y = SOUND_BUTTON_Y -50;
+    public static final int MUSIC_BUTTON_X = 200;
+    public static final int MUSIC_BUTTON_Y = 210;
+    public static final int SOUND_BUTTON_X = MUSIC_BUTTON_X;
+    public static final int SOUND_BUTTON_Y = MUSIC_BUTTON_Y -50;
     public static final int GAME_SPEED_BUTTON_X = 300;
     public static final int GAME__SPEED_BUTTON_Y = 310;
     

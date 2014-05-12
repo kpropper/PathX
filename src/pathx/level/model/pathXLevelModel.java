@@ -12,8 +12,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import mini_game.MiniGame;
 import pathx.PathX;
+import mini_game.Sprite;
+import pathx.data.pathXDataModel;
+import mini_game.Viewport;
+import pathx.level.model.Player;
+import java.util.HashMap;
 import static pathx.pathXConstants.*;
 import properties_manager.PropertiesManager;
+import java.awt.geom.Line2D;
+
 
 /**
  *
@@ -24,6 +31,11 @@ public class pathXLevelModel {
     // THIS IS THE LEVEL CURRENTLY LOADED
     pathXLevel level;
     
+    pathXDataModel data;
+    
+    Player player;
+    
+    Viewport viewport;
     // USED TO MANAGE WHAT THE USER IS CURRENTLY EDITING
 //    PXLE_EditMode editMode;
 
@@ -55,9 +67,12 @@ public class pathXLevelModel {
     PropertiesManager props = PropertiesManager.getPropertiesManager();
     String imgPath = props.getProperty(PathX.pathXPropertyType.PATH_IMG);
     
-    public pathXLevelModel()
+    public pathXLevelModel(pathXDataModel initData)
     {
         level = new pathXLevel();
+        data = initData;
+        player = data.getPlayer();
+        viewport = data.getViewport();
 //        editMode = PXLE_EditMode.NOTHING_SELECTED;
 //        viewport = new pathXLevelViewport();
 //        levelBeingEdited = false;
@@ -184,4 +199,218 @@ public class pathXLevelModel {
         double diffYSquared = Math.pow(y1 - y2, 2);
         return Math.sqrt(diffXSquared + diffYSquared);
     }
+    
+    //PATH FINDING ALGORITHMS
+    public ArrayList<Intersection> findShortestPathToIntersection(Intersection selectedIntersection)
+    {
+        boolean found = false;
+        int selectedX = selectedIntersection.x;
+        int selectedY = selectedIntersection.y;
+        
+        Road startRoad = findRoadAtSpriteLocation(player);
+        Intersection currentIntersection = getClosestIntersection(startRoad, player);
+        
+        ArrayList<Road> roadsVisited = new ArrayList<Road>();
+        ArrayList<Intersection> intersectionsVisited = new ArrayList<Intersection>();
+        intersectionsVisited.add(currentIntersection);
+        
+        // LIST TO STORE THE SHORTEST PATH TO THE SELECTED INTERSECTION
+        ArrayList<Intersection> path = new ArrayList();
+        
+        // SAVES ALL NODE1 AS KEY AND NODE2 AS VALUE IN A HASHMAP
+        HashMap<Intersection, Intersection> intersections = new HashMap();
+        for (Road r : level.roads)
+        {
+            Intersection i1 = r.node1;
+            Intersection i2 = r.node2;
+            intersections.put(i1, i2);
+        }
+        
+        while (!found)
+        {
+            ArrayList<Intersection> neighbors = getNeighbors(currentIntersection);
+            if (neighbors.size() == 1)
+            {
+                currentIntersection = neighbors.get(0);
+                path.add(neighbors.get(0));
+                if (neighbors.get(0).x == selectedX && neighbors.get(0).y == selectedY)
+                    return path;
+            }
+            else
+            {
+                for (Intersection i : neighbors)
+                {
+                    if (i.x == selectedX && i.y == selectedY)
+                    {
+                        path.add(i);
+                        return path;
+                    }
+                }
+                currentIntersection = getClosestNeighbor(neighbors, currentIntersection);
+                path.add(currentIntersection);
+                intersectionsVisited.add(currentIntersection);
+            }
+        }
+        return path;
+    }
+    
+    public Intersection getClosestIntersection(Road currentRoad, Player player)
+    {
+        int x1 = currentRoad.node1.x;
+        int y1 = currentRoad.node1.y;
+        int x2 = currentRoad.node2.x;
+        int y2 = currentRoad.node2.y;
+        int px = (int) player.getX();
+        int py = (int) player.getY();
+        double distanceNode1 = calculateDistanceBetweenPoints(px, py, x1, y1);
+        double distanceNode2 = calculateDistanceBetweenPoints(px, py, x2, y2);
+        
+        if (distanceNode1 < distanceNode2)
+            return currentRoad.node1;
+        else
+            return currentRoad.node2;
+    }
+    
+    public ArrayList<Intersection> getNeighbors(Intersection intersection)
+    {
+        ArrayList<Intersection> neighbors = new ArrayList();
+        ArrayList<Road> roads = level.roads;
+        int x = intersection.x;
+        int y = intersection.y;
+        
+        for (int i = 0; i < roads.size(); i++)
+        {
+            if (roads.get(i).node1.x == x && roads.get(i).node1.y == y)
+            {
+                neighbors.add(roads.get(i).node2);
+            } else if (roads.get(i).node2.x == x && roads.get(i).node2.y == y)
+            {
+                neighbors.add(roads.get(i).node1);
+            }
+        }
+        return neighbors;
+    }
+    
+    public Intersection getClosestNeighbor(ArrayList<Intersection> intersections, Intersection ci)
+    {
+        Intersection closestIntersection = intersections.get(0);
+        if (intersections.size() > 0)
+        {
+            for (int i = 1; i < intersections.size(); i++)
+            {
+                Intersection intersection = intersections.get(i);
+                if (calculateDistanceBetweenPoints(ci.x, ci.y, closestIntersection.x, closestIntersection.y) >
+                    calculateDistanceBetweenPoints(ci.x, ci.y, intersection.x, intersection.y))
+                {
+                    closestIntersection = intersection;
+                }
+            }
+        }
+        return closestIntersection;
+    }
+    
+    public ArrayList<Road> getNeighborRoads(Intersection intersection)
+    {
+        ArrayList<Road> neighborRoads = new ArrayList();
+        ArrayList<Road> roads = level.roads;
+        int x = intersection.x;
+        int y = intersection.y;
+        
+        for (int i = 0; i < roads.size(); i++)
+        {
+            // IF EITHER NODE 1 OR NODE 2 OF ROAD IS A NEIGHBOR
+            if ((roads.get(i).node1.x == x &&
+                roads.get(i).node1.y == y) ||
+                (roads.get(i).node2.x == x &&
+                roads.get(i).node2.y == y))
+            {
+                neighborRoads.add(roads.get(i));
+            }
+        }
+        return neighborRoads;
+    }
+    
+    public Road getShortestRoad(ArrayList<Road> roads)
+    {
+        Road shortestRoad = roads.get(0);
+        for (Road r : roads)
+        {
+            if (shortestRoad.distance > r.distance)
+            {
+                shortestRoad = r;
+            }
+        }
+        return shortestRoad;
+    }
+    
+    public Road getRoad(Intersection i1, Intersection i2)
+    {
+        for (Road r : level.roads)
+        {
+            if (((r.node1.x == i1.x && r.node1.y == i1.y) &&
+                (r.node2.x == i2.x && r.node2.y == i2.y)) ||
+                ((r.node1.x == i2.x && r.node1.y == i2.y) &&
+                (r.node2.x == i1.x && r.node2.y == i1.y)))
+            {
+                return r;
+            }
+        }
+        return null;
+    }
+    
+    public Road findRoadAtSpriteLocation(Sprite s)
+    {
+        Iterator<Road> it = level.roads.iterator();
+        Line2D.Double tempLine = new Line2D.Double();
+        double centerX = s.getX() + 17.5;
+        double centerY = s.getY() + 17.5;
+        while (it.hasNext())
+        {
+            Road r = it.next();
+            tempLine.x1 = r.node1.x + VIEWABLE_GAMEWORLD_OFFSET;
+            tempLine.y1 = r.node1.y;
+            tempLine.x2 = r.node2.x + VIEWABLE_GAMEWORLD_OFFSET;
+            tempLine.y2 = r.node2.y;
+            double distance = tempLine.ptSegDist(centerX+viewport.getViewportX(), centerY+viewport.getViewportY());
+            
+            // IS IT CLOSE ENOUGH?
+            if (distance <= 10/*INT_STROKE*/)
+            {
+                // SELECT IT
+//                this.selectedRoad = r;
+                //this.switchEditMode(PXLE_EditMode.ROAD_SELECTED);
+                return r;
+            }
+        }
+        return null;
+    }
+   
+    /*
+    public void generatePolicePath(Police p)
+    {
+        // FIND NEIGHBORS, CHOOSE RANDOM NEIGHBOR, GO THERE, REPEAT
+        
+        ArrayList<Intersection> path = new ArrayList();
+        int x = (int) p.getX() + INTERSECTION_RADIUS;
+        int y = (int) p.getY() + INTERSECTION_RADIUS;
+        
+        Intersection currentIntersection = findIntersectionAtCanvasLocation(x, y);
+        p.initCurrentIntersection(currentIntersection);
+        
+        ArrayList<Intersection> neighbors = getNeighbors(currentIntersection);
+        if (neighbors.contains(level.startingLocation))
+        {
+            neighbors.remove(level.startingLocation);
+        }
+        
+        int random = (int) (Math.random() * neighbors.size());
+        Intersection nextIntersection = neighbors.get(random);
+        p.setNextIntersection(nextIntersection);
+        Road roadInBetween = getRoad(currentIntersection, nextIntersection);
+        if (roadInBetween != null)
+        {
+            p.setTarget(nextIntersection.x , nextIntersection.y );
+            p.startMovingToTarget(roadInBetween.speedLimit / 10);
+        }
+    }*/
 }

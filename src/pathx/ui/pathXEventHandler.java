@@ -123,7 +123,7 @@ public class pathXEventHandler {
     
     public void respondToMusicRequest()
     {
-        
+        game.toggleMusic();
     }
     
     public void respondToKeyPress(int keyCode)
