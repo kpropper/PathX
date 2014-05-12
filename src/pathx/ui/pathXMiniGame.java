@@ -511,6 +511,15 @@ public class pathXMiniGame extends MiniGame{
         }
     }
     
+    public void playerReset()
+    {
+        Player player = ((pathXDataModel)data).getPlayer();
+    //    player.setTarget(0, 0);
+     //   player.setPosition(0, 0);
+      //  player.setVx(0);
+      //  player.setVy(0);
+    }
+    
 
      // SERVICE METHODS
         // - displayStats
@@ -667,14 +676,16 @@ public class pathXMiniGame extends MiniGame{
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         
         // PLAY THE TITLE SONG
- //       audio.play(path.SONG_CUE_MENU_SCREEN.toString());
         if(musicPlaying)
         {
+            audio.stop(pathXPropertyType.GAME_SONG.toString());
             if(!audio.isPlaying(pathXPropertyType.TITLE_SONG.toString()))
             {
                 audio.play(pathXPropertyType.TITLE_SONG.toString(), true);
             }
         }
+        
+        playerReset();
 
     }
     
@@ -865,6 +876,17 @@ public class pathXMiniGame extends MiniGame{
         
         // AND CHANGE THE SCREEN STATE
         currentScreenState = LEVEL_SELECT_SCREEN_STATE;
+        
+        if(musicPlaying)
+        {
+            audio.stop(pathXPropertyType.GAME_SONG.toString());
+            if(!audio.isPlaying(pathXPropertyType.TITLE_SONG.toString()))
+            {
+                audio.play(pathXPropertyType.TITLE_SONG.toString(), true);
+            }
+        }
+        
+   //     playerReset();
 
     }
     
@@ -873,15 +895,7 @@ public class pathXMiniGame extends MiniGame{
      * all the appropriate UI controls visible & invisible.
      */
     public void switchToGameScreen()
-    {
-        
-//        File testFile = new File("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
-//        if(testFile.canRead())
-//        {
-//            levelIO.loadLevel(testFile, model);
-//        }
-//        path.setLevelPath("D:\\Development\\NetBeansProjects\\pathXLevelEditor\\data\\levels\\Cali.bin");
-        
+    {   
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         audio.stop(pathXPropertyType.TITLE_SONG.toString());
      
@@ -980,7 +994,7 @@ public class pathXMiniGame extends MiniGame{
             audio.play(pathXPropertyType.GAME_SONG.toString(), true);
         }
         // PLAY THE GAMEPLAY SCREEN SONG
-          audio.stop(pathXPropertyType.TITLE_SONG.toString());
+ //         audio.stop(pathXPropertyType.TITLE_SONG.toString());
 //        audio.play(SortingHatPropertyType.SONG_CUE_GAME_SCREEN.toString(), true);        
     }
    

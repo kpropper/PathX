@@ -153,7 +153,7 @@ public class Player extends Sprite{
      //       next = (Intersection)pathIt.next();
      //       targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX();
      //       targetY = next.y + viewport.getViewportY();
-            startMovingToTarget(6);
+     //       startMovingToTarget(6);
         }
         if (calculateDistanceToTarget() < MAX_TILE_VELOCITY)
         {

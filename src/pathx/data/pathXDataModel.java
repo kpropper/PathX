@@ -36,7 +36,12 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private Player player;
     
+    private int money;
+    
+    private int level;
+    
     private boolean soundEffectsOn = true;
+    
 
 
     /**
@@ -75,8 +80,21 @@ public class pathXDataModel extends MiniGameDataModel {
     }
     
     public boolean soundEffectsOn() {   return soundEffectsOn;  }
-    public Player getPlayer()       {   return player;  }
+    public Player getPlayer()       {   return player;          }
+    public int getMoney()           {   return money;           }
+    public int getLevel()           {   return level;           }
 
+    //  CHANGE THE AMOUNT OF MONEY
+    public void changeMoney(int moneyChange)
+    {
+        money += moneyChange;
+    }
+    
+    // CHANGE THE LEVEL
+    public void setLevel(int newLevel)
+    {
+        level = newLevel;
+    }
     
 
 
@@ -103,8 +121,8 @@ public class pathXDataModel extends MiniGameDataModel {
           //      player.setTarget(x,y);
                player.setTarget(guess.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX(),guess.y - viewport.getViewportY());
                if(!player.isMoving())
-               {    player.setPath(model.findShortestPathToIntersection(guess));
-  //                  player.startMovingToTarget(4);
+               {   // player.setPath(model.findShortestPathToIntersection(guess));
+                    player.startMovingToTarget(4);
                }
             }
         }
