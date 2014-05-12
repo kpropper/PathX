@@ -40,6 +40,8 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private int level;
     
+    private int goal = MONEY_GOAL;
+    
     private boolean soundEffectsOn = true;
     
 
@@ -83,6 +85,11 @@ public class pathXDataModel extends MiniGameDataModel {
     public Player getPlayer()       {   return player;          }
     public int getMoney()           {   return money;           }
     public int getLevel()           {   return level;           }
+    public String getGoalDisplay()
+    {
+        String goalMoney = "$" + Integer.toString(goal);
+        return goalMoney;
+    }
 
     //  CHANGE THE AMOUNT OF MONEY
     public void changeMoney(int moneyChange)

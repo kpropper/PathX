@@ -72,7 +72,6 @@ public class PathX {
         // pathXproperties.xml
                 
         /* IMAGE FILE NAMES */
-        IMAGE_BUTTON_DELETE_ME,//////////////////////////////////////DELETE ME/////////////////////////////////////////////
         IMAGE_BACKGROUND_GAME,
         IMAGE_BACKGROUND_MENU,
         IMAGE_BACKGROUND_SETTINGS,
@@ -110,6 +109,7 @@ public class PathX {
         IMAGE_BUTTON_ARROW_LEFT_MOUSE_OVER,
         IMAGE_BUTTON_ARROW_RIGHT,
         IMAGE_BUTTON_ARROW_RIGHT_MOUSE_OVER,
+        IMAGE_BUTTON_START,
         IMAGE_WINDOW_ICON,
         IMAGE_MAP,
         IMAGE_BUTTON_LOCATION_MARKER,

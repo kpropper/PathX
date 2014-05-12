@@ -96,6 +96,12 @@ public class pathXLevelModel {
     public int              getLastMouseY()             {   return lastMouseY;              }
     public Intersection     getStartingLocation()       {   return level.startingLocation;  }
     public Intersection     getDestination()            {   return level.destination;       }
+    public String           getLevelName()              {   return level.getLevelName();    }
+    public String           getLevelMoneyDisplay()
+    {
+        String moneyDisplay = "$"+ Integer.toString(level.getMoney());
+        return moneyDisplay;
+    }
 //    public boolean          isDataUpdatedSinceLastSave(){   return dataUpdatedSinceLastSave;}    
     public boolean          isStartingLocation(Intersection testInt)  
     {   return testInt == level.startingLocation;           }

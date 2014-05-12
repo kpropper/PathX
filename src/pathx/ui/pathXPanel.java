@@ -130,19 +130,37 @@ public class pathXPanel extends JPanel{
             {
                 renderGameField = 0;
                 renderMap(g);
+                
+                //RENDER THE DIALOGS
+                renderDialogs(g);
+            
+
+                // AND THE BUTTONS AND DECOR
+                renderGUIControls(g);
 
             }
             else if(data.inProgress())
             {
                     renderGame(g);
             }
+            
+            else
+            {
+                //RENDER THE DIALOGS
+                renderDialogs(g);
+            
+
+                // AND THE BUTTONS AND DECOR
+                renderGUIControls(g);
+                
+            }    
 
             //RENDER THE DIALOGS
-            renderDialogs(g);
+//            renderDialogs(g);
             
 
             // AND THE BUTTONS AND DECOR
-            renderGUIControls(g);
+ //           renderGUIControls(g);
 
         }
         finally
@@ -199,6 +217,8 @@ public class pathXPanel extends JPanel{
            viewport = data.getViewport();
            int x  = viewport.getViewportX();
            int y = viewport.getViewportY();
+           
+           renderLevelSelectionHeader(g);
            
            BufferedImage img;
            BufferedImage tmp;
@@ -263,27 +283,38 @@ public class pathXPanel extends JPanel{
         g.drawImage(tmp, 200, 0, null);
         
         //moveAllCharacters();
-        player.update(game);
+        if(!data.isPaused())
+        {
+            player.update(game);
+        }
         
         // WE'LL USE THE Graphics2D FEATURES, WHICH IS 
         // THE ACTUAL TYPE OF THE g OBJECT
         Graphics2D g2 = (Graphics2D) g;
         
         //BUTTONS AND DIOLOGS ARE RERENDERED DUE TO CLIPPPING OF THE ROADS
-        renderDialogs(g);
         renderGUIControls(g);
-        
-        //RENDER THE ROADS TODO:CLEAN UP DISPLAY
-        renderRoads(g2);
-        
-        //RENDERS THE INTERSECTIONS
-        renderIntersections(g2);
-        
-      //  renderSprite(g, player);
-        renderCharacters(g, player);
-        
-        renderStats(g2);
+        if(game.getGUIButtons().get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled())
+        {
+            renderLevelInfo(g);
+            
+            renderInfoText(g2);
 
+        }
+        else
+        {
+            //RENDER THE ROADS TODO:CLEAN UP DISPLAY
+            renderRoads(g2);
+        
+            //RENDERS THE INTERSECTIONS
+            renderIntersections(g2);
+        
+            //renderSprite(g, player);
+            renderCharacters(g, player);
+        
+            renderStats(g2);
+            
+        }
     }
        
     /**
@@ -601,5 +632,31 @@ public class pathXPanel extends JPanel{
                 400, 120);
         g2.drawString("Player Target" + player.getTargetX() + ", " + player.getTargetY(),
                 300, 150);
+    }
+    
+    public void renderLevelInfo(Graphics g)
+    {
+        renderDialogs(g);
+        Sprite closeButton = game.getGUIButtons().get(LEVEL_INFO_CLOSE_BUTTON_TYPE);
+        renderSprite(g, closeButton);
+    }
+    
+    public void renderInfoText(Graphics g)
+    {
+        g.setColor(LEVEL_INFO_COLOR);
+        g.setFont(LEVEL_INFO_FONT);
+        g.drawString(model.getLevelName(), LEVEL_INFO_TITLE_X, LEVEL_INFO_TITLE_Y);
+        g.drawString(LEVEL_INFO_TEXT_1 + model.getLevelName(), LEVEL_INFO_LINE1_X, LEVEL_INFO_LINE1_Y);
+        g.drawString(LEVEL_INFO_TEXT_2, LEVEL_INFO_LINE2_X, LEVEL_INFO_LINE2_Y );
+        g.drawString(model.getLevelMoneyDisplay() + PERIOD, LEVEL_INFO_LINE3_X, LEVEL_INFO_LINE3_Y);
+    }
+    
+    public void renderLevelSelectionHeader(Graphics g)
+    {
+        g.setColor(LEVEL_SELECT_COLOR);
+        g.setFont(LEVEL_SELECT_FONT);
+        g.drawString(model.getLevelMoneyDisplay(), PLAYER_MONEY_X , PLAYER_MONEY_Y);
+        g.drawString(data.getGoalDisplay(), GOAL_X, GOAL_Y);
+
     }
 }

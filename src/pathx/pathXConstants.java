@@ -19,6 +19,9 @@ public class pathXConstants {
     public static String PATH_DATA = "./data/";
     public static String PATH_LEVELS = "./data/levels/";
     
+    // GAME CONSTANTS (USED EDIT TO MAKE GAMEPLAY MORE "FAIR"
+    public static final int MONEY_GOAL = 250000;
+    
     // THESE ARE THE TYPES OF CONTROLS, WE USE THESE CONSTANTS BECAUSE WE'LL
     // STORE THEM BY TYPE, SO THESE WILL PROVIDE A MEANS OF IDENTIFYING THEM
     
@@ -51,6 +54,15 @@ public class pathXConstants {
     public static final String GAME_LEFT_ARROW_BUTTON_TYPE = "GAME_LEFT_ARROW_BUTTON_TYPE";
     public static final String GAME_RIGHT_ARROW_BUTTON_TYPE = "GAME_RIGHT_ARROW_BUTTON_TYPE";
     public static final String PAUSE_BUTTON_TYPE = "PAUSE_BUTTON_TYPE";
+    public static final String START_BUTTON_TYPE = "START_BUTTON_TYPE";
+    
+    //MAP HEADER
+    public static final int PLAYER_MONEY_X = 328;
+    public static final int PLAYER_MONEY_Y = 40;
+    public static final int GOAL_X = 278;
+    public static final int GOAL_Y = PLAYER_MONEY_Y + 35;
+    public static final Color LEVEL_SELECT_COLOR = Color.BLACK;
+    public static final Font LEVEL_SELECT_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 24);
     
     //MAP NAVIGATION BUTTONS
     public static final String UP_ARROW_BUTTON_TYPE = "UP_ARROW_BUTTON_TYPE";
@@ -111,16 +123,16 @@ public class pathXConstants {
 //    public static final int VIEWPORT_INC = 5;
     
     // FOR TILE RENDERING
-    public static final int NUM_TILES = 30;
-    public static final int TILE_WIDTH = 135;
-    public static final int TILE_HEIGHT = 126;
-    public static final int TILE_IMAGE_OFFSET_X = 45;
-    public static final int TILE_IMAGE_OFFSET_Y = 30;
-    public static final String TILE_SPRITE_TYPE_PREFIX = "TILE_";
-    public static final int COLOR_INC = 10;
+//    public static final int NUM_TILES = 30;
+//    public static final int TILE_WIDTH = 135;
+//    public static final int TILE_HEIGHT = 126;
+//    public static final int TILE_IMAGE_OFFSET_X = 45;
+//    public static final int TILE_IMAGE_OFFSET_Y = 30;
+//    public static final String TILE_SPRITE_TYPE_PREFIX = "TILE_";
+ //   public static final int COLOR_INC = 10;
     
     // FOR MOVING TILES AROUND
-    public static final int MAX_TILE_VELOCITY = 20;
+    public static final int MAX_TILE_VELOCITY = 40;
     
     // UI CONTROLS POSITIONS FOR THE MENU SCREEN
     public static final int CLOSE_BUTTON_X = 580;
@@ -202,13 +214,15 @@ public class pathXConstants {
     public static final String ZOMBIE_TYPE = "ZOMBIE_TYPE";
     public static final String BANDIT_TYPE = "BANDIT_TYPE";
     public static final int GAME_CLOSE_BUTTON_X = 70;
-    public static final int GAME_CLOSE_BUTTON_Y = 90;
+    public static final int GAME_CLOSE_BUTTON_Y = 80;
     public static final int GAME_HOME_BUTTON_X = GAME_CLOSE_BUTTON_X -50;
     public static final int GAME_HOME_BUTTON_Y = GAME_CLOSE_BUTTON_Y;
-    public static final int BACK_BUTTON_X = GAME_HOME_BUTTON_X + 26;
+    public static final int BACK_BUTTON_X = GAME_HOME_BUTTON_X;
     public static final int BACK_BUTTON_Y = GAME_HOME_BUTTON_Y + 50;
+    public static final int START_BUTTON_X = GAME_CLOSE_BUTTON_X;
+    public static final int START_BUTTON_Y = BACK_BUTTON_Y;
     public static final int GAME_UP_BUTTON_X = 70;
-    public static final int GAME_UP_BUTTON_Y = 320;
+    public static final int GAME_UP_BUTTON_Y = 330;
     public static final int GAME_DOWN_BUTTON_X = GAME_UP_BUTTON_X;
     public static final int GAME_DOWN_BUTTON_Y = GAME_UP_BUTTON_Y + 80;
     public static final int GAME_LEFT_BUTTON_X = GAME_UP_BUTTON_X - 40;
@@ -226,6 +240,20 @@ public class pathXConstants {
     public static final int LEVEL_INFO_DIALOG_Y = 10;
     public static final int LEVEL_INFO_CLOSE_BUTTON_X = 252;
     public static final int LEVEL_INFO_CLOSE_BUTTON_Y = 300;
+    public static final String LEVEL_INFO_TEXT_1 = "Rob the Bank of ";
+    public static final String LEVEL_INFO_TEXT_2 = " and make your getaway to earn ";
+    public static final String PERIOD = ".";
+    public static final Color LEVEL_INFO_COLOR = Color.BLACK;
+    public static final Font LEVEL_INFO_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 24);
+    public static final int LEVEL_INFO_TITLE_X = 175;
+    public static final int LEVEL_INFO_TITLE_Y = 60;
+    public static final int LEVEL_INFO_LINE1_X = LEVEL_INFO_TITLE_X;
+    public static final int LEVEL_INFO_LINE1_Y = LEVEL_INFO_TITLE_Y + 75;
+    public static final int LEVEL_INFO_LINE2_X = LEVEL_INFO_LINE1_X;
+    public static final int LEVEL_INFO_LINE2_Y = LEVEL_INFO_LINE1_Y + 35;
+    public static final int LEVEL_INFO_LINE3_X = LEVEL_INFO_LINE2_X;
+    public static final int LEVEL_INFO_LINE3_Y = LEVEL_INFO_LINE2_Y + 35;
+       
     
     
     // THESE ARE USED FOR FORMATTING THE TIME OF GAME
