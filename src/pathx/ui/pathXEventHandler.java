@@ -118,12 +118,17 @@ public class pathXEventHandler {
             
     public void respondToSoundRequest()
     {
-
+        game.toggleSoundEffects();
     }
     
     public void respondToMusicRequest()
     {
         game.toggleMusic();
+    }
+    
+    public void respondToGameStartRequest()
+    {
+        game.startGameLevel();
     }
     
     public void respondToKeyPress(int keyCode)

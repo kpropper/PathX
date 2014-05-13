@@ -88,15 +88,11 @@
         <property name="TEXT_HELP_DIALOG"                       value="BLAH \n BLAH \n BLAH"></property>          
         
         <!-- AUDIO FILES -->
-        <property name="AUDIO_CUE_BAD_MOVE"                 value="./pathX/BadMove.wav"></property>
-        <property name="AUDIO_CUE_CHEAT"                    value="./pathX/Cheat.wav"></property>
-        <property name="AUDIO_CUE_DESELECT_TILE"            value="./pathX/DeselectTile.wav"></property>
-        <property name="AUDIO_CUE_GOOD_MOVE"                value="./pathX/GoodMove.wav"></property>
-        <property name="AUDIO_CUE_SELECT_TILE"              value="./pathX/SelectTile.wav"></property>
-        <property name="AUDIO_CUE_UNDO"                     value="./pathX/Undo.wav"></property>
-        <property name="AUDIO_CUE_WIN"                      value="./pathX/Win.mid"></property>
-        <property name="SONG_CUE_GAME_SCREEN"               value="./pathX/GameSong.mid"></property>        
-        <property name="SONG_CUE_MENU_SCREEN"               value="./pathX/MenuSong.mid"></property>
+        <property name="AUDIO_CUE_POLICE_SIREN"             value="./pathX/PoliceSiren.wav"></property>
+        <property name="AUDIO_CUE_CAR_START"                value="./pathX/CarStart.wav"></property>
+        <property name="AUDIO_CUE_CAR_WONT_START"           value="./pathX/CarWontStart.wav"></property>
+        <property name="AUDIO_CUE_BULLET_RICOCHET"          value="./pathX/BulletRicochet.wav"></property>
+        <property name="AUDIO_CUE_CAR_CRASH"                value="./pathX/CarCrash.wav"></property>
         <property name="TITLE_SONG"                         value="./pathX/TitleSong.mid"></property>
         <property name="GAME_SONG"                          value="./pathX/Ingame_music.mid"></property>
     </property_list>

@@ -125,10 +125,9 @@ public class pathXDataModel extends MiniGameDataModel {
             Intersection guess = model.findIntersection(x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),y + viewport.getViewportY());
             if(guess != null)
             {
-          //      player.setTarget(x,y);
-               player.setTarget(guess.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX(),guess.y - viewport.getViewportY());
                if(!player.isMoving())
                {   // player.setPath(model.findShortestPathToIntersection(guess));
+                   player.setTarget(guess.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX(),guess.y - viewport.getViewportY());
                     player.startMovingToTarget(4);
                }
             }

@@ -139,14 +139,10 @@ public class PathX {
         /* AUDIO CUES */
         TITLE_SONG,
         GAME_SONG,
-        AUDIO_CUE_BAD_MOVE,
-        AUDIO_CUE_CHEAT,
-        AUDIO_CUE_DESELECT_TILE,
-        AUDIO_CUE_GOOD_MOVE,
-        AUDIO_CUE_SELECT_TILE,
-        AUDIO_CUE_UNDO,
-        AUDIO_CUE_WIN,
-        SONG_CUE_GAME_SCREEN,
-        SONG_CUE_MENU_SCREEN,    
+        AUDIO_CUE_POLICE_SIREN,
+        AUDIO_CUE_CAR_START,
+        AUDIO_CUE_CAR_WONT_START,
+        AUDIO_CUE_BULLET_RICOCHET,
+        AUDIO_CUE_CAR_CRASH,  
     }  
 }

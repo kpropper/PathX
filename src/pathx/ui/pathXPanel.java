@@ -139,7 +139,7 @@ public class pathXPanel extends JPanel{
                 renderGUIControls(g);
 
             }
-            else if(data.inProgress())
+            else if(((pathXMiniGame)game).isCurrentScreenState(GAME_SCREEN_STATE))
             {
                     renderGame(g);
             }

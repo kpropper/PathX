@@ -497,6 +497,18 @@ public class pathXMiniGame extends MiniGame{
         }
     }
     
+    public void startGameLevel()
+    {
+        if(!data.inProgress())
+        {
+            data.setGameState(MiniGameState.IN_PROGRESS);
+            data.unpause();
+            if(((pathXDataModel)data).soundEffectsOn())
+            {
+                audio.play(pathXPropertyType.AUDIO_CUE_CAR_START.toString(), true);
+            }
+        }
+    }
     public void respondToPauseRequest()
     {
         if(!data.isPaused())
@@ -510,17 +522,7 @@ public class pathXMiniGame extends MiniGame{
             data.unpause();
         }
     }
-    
-    public void playerReset()
-    {
-        Player player = ((pathXDataModel)data).getPlayer();
-    //    player.setTarget(0, 0);
-     //   player.setPosition(0, 0);
-        player.setVx(0);
-        player.setVy(0);
-    }
-    
-
+       
      // SERVICE METHODS
         // - displayStats
         // - savePlayerRecord
@@ -686,9 +688,6 @@ public class pathXMiniGame extends MiniGame{
                 audio.play(pathXPropertyType.TITLE_SONG.toString(), true);
             }
         }
-        
-        playerReset();
-
     }
     
     public void switchToSettingsScreen()
@@ -725,9 +724,18 @@ public class pathXMiniGame extends MiniGame{
             guiButtons.get(MUSIC_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
             guiButtons.get(MUSIC_BUTTON_TYPE).setEnabled(true);
         }
-        
+
         // WHAT IS THE CURRENT SOUND EFFECT STATE
-        
+        if(((pathXDataModel)data).soundEffectsOn())
+        {
+            guiButtons.get(SOUND_BUTTON_TYPE).setState(pathXTileState.SELECTED_STATE.toString());
+            guiButtons.get(SOUND_BUTTON_TYPE).setEnabled(true);
+        }
+        else
+        {
+            guiButtons.get(SOUND_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+            guiButtons.get(SOUND_BUTTON_TYPE).setEnabled(true);
+        }
         
         // AND CHANGE THE SCREEN STATE
         currentScreenState = SETTINGS_SCREEN_STATE;
@@ -995,7 +1003,8 @@ public class pathXMiniGame extends MiniGame{
         currentScreenState = GAME_SCREEN_STATE;
         
         
-        data.setGameState(MiniGameState.IN_PROGRESS);
+ //       data.setGameState(MiniGameState.IN_PROGRESS);
+        
         
         if(musicPlaying)
         {
@@ -1027,13 +1036,11 @@ public class pathXMiniGame extends MiniGame{
             String audioPath = props.getProperty(pathXPropertyType.PATH_AUDIO);
 
             // LOAD ALL THE AUDIO
-            loadAudioCue(pathXPropertyType.AUDIO_CUE_SELECT_TILE);
-            loadAudioCue(pathXPropertyType.AUDIO_CUE_DESELECT_TILE);
-            loadAudioCue(pathXPropertyType.AUDIO_CUE_GOOD_MOVE);
-            loadAudioCue(pathXPropertyType.AUDIO_CUE_BAD_MOVE);
-            loadAudioCue(pathXPropertyType.AUDIO_CUE_CHEAT);
-            loadAudioCue(pathXPropertyType.AUDIO_CUE_UNDO);
-            loadAudioCue(pathXPropertyType.AUDIO_CUE_WIN);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_CAR_START);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_BULLET_RICOCHET);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_POLICE_SIREN);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_CAR_WONT_START);
+            loadAudioCue(pathXPropertyType.AUDIO_CUE_CAR_CRASH);
             loadAudioCue(pathXPropertyType.TITLE_SONG);
             loadAudioCue(pathXPropertyType.GAME_SONG);
 
@@ -1593,11 +1600,33 @@ public class pathXMiniGame extends MiniGame{
         }
     }
     
+    public void toggleSoundEffects()
+    {
+        if(((pathXDataModel)data).soundEffectsOn())
+        {
+            guiButtons.get(SOUND_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
+            ((pathXDataModel)data).turnOffSoundEffects();
+        }
+        else
+        {
+            guiButtons.get(SOUND_BUTTON_TYPE).setState(pathXTileState.SELECTED_STATE.toString());
+            ((pathXDataModel)data).turnOnSoundEffect();
+        }
+    }
+    
     public void playGameMusic()
     {
         if(musicPlaying)
         {
             audio.play(pathXPropertyType.GAME_SONG.toString(), true);
+        }
+    }
+    
+    public void playCarStart()
+    {
+        if(((pathXDataModel)data).soundEffectsOn())
+        {
+            audio.play(pathXPropertyType.AUDIO_CUE_CAR_START.toString(), true);
         }
     }
     /**
@@ -1722,6 +1751,12 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(RIGHT_ARROW_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
                 {   eventHandler.respondToRightRequest();  }
+        });
+        
+        //GAME START PRESS EVENT HANDLER
+        guiButtons.get(START_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToGameStartRequest();  }
         });
         
          //GAME UP ARROW PRESS EVENT HANDLER
