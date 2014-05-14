@@ -138,7 +138,7 @@ public class Police extends Sprite {
             nextStops = levelModel.getNeighbors(now);
             next = nextStops.get(caller.nextInt((nextStops.size())));
             targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
-            targetY = next.y + viewport.getViewportY();
+            targetY = next.y - viewport.getViewportY();
             path = levelModel.getRoad(now, next);
             startMovingToTarget(path.speedLimit/10);
         }

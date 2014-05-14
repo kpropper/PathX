@@ -90,6 +90,10 @@ public class Bandit extends Sprite{
         data = initModel;
         viewport = data.getViewport();
         levelModel = data.getLevelModel();
+     //   first = levelModel.findIntersection((int)x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),(int)y + viewport.getViewportY());
+        now = levelModel.findIntersection((int)x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),(int)y + viewport.getViewportY());
+        next = data.getDestination();
+        destination = data.getStart();
         getBanditPath();
     }
     
@@ -142,10 +146,10 @@ public class Bandit extends Sprite{
     
     public void getBanditPath()
     {
-        first = levelModel.findIntersection((int)x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),(int)y + viewport.getViewportY());
-        now = first;
-        next = data.getDestination();
-        destination = data.getStart();
+    //    first = levelModel.findIntersection((int)x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),(int)y + viewport.getViewportY());
+    //    now = first;
+    //    next = data.getDestination();
+    //    destination = data.getStart();
         while((destination.x != next.x) && (destination.y != next.y))
         {
             nextStops = levelModel.getNeighbors(now);
@@ -170,7 +174,7 @@ public class Bandit extends Sprite{
             {
                 next = (Intersection)pathIt.next();
                 targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
-                targetY = next.y + viewport.getViewportY();
+                targetY = next.y - viewport.getViewportY();
                 road = levelModel.getRoad(now, next);
                 startMovingToTarget(road.speedLimit/10);
                 now = next;

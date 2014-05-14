@@ -36,8 +36,6 @@ public class pathXLevelModel {
     Player player;
     
     Viewport viewport;
-    // USED TO MANAGE WHAT THE USER IS CURRENTLY EDITING
-//    PXLE_EditMode editMode;
 
     // DATA FOR RENDERING
 //    pathXLevelViewport viewport;
@@ -73,17 +71,11 @@ public class pathXLevelModel {
         data = initData;
         player = data.getPlayer();
         viewport = data.getViewport();
-//        editMode = PXLE_EditMode.NOTHING_SELECTED;
-//        viewport = new pathXLevelViewport();
-//        levelBeingEdited = false;
         startRoadIntersection = null;
     }
     
         // ACCESSOR METHODS
     public pathXLevel       getLevel()                  {   return level;                   }
-//    public PXLE_View        getView()                   {   return view;                    }
-//    public pathXLevelViewport         getViewport()               {   return viewport;                }
-//    public PXLE_EditMode    getEditMode()               {   return editMode;                }
     public boolean          isLevelBeingEdited()        {   return levelBeingEdited;        }
     public String           getBackgroundImageName()    {   return level.backgroundImageFileName;       }
     public Image            getBackgroundImage()        {   return backgroundImage;         }
@@ -133,17 +125,15 @@ public class pathXLevelModel {
 
         // UPDATE THE LEVEL TO FIT THE BACKGROUDN IMAGE SIZE
         level.backgroundImageFileName = newBgImage;
-   //     BufferedImage img = null;
+        
         try
         {
             backgroundImage = ImageIO.read(new File(PATH_LEVELS + level.backgroundImageFileName));
         } catch (IOException e) {
         }
-  //      backgroundImage = game.loadImage(/*imgPath +*/ level.backgroundImageFileName);//view.loadImage(LEVELS_PATH + level.backgroundImageFileName);
+
         int levelWidth = backgroundImage.getWidth(null);
         int levelHeight = backgroundImage.getHeight(null);
-   //     viewport.setLevelDimensions(levelWidth, levelHeight);
-   //     view.getCanvas().repaint();
     }
 
     /**
@@ -157,8 +147,6 @@ public class pathXLevelModel {
             startingLocationImage = ImageIO.read(new File(PATH_LEVELS + level.startingLocationImageFileName));
         } catch (IOException e) {
         }
-  //      startingLocationImage = //game.loadImage(imgPath + level.startingLocationImageFileName);
-  //      view.getCanvas().repaint();
     }
 
     /**
@@ -172,22 +160,8 @@ public class pathXLevelModel {
             destinationImage = ImageIO.read(new File(PATH_LEVELS + level.destinationImageFileName));
         } catch (IOException e) {
         }
- //       destinationImage = game.loadImage(imgPath + level.destinationImageFileName);
- //       view.getCanvas().repaint();
     }
 
-    /**
-     * Used for scrolling the viewport by (incX, incY). Note that it won't
-     * let the viewport scroll off the level.
-     */
-    public void moveViewport(int incX, int incY)
-    {
-        // MOVE THE VIEWPORT
-    //    viewport.move(incX, incY);
-
-        // AND NOW FORCE A REDRAW
- //       view.getCanvas().repaint();
-    }
     
     public Intersection findIntersection(int x, int y)
     {
@@ -237,6 +211,7 @@ public class pathXLevelModel {
         
         while (!found)
         {
+            if (path.size() == 20) {return path;}
             ArrayList<Intersection> neighbors = getNeighbors(currentIntersection);
             if (neighbors.size() == 1)
             {
@@ -269,8 +244,8 @@ public class pathXLevelModel {
         int y1 = currentRoad.node1.y;
         int x2 = currentRoad.node2.x;
         int y2 = currentRoad.node2.y;
-        int px = (int) player.getX() - VIEWABLE_GAMEWORLD_OFFSET;
-        int py = (int) player.getY();
+        int px = (int) player.getX() - VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
+        int py = (int) player.getY() - viewport.getViewportY();
         double distanceNode1 = calculateDistanceBetweenPoints(px, py, x1, y1);
         double distanceNode2 = calculateDistanceBetweenPoints(px, py, x2, y2);
         
@@ -371,6 +346,8 @@ public class pathXLevelModel {
     {
         Iterator<Road> it = level.roads.iterator();
         Line2D.Double tempLine = new Line2D.Double();
+        double smallestDistance = 100;
+        Road closestRoad = new Road();
         double centerX = s.getX() + 17.5 - VIEWABLE_GAMEWORLD_OFFSET;
         double centerY = s.getY() + 17.5;
         while (it.hasNext())
@@ -383,42 +360,22 @@ public class pathXLevelModel {
             double distance = tempLine.ptSegDist(centerX + viewport.getViewportX(), centerY + viewport.getViewportY());
             
             // IS IT CLOSE ENOUGH?
-            if (distance <= 20/*INT_STROKE*/)
+            if (distance <= smallestDistance/*23 INT_STROKE*/)
             {
                 // SELECT IT
-                this.selectedRoad = r;
-                return r;
+                //this.selectedRoad = r;
+                //return r;
+                smallestDistance = distance;
+                closestRoad = r;
             }
         }
-        return null;
+        // IS IT CLOSE ENOUGH?
+     //   if (smallestDistance <= 30/*INT_STROKE*/)
+    //    {
+           // SELECT IT
+           this.selectedRoad = closestRoad;
+           return closestRoad;
+     //   }
+    //    return null;
     }
-   
-    /*
-    public void generatePolicePath(Police p)
-    {
-        // FIND NEIGHBORS, CHOOSE RANDOM NEIGHBOR, GO THERE, REPEAT
-        
-        ArrayList<Intersection> path = new ArrayList();
-        int x = (int) p.getX() + INTERSECTION_RADIUS;
-        int y = (int) p.getY() + INTERSECTION_RADIUS;
-        
-        Intersection currentIntersection = findIntersectionAtCanvasLocation(x, y);
-        p.initCurrentIntersection(currentIntersection);
-        
-        ArrayList<Intersection> neighbors = getNeighbors(currentIntersection);
-        if (neighbors.contains(level.startingLocation))
-        {
-            neighbors.remove(level.startingLocation);
-        }
-        
-        int random = (int) (Math.random() * neighbors.size());
-        Intersection nextIntersection = neighbors.get(random);
-        p.setNextIntersection(nextIntersection);
-        Road roadInBetween = getRoad(currentIntersection, nextIntersection);
-        if (roadInBetween != null)
-        {
-            p.setTarget(nextIntersection.x , nextIntersection.y );
-            p.startMovingToTarget(roadInBetween.speedLimit / 10);
-        }
-    }*/
 }

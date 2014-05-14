@@ -50,6 +50,40 @@
         <property name="IMAGE_BUTTON_GAME_PLAY"             value="./pathX/ButtonGamePlay.png"></property>
         <property name="IMAGE_BUTTON_PAUSE"                 value="./pathX/ButtonPause.png"></property>
         <property name="IMAGE_BUTTON_START"                 value="./pathX/ButtonStart.png"></property>
+        <property name="IMAGE_BUTTON_FLAT_TIRE"             value="./pathX/ButtonFlatTire.png"></property>
+        <property name="IMAGE_BUTTON_GAS"                   value="./pathX/ButtonGas.png"></property>
+        <property name="IMAGE_BUTTON_GREEN_LIGHT"           value="./pathX/ButtonLightGreen.png"></property>
+        <property name="IMAGE_BUTTON_RED_LIGHT"             value="./pathX/ButtonLightRed.png"></property>
+        <property name="IMAGE_BUTTON_CLOSE_ROAD"            value="./pathX/ButtonCloseRoad.png"></property>
+        <property name="IMAGE_BUTTON_OPEN_INTERSECTION"     value="./pathX/ButtonOpenIntersection.png"></property>
+        <property name="IMAGE_BUTTON_CLOSE_INTERSECTION"    value="./pathX/ButtonCloseIntersection.png"></property>
+        <property name="IMAGE_BUTTON_FREEZE_TIME"           value="./pathX/ButtonFreezeTime.png"></property>
+        <property name="IMAGE_BUTTON_INCREASE_PLAYER_SPEED"    value="./pathX/ButtonIncreasePlayerSpeed.png"></property>
+        <property name="IMAGE_BUTTON_INCREASE_SPEED"        value="./pathX/ButtonIncreaseSpeed.png"></property>
+        <property name="IMAGE_BUTTON_DECREASE_SPEED"        value="./pathX/ButtonDecreaseSpeed.png"></property>
+        <property name="IMAGE_BUTTON_MIND_CONTROL"          value="./pathX/ButtonMindControl.png"></property>
+        <property name="IMAGE_BUTTON_INVINCIBLE"            value="./pathX/ButtonInvincible.png"></property>
+        <property name="IMAGE_BUTTON_STEAL"                 value="./pathX/ButtonSteal.png"></property>
+        <property name="IMAGE_BUTTON_FLY"                   value="./pathX/ButtonFly.png"></property>
+        <property name="IMAGE_BUTTON_INTANGABILITY"         value="./pathX/ButtonIntangability.png"></property>       
+        <property name="IMAGE_BUTTON_FLAT_TIRE_NA"          value="./pathX/ButtonFlatTireNA.png"></property>
+        <property name="IMAGE_BUTTON_GAS_NA"                value="./pathX/ButtonGasNA.png"></property>
+        <property name="IMAGE_BUTTON_GREEN_LIGHT_NA"        value="./pathX/ButtonLightGreenNA.png"></property>
+        <property name="IMAGE_BUTTON_RED_LIGHT_NA"          value="./pathX/ButtonLightRedNA.png"></property>
+        <property name="IMAGE_BUTTON_CLOSE_ROAD_NA"         value="./pathX/ButtonCloseRoadNA.png"></property>
+        <property name="IMAGE_BUTTON_OPEN_INTERSECTION_NA"  value="./pathX/ButtonOpenIntersectionNA.png"></property>
+        <property name="IMAGE_BUTTON_CLOSE_INTERSECTION_NA" value="./pathX/ButtonCloseIntersectionNA.png"></property>
+        <property name="IMAGE_BUTTON_FREEZE_TIME_NA"        value="./pathX/ButtonFreezeTimeNA.png"></property>
+        <property name="IMAGE_BUTTON_INCREASE_PLAYER_SPEED_NA"  value="./pathX/ButtonIncreasePlayerSpeedNA.png"></property>
+        <property name="IMAGE_BUTTON_INCREASE_SPEED_NA"     value="./pathX/ButtonIncreaseSpeedNA.png"></property>
+        <property name="IMAGE_BUTTON_DECREASE_SPEED_NA"     value="./pathX/ButtonDecreaseSpeedNA.png"></property>
+        <property name="IMAGE_BUTTON_MIND_CONTROL_NA"       value="./pathX/ButtonMindControlNA.png"></property>
+        <property name="IMAGE_BUTTON_INVINCIBLE_NA"         value="./pathX/ButtonInvincibleNA.png"></property>
+        <property name="IMAGE_BUTTON_STEAL_NA"              value="./pathX/ButtonStealNA.png"></property>
+        <property name="IMAGE_BUTTON_FLY_NA"                value="./pathX/ButtonFlyNA.png"></property>
+        <property name="IMAGE_BUTTON_INTANGABILITY_NA"      value="./pathX/ButtonIntangabilityNA.png"></property>
+        
+        
         <property name="IMAGE_PLAYER"                       value="./pathX/ImagePlayer.png"></property>
         <property name="IMAGE_POLICE"                       value="./pathX/ImagePolice.png"></property>
         <property name="IMAGE_ZOMBIE"                       value="./pathX/ImageZombie.png"></property>

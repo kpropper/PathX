@@ -60,12 +60,12 @@ public class pathXLevelPlacement {
     public static final Integer SANFRANCISCO_Z_1_Y = 45;  
     
     //SANJOSE
-    public static final Integer SANJOSE_P_1_X = 695;
-    public static final Integer SANJOSE_P_1_Y = 81;
-    public static final Integer SANJOSE_P_2_X = 220;
-    public static final Integer SANJOSE_P_2_Y = 820;
-    public static final Integer SANJOSE_B_1_X = 700;
-    public static final Integer SANJOSE_B_1_Y = 820;
+    public static final Integer SANJOSE_P_1_X = 188;
+    public static final Integer SANJOSE_P_1_Y = 193;
+    public static final Integer SANJOSE_P_2_X = 596;
+    public static final Integer SANJOSE_P_2_Y = 505;
+    public static final Integer SANJOSE_B_1_X = 598;
+    public static final Integer SANJOSE_B_1_Y = 197;
     
     
     //SANFRANCISCO INFO

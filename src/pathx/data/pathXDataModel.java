@@ -77,8 +77,7 @@ public class pathXDataModel extends MiniGameDataModel {
         miniGame = initMiniGame;
         
         //SETUP THE PLAYER
-        SpriteType sT = new SpriteType(PLAYER_TYPE);
-        player = new Player(sT,0,0,0,0,pathXTileState.INVISIBLE_STATE.toString());
+        createPlayer();
 
     }
 
@@ -128,14 +127,19 @@ public class pathXDataModel extends MiniGameDataModel {
         level = newLevel;
     }
     
+    // CREATE THE PLAYER
+    public void createPlayer()
+    {
+        SpriteType sT = new SpriteType(PLAYER_TYPE);
+        player = new Player(sT,0,0,0,0,pathXTileState.INVISIBLE_STATE.toString());
+    }
+    
+    
     //CREATE POLICE SPRITES
     public void createPolice(BufferedImage p)
     {
         NPC = placement.getPolice(model.getLevelName());
         SpriteType sT = new SpriteType(POLICE_TYPE);
-//        sT.addState(pathXTileState.VISIBLE_STATE.toString(), p);
-//        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), p);
-        
         for(int c = 1; c <= model.getNumPolice(); c++)
         {
             
@@ -147,6 +151,7 @@ public class pathXDataModel extends MiniGameDataModel {
             cop.setPosition(i.x + VIEWABLE_GAMEWORLD_OFFSET, i.y);
             cop.setDataModel(this);
             police.add(cop);
+            NPCs.add(cop);
         }
     }
     
@@ -154,9 +159,6 @@ public class pathXDataModel extends MiniGameDataModel {
     public void createZombies(BufferedImage p)
     {
         SpriteType sT = new SpriteType(ZOMBIE_TYPE);
-//        sT.addState(pathXTileState.VISIBLE_STATE.toString(), p);
-//        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), p);
-        
         for(int z = 1; z <= model.getNumZombies(); z++)
         {
             
@@ -168,16 +170,14 @@ public class pathXDataModel extends MiniGameDataModel {
             zom.setPosition(i.x + VIEWABLE_GAMEWORLD_OFFSET, i.y);
             zom.setDataModel(this);
             zombie.add(zom);
+            NPCs.add(zom);
         }     
     }
     
     //CREATE BANDIT SPRITES
     public void createBandits(BufferedImage p)
     {
-        SpriteType sT = new SpriteType(BANDIT_TYPE);
-//        sT.addState(pathXTileState.VISIBLE_STATE.toString(), p);
-//        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), p);
-        
+        SpriteType sT = new SpriteType(BANDIT_TYPE);        
         for(int b = 1; b <= model.getNumBandits(); b++)
         {
             
@@ -189,7 +189,17 @@ public class pathXDataModel extends MiniGameDataModel {
             bandit.setPosition(i.x + VIEWABLE_GAMEWORLD_OFFSET, i.y);
             bandit.setDataModel(this);
             bandits.add(bandit);
+            NPCs.add(bandit);
         }     
+    }
+    
+
+    public void clearGame()
+    {
+        police.clear();
+        zombie.clear();
+        bandits.clear();
+ //       createPlayer();
     }
 
 
