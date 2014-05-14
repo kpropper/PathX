@@ -2143,14 +2143,14 @@ public class pathXMiniGame extends MiniGame{
         //HOU (HOUSTON)
         guiButtons.get(HOU_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Houston.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //SA (SAN ANTONIO)
         guiButtons.get(SA_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "SanAntonio.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2164,21 +2164,21 @@ public class pathXMiniGame extends MiniGame{
         //PHE (PHOENIX)
         guiButtons.get(PHE_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Phoenix.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //SD (SAN DIEGO)
         guiButtons.get(SD_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "SanDiego.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //DALL (DALLAS)
         guiButtons.get(DALL_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Dallas.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2192,7 +2192,7 @@ public class pathXMiniGame extends MiniGame{
         //AUS (AUSTIN)
         guiButtons.get(AUS_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Austin.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2220,14 +2220,14 @@ public class pathXMiniGame extends MiniGame{
         //CO (COLUMBUS)
         guiButtons.get(CO_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Columbus.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //FW (FORT WORTH)
         guiButtons.get(FW_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "FortWorth.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2241,14 +2241,14 @@ public class pathXMiniGame extends MiniGame{
         //DET (DETROIT)
         guiButtons.get(DET_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "Detroit.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
         //EP (EL PASO)
         guiButtons.get(EP_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "ElPaso.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
