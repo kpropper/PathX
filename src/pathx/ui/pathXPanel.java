@@ -24,6 +24,9 @@ import pathx.level.model.pathXLevelModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import pathx.file.pathXFileIO;
+import pathx.level.model.Police;
+import pathx.level.model.Zombie;
+import pathx.level.model.Bandit;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -276,6 +279,16 @@ public class pathXPanel extends JPanel{
             img = game.loadImage(imgPath + policeImg);
             data.createPolice(img);
             
+            //CREATE THE ZOMBIE SPRITES
+            String zombieImg = props.getProperty(pathXPropertyType.IMAGE_ZOMBIE);
+            img = game.loadImage(imgPath + zombieImg);
+            data.createZombies(img);
+            
+            //CREATE THE BANDIT SPRITES
+            String banditImg = props.getProperty(pathXPropertyType.IMAGE_BANDIT);
+            img = game.loadImage(imgPath + banditImg);
+            data.createBandits(img);
+            
 
         }
         
@@ -296,6 +309,18 @@ public class pathXPanel extends JPanel{
             while(police.hasNext())
             {
                 police.next().update(game);
+            }
+            
+            Iterator<Zombie> zombies = data.getZombie();
+            while(zombies.hasNext())
+            {
+                zombies.next().update(game);
+            }
+            
+            Iterator<Bandit> bandits = data.getBandits();
+            while(bandits.hasNext())
+            {
+                bandits.next().update(game);
             }
         }
         
@@ -413,8 +438,9 @@ public class pathXPanel extends JPanel{
     public void renderNPCs(Graphics2D g2)
     {
         // ONLY RENDER THE VISIBLE ONES
-        Iterator<Sprite> police = data.getPolice();
-        Sprite cop;
+        // POLICE
+        Iterator<Police> police = data.getPolice();
+        Police cop;
         while(police.hasNext())
         {
            cop = police.next();
@@ -435,7 +461,55 @@ public class pathXPanel extends JPanel{
                 cop.setState("VISIBLE_STATE");
                 cop.setEnabled(true);
             }
-        }    
+        }
+        //ZOMBIES
+        Iterator<Zombie> zombies = data.getZombie();
+        Zombie zom;
+        while(zombies.hasNext())
+        {
+           zom = zombies.next();
+           if (!zom.getState().equals(pathXTileState.INVISIBLE_STATE.toString()))
+        {
+            SpriteType bgST = zom.getSpriteType();
+            Image img = bgST.getStateImage(zom.getState());
+            g2.drawImage(img, (int)zom.getX(), (int)zom.getY(), bgST.getWidth(), bgST.getHeight(), null); 
+            }
+            else if(zom.getX() < 200)
+            {
+                zom.setState("INVISIBLE_STATE");
+                zom.setEnabled(false);
+            }   
+            
+            else if(zom.getX() > 200 )//&& !guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled())
+            {
+                zom.setState("VISIBLE_STATE");
+                zom.setEnabled(true);
+            }
+        }
+        //BANDITS
+        Iterator<Bandit> bandits = data.getBandits();
+        Bandit bandit;
+        while(bandits.hasNext())
+        {
+           bandit = bandits.next();
+           if (!bandit.getState().equals(pathXTileState.INVISIBLE_STATE.toString()))
+        {
+            SpriteType bgST = bandit.getSpriteType();
+            Image img = bgST.getStateImage(bandit.getState());
+            g2.drawImage(img, (int)bandit.getX(), (int)bandit.getY(), bgST.getWidth(), bgST.getHeight(), null); 
+            }
+            else if(bandit.getX() < 200)
+            {
+                bandit.setState("INVISIBLE_STATE");
+                bandit.setEnabled(false);
+            }   
+            
+            else if(bandit.getX() > 200 )//&& !guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled())
+            {
+                bandit.setState("VISIBLE_STATE");
+                bandit.setEnabled(true);
+            }
+        }
     }
     
     

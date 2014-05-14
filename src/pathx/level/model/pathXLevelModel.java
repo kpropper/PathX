@@ -95,6 +95,8 @@ public class pathXLevelModel {
     public int              getLastMouseX()             {   return lastMouseX;              }
     public int              getLastMouseY()             {   return lastMouseY;              }
     public int              getNumPolice()              {   return level.numPolice;         }
+    public int              getNumZombies()             {   return level.numZombies;        }
+    public int              getNumBandits()             {   return level.numBandits;        }
     public Intersection     getStartingLocation()       {   return level.startingLocation;  }
     public Intersection     getDestination()            {   return level.destination;       }
     public String           getLevelName()              {   return level.getLevelName();    }

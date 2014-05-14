@@ -41,6 +41,8 @@ import pathx.level.model.pathXLevelModel;
 import pathx.level.model.Player;
 import pathx.level.model.Intersection;
 import pathx.level.model.Police;
+import pathx.level.model.Zombie;
+import pathx.level.model.Bandit;
 
 /**
  *
@@ -496,6 +498,7 @@ public class pathXMiniGame extends MiniGame{
                     }
                     
                     //UPDATE NPCS
+                    //POLICE
                     Iterator<Police> police = ((pathXDataModel)data).getPolice();
                     Police cop;
                     while(police.hasNext())
@@ -513,6 +516,46 @@ public class pathXMiniGame extends MiniGame{
                         {
                             cop.setState("VISIBLE_STATE");
                             cop.setEnabled(true);
+                        }
+                    }
+                    //ZOMBIES
+                    Iterator<Zombie> zombie = ((pathXDataModel)data).getZombie();
+                    Zombie zom;
+                    while(zombie.hasNext())
+                    {
+                        zom = zombie.next();
+                        zom.setPosition((int)zom.getX()-x,(int)zom.getY()-y);
+                        zom.setTarget(zom.getTargetX() - x,zom.getTargetY()- y);
+                        if(zom.getX() < 200)
+                        {
+                            zom.setState("INVISIBLE_STATE");
+                            zom.setEnabled(false);
+                        }   
+            
+                        if(temp.getX() > 200 && !guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled())
+                        {
+                            zom.setState("VISIBLE_STATE");
+                            zom.setEnabled(true);
+                        }
+                    }
+                    //BANDITS
+                    Iterator<Bandit> bandits = ((pathXDataModel)data).getBandits();
+                    Bandit bandit;
+                    while(bandits.hasNext())
+                    {
+                        bandit = bandits.next();
+                        bandit.setPosition((int)bandit.getX()-x,(int)bandit.getY()-y);
+                        bandit.setTarget(bandit.getTargetX() - x,bandit.getTargetY()- y);
+                        if(bandit.getX() < 200)
+                        {
+                            bandit.setState("INVISIBLE_STATE");
+                            bandit.setEnabled(false);
+                        }   
+            
+                        if(bandit.getX() > 200 && !guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled())
+                        {
+                            bandit.setState("VISIBLE_STATE");
+                            bandit.setEnabled(true);
                         }
                     }
            }
@@ -1880,7 +1923,7 @@ public class pathXMiniGame extends MiniGame{
         //SJ (SAN JOSE)
         guiButtons.get(SJ_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "SANJOSE.bin");
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -1908,7 +1951,7 @@ public class pathXMiniGame extends MiniGame{
         //SF (SAN FRANCISCO)
         guiButtons.get(SF_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
-                {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                {   path.setLevelPath(PATH_LEVELS + "SANFRANCISICO.bin");
                     eventHandler.respondToGameRequest();  }
         });
         

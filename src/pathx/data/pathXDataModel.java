@@ -12,6 +12,7 @@ import mini_game.MiniGame;
 import mini_game.MiniGameDataModel;
 import mini_game.Viewport;
 import pathx.level.model.Intersection;
+import mini_game.Sprite;
 import mini_game.SpriteType;
 import properties_manager.PropertiesManager;
 import static pathx.pathXConstants.*;
@@ -19,9 +20,12 @@ import pathx.ui.pathXMiniGame;
 import pathx.ui.pathXPanel;
 import pathx.ui.pathXTileState;
 import pathx.level.model.pathXLevelModel;
+import pathx.level.model.Intersection;
 import pathx.level.model.Player;
 import pathx.ui.pathXTileState;
 import pathx.level.model.Police;
+import pathx.level.model.Zombie;
+import pathx.level.model.Bandit;
 import pathx.level.model.pathXLevelPlacement;
 
 
@@ -49,6 +53,14 @@ public class pathXDataModel extends MiniGameDataModel {
     private boolean soundEffectsOn = true;
     
     private ArrayList<Police> police = new ArrayList();
+    
+    private ArrayList<Zombie> zombie = new ArrayList();
+    
+    private ArrayList<Bandit> bandits = new ArrayList();
+    
+    private ArrayList<Sprite> NPCs = new ArrayList();
+    
+    private Iterator NPC;
     
 
 
@@ -91,7 +103,12 @@ public class pathXDataModel extends MiniGameDataModel {
     public Player getPlayer()       {   return player;          }
     public int getMoney()           {   return money;           }
     public int getLevel()           {   return level;           }
+    public Intersection getStart()  {   return model.getStartingLocation(); }
+    public Intersection getDestination() {  return model.getDestination();  }
     public Iterator getPolice()   {   return police.iterator();   }
+    public Iterator getZombie()   {   return zombie.iterator();   }
+    public Iterator getBandits()  {   return bandits.iterator();  }
+    public Iterator getNPCs()       {   return NPCs.iterator(); }
     public pathXLevelModel getLevelModel() {   return model;   }
     public String getGoalDisplay()
     {
@@ -114,7 +131,7 @@ public class pathXDataModel extends MiniGameDataModel {
     //CREATE POLICE SPRITES
     public void createPolice(BufferedImage p)
     {
-        Iterator policePos = placement.getPolice(model.getLevelName());
+        NPC = placement.getPolice(model.getLevelName());
         SpriteType sT = new SpriteType(POLICE_TYPE);
 //        sT.addState(pathXTileState.VISIBLE_STATE.toString(), p);
 //        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), p);
@@ -124,8 +141,8 @@ public class pathXDataModel extends MiniGameDataModel {
             
             Police cop = new Police(sT);
             cop.setImage(p);
-            int ix = (int)policePos.next();
-            int iy = (int)policePos.next();
+            int ix = (int)NPC.next();
+            int iy = (int)NPC.next();
             Intersection i = model.findIntersection(ix,iy);
             cop.setPosition(i.x + VIEWABLE_GAMEWORLD_OFFSET, i.y);
             cop.setDataModel(this);
@@ -133,6 +150,47 @@ public class pathXDataModel extends MiniGameDataModel {
         }
     }
     
+    //CREATE ZOMBIE SPRITES
+    public void createZombies(BufferedImage p)
+    {
+        SpriteType sT = new SpriteType(ZOMBIE_TYPE);
+//        sT.addState(pathXTileState.VISIBLE_STATE.toString(), p);
+//        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), p);
+        
+        for(int z = 1; z <= model.getNumZombies(); z++)
+        {
+            
+            Zombie zom = new Zombie(sT);
+            zom.setImage(p);
+            int ix = (int)NPC.next();
+            int iy = (int)NPC.next();
+            Intersection i = model.findIntersection(ix,iy);
+            zom.setPosition(i.x + VIEWABLE_GAMEWORLD_OFFSET, i.y);
+            zom.setDataModel(this);
+            zombie.add(zom);
+        }     
+    }
+    
+    //CREATE BANDIT SPRITES
+    public void createBandits(BufferedImage p)
+    {
+        SpriteType sT = new SpriteType(BANDIT_TYPE);
+//        sT.addState(pathXTileState.VISIBLE_STATE.toString(), p);
+//        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), p);
+        
+        for(int b = 1; b <= model.getNumBandits(); b++)
+        {
+            
+            Bandit bandit = new Bandit(sT);
+            bandit.setImage(p);
+            int ix = (int)NPC.next();
+            int iy = (int)NPC.next();
+            Intersection i = model.findIntersection(ix,iy);
+            bandit.setPosition(i.x + VIEWABLE_GAMEWORLD_OFFSET, i.y);
+            bandit.setDataModel(this);
+            bandits.add(bandit);
+        }     
+    }
 
 
     /**
