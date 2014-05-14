@@ -21,6 +21,8 @@ import pathx.ui.pathXTileState;
 import pathx.level.model.pathXLevelModel;
 import pathx.level.model.Player;
 import pathx.ui.pathXTileState;
+import pathx.level.model.Police;
+import pathx.level.model.pathXLevelPlacement;
 
 
 /**
@@ -42,7 +44,11 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private int goal = MONEY_GOAL;
     
+    private pathXLevelPlacement placement = new pathXLevelPlacement();
+    
     private boolean soundEffectsOn = true;
+    
+    private ArrayList<Police> police = new ArrayList();
     
 
 
@@ -85,6 +91,8 @@ public class pathXDataModel extends MiniGameDataModel {
     public Player getPlayer()       {   return player;          }
     public int getMoney()           {   return money;           }
     public int getLevel()           {   return level;           }
+    public Iterator getPolice()   {   return police.iterator();   }
+    public pathXLevelModel getLevelModel() {   return model;   }
     public String getGoalDisplay()
     {
         String goalMoney = "$" + Integer.toString(goal);
@@ -101,6 +109,28 @@ public class pathXDataModel extends MiniGameDataModel {
     public void setLevel(int newLevel)
     {
         level = newLevel;
+    }
+    
+    //CREATE POLICE SPRITES
+    public void createPolice(BufferedImage p)
+    {
+        Iterator policePos = placement.getPolice(model.getLevelName());
+        SpriteType sT = new SpriteType(POLICE_TYPE);
+//        sT.addState(pathXTileState.VISIBLE_STATE.toString(), p);
+//        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), p);
+        
+        for(int c = 1; c <= model.getNumPolice(); c++)
+        {
+            
+            Police cop = new Police(sT);
+            cop.setImage(p);
+            int ix = (int)policePos.next();
+            int iy = (int)policePos.next();
+            Intersection i = model.findIntersection(ix,iy);
+            cop.setPosition(i.x + VIEWABLE_GAMEWORLD_OFFSET, i.y);
+            cop.setDataModel(this);
+            police.add(cop);
+        }
     }
     
 
@@ -126,9 +156,9 @@ public class pathXDataModel extends MiniGameDataModel {
             if(guess != null)
             {
                if(!player.isMoving())
-               {   // player.setPath(model.findShortestPathToIntersection(guess));
-                   player.setTarget(guess.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX(),guess.y - viewport.getViewportY());
-                    player.startMovingToTarget(4);
+               {   player.setPath(model.findShortestPathToIntersection(guess));
+                 //  player.setTarget(guess.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX(),guess.y - viewport.getViewportY());
+                //    player.startMovingToTarget(4);
                }
             }
         }

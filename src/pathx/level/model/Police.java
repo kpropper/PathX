@@ -16,44 +16,49 @@ import pathx.level.model.Intersection;
 import java.util.Iterator;
 import mini_game.Viewport;
 import pathx.data.pathXDataModel;
+import java.util.Random;
 
 /**
  *
  * @author Karl
  */
-public class Player extends Sprite{
-
-    //PATH FOR THE PLAYER TO TRAVEL
-    private ArrayList<Intersection> path;
-    
+public class Police extends Sprite {
+       
     //COORDINATES OF THE TARGET LOCATION
     private float targetX;
     private float targetY;
     
+    private Intersection now;
+    
     private Intersection next;
-    
-    private Iterator pathIt;
-    
+       
     private pathXDataModel data;
     
     private Viewport viewport;
+    
+    private pathXLevelModel levelModel;
+    
+    private ArrayList<Intersection> nextStops;
+    
+    private Road path;
+    
+    private Random caller = new Random();
+    
     
     //IS THE PLAYER CURRENTLY MOVING
     boolean movingToTarget;
     
     
-    public Player(SpriteType initSpriteType, float initX, float initY, float initVx, float initVy, String initState){
+    public Police(SpriteType sT){
         
-        super(initSpriteType, initX, initY,initVx,initVy, initState);
-        
-        path = new ArrayList();
+        super(sT, 0, 0,0,0, pathXTileState.VISIBLE_STATE.toString());
+
         movingToTarget = false;
     }
     
     public boolean isMoving()   {   return movingToTarget;   }
     public float getTargetX()   {   return targetX;  }
     public float getTargetY()   {   return targetY;  }
-    public Iterator getPathIterator() {return path.iterator(); }
     
     public void setImage(BufferedImage img)
     {
@@ -70,16 +75,11 @@ public class Player extends Sprite{
         targetY = y;
     }
     
-    public void setPath(ArrayList<Intersection> newPath)
-    {
-        path = newPath;
-        pathIt = path.iterator();
-    }
-    
     public void setDataModel(pathXDataModel initModel)
     {
         data = initModel;
         viewport = data.getViewport();
+        levelModel = data.getLevelModel();
     }
     
     public void startMovingToTarget (int velocity)
@@ -114,14 +114,6 @@ public class Player extends Sprite{
         this.y = y;
     }
     
-    public void checkPosition()
-    {
-        if((targetX <= x + 30 && targetX >= x - 30) && (targetY >= y - 30 && targetY <= y + 30))
-        {
-            movingToTarget = false;
-        }
-    }
-    
     public float calculateDistanceToTarget()
     {
         // GET THE X-AXIS DISTANCE TO GO
@@ -140,24 +132,15 @@ public class Player extends Sprite{
     @Override
     public void update(MiniGame game)
     {
-        // IF WE ARE IN A POST-WIN STATE WE ARE PLAYING THE WIN
-        // ANIMATION, SO MAKE SURE THIS TILE FOLLOWS THE PATH
-      //  if (game.getDataModel().won())
-      //  {
-      //      updateWinPath(game);
-      //  }
-        // IF NOT, IF THIS TILE IS ALMOST AT ITS TARGET DESTINATION,
-        // JUST GO TO THE TARGET AND THEN STOP MOVING
-        if(!movingToTarget && !path.isEmpty() && pathIt.hasNext())
+        if(!movingToTarget)
         {
-            next = (Intersection)pathIt.next();
+            now = levelModel.findIntersection((int)x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),(int)y + viewport.getViewportY());
+            nextStops = levelModel.getNeighbors(now);
+            next = nextStops.get(caller.nextInt((nextStops.size())));
             targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
             targetY = next.y + viewport.getViewportY();
-            startMovingToTarget(6);
-            if(!pathIt.hasNext())
-            {
-                path.clear();
-            }
+            path = levelModel.getRoad(now, next);
+            startMovingToTarget(path.speedLimit/10);
         }
         if (calculateDistanceToTarget() < MAX_TILE_VELOCITY)
         {
@@ -173,5 +156,6 @@ public class Player extends Sprite{
         {
             super.update(game);
         }
-    }  
+    }
+    
 }

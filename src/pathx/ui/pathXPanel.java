@@ -271,7 +271,12 @@ public class pathXPanel extends JPanel{
             player.setImage(img);
             player.setDataModel(data);
             
-    //        ((pathXMiniGame)game).playGameMusic();
+            //CREATE THE POLICE SPRITES
+            String policeImg = props.getProperty(pathXPropertyType.IMAGE_POLICE);
+            img = game.loadImage(imgPath + policeImg);
+            data.createPolice(img);
+            
+
         }
         
         int x  = viewport.getViewportX();
@@ -286,6 +291,12 @@ public class pathXPanel extends JPanel{
         if(!data.isPaused())
         {
             player.update(game);
+            
+            Iterator<Sprite> police = data.getPolice();
+            while(police.hasNext())
+            {
+                police.next().update(game);
+            }
         }
         
         // WE'LL USE THE Graphics2D FEATURES, WHICH IS 
@@ -310,7 +321,9 @@ public class pathXPanel extends JPanel{
             renderIntersections(g2);
         
             //renderSprite(g, player);
-            renderCharacters(g, player);
+            renderPlayer(g, player);
+            
+            renderNPCs(g2);
         
             renderStats(g2);
             
@@ -375,7 +388,7 @@ public class pathXPanel extends JPanel{
         }
     }
     
-    public void renderCharacters(Graphics g, Sprite s)
+    public void renderPlayer(Graphics g, Sprite s)
     {
         // ONLY RENDER THE VISIBLE ONES
         if (!s.getState().equals(pathXTileState.INVISIBLE_STATE.toString()))
@@ -395,6 +408,34 @@ public class pathXPanel extends JPanel{
            s.setState("VISIBLE_STATE");
            s.setEnabled(true);
         }
+    }
+    
+    public void renderNPCs(Graphics2D g2)
+    {
+        // ONLY RENDER THE VISIBLE ONES
+        Iterator<Sprite> police = data.getPolice();
+        Sprite cop;
+        while(police.hasNext())
+        {
+           cop = police.next();
+           if (!cop.getState().equals(pathXTileState.INVISIBLE_STATE.toString()))
+        {
+            SpriteType bgST = cop.getSpriteType();
+            Image img = bgST.getStateImage(cop.getState());
+            g2.drawImage(img, (int)cop.getX(), (int)cop.getY(), bgST.getWidth(), bgST.getHeight(), null); 
+            }
+            else if(cop.getX() < 200)
+            {
+                cop.setState("INVISIBLE_STATE");
+                cop.setEnabled(false);
+            }   
+            
+            else if(cop.getX() > 200 )//&& !guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled())
+            {
+                cop.setState("VISIBLE_STATE");
+                cop.setEnabled(true);
+            }
+        }    
     }
     
     

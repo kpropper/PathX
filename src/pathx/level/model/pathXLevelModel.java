@@ -94,6 +94,7 @@ public class pathXLevelModel {
     public Intersection     getStartRoadIntersection()  {   return startRoadIntersection;   }
     public int              getLastMouseX()             {   return lastMouseX;              }
     public int              getLastMouseY()             {   return lastMouseY;              }
+    public int              getNumPolice()              {   return level.numPolice;         }
     public Intersection     getStartingLocation()       {   return level.startingLocation;  }
     public Intersection     getDestination()            {   return level.destination;       }
     public String           getLevelName()              {   return level.getLevelName();    }
@@ -266,7 +267,7 @@ public class pathXLevelModel {
         int y1 = currentRoad.node1.y;
         int x2 = currentRoad.node2.x;
         int y2 = currentRoad.node2.y;
-        int px = (int) player.getX();
+        int px = (int) player.getX() - VIEWABLE_GAMEWORLD_OFFSET;
         int py = (int) player.getY();
         double distanceNode1 = calculateDistanceBetweenPoints(px, py, x1, y1);
         double distanceNode2 = calculateDistanceBetweenPoints(px, py, x2, y2);
@@ -368,23 +369,22 @@ public class pathXLevelModel {
     {
         Iterator<Road> it = level.roads.iterator();
         Line2D.Double tempLine = new Line2D.Double();
-        double centerX = s.getX() + 17.5;
+        double centerX = s.getX() + 17.5 - VIEWABLE_GAMEWORLD_OFFSET;
         double centerY = s.getY() + 17.5;
         while (it.hasNext())
         {
             Road r = it.next();
-            tempLine.x1 = r.node1.x + VIEWABLE_GAMEWORLD_OFFSET;
+            tempLine.x1 = r.node1.x;
             tempLine.y1 = r.node1.y;
-            tempLine.x2 = r.node2.x + VIEWABLE_GAMEWORLD_OFFSET;
+            tempLine.x2 = r.node2.x;
             tempLine.y2 = r.node2.y;
-            double distance = tempLine.ptSegDist(centerX+viewport.getViewportX(), centerY+viewport.getViewportY());
+            double distance = tempLine.ptSegDist(centerX + viewport.getViewportX(), centerY + viewport.getViewportY());
             
             // IS IT CLOSE ENOUGH?
-            if (distance <= 10/*INT_STROKE*/)
+            if (distance <= 20/*INT_STROKE*/)
             {
                 // SELECT IT
-//                this.selectedRoad = r;
-                //this.switchEditMode(PXLE_EditMode.ROAD_SELECTED);
+                this.selectedRoad = r;
                 return r;
             }
         }

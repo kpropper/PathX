@@ -40,6 +40,7 @@ import pathx.level.model.pathXLevelViewport;
 import pathx.level.model.pathXLevelModel;
 import pathx.level.model.Player;
 import pathx.level.model.Intersection;
+import pathx.level.model.Police;
 
 /**
  *
@@ -475,7 +476,7 @@ public class pathXMiniGame extends MiniGame{
                     temp.setX(temp.getX()- x);
                     temp.setY(temp.getY() - y);
                     temp.setTarget(temp.getTargetX() - x,temp.getTargetY()- y);
-                    Iterator playerPath = temp.getPathIterator();
+                //    Iterator playerPath = temp.getPathIterator();
                //     while(playerPath.hasNext())
                  //   {
                    //     Intersection pathNode = (Intersection)playerPath.next();
@@ -493,7 +494,28 @@ public class pathXMiniGame extends MiniGame{
                         temp.setState("VISIBLE_STATE");
                         temp.setEnabled(true);
                     }
-            }
+                    
+                    //UPDATE NPCS
+                    Iterator<Police> police = ((pathXDataModel)data).getPolice();
+                    Police cop;
+                    while(police.hasNext())
+                    {
+                        cop = police.next();
+                        cop.setPosition((int)cop.getX()-x,(int)cop.getY()-y);
+                        cop.setTarget(cop.getTargetX() - x,cop.getTargetY()- y);
+                        if(cop.getX() < 200)
+                        {
+                            cop.setState("INVISIBLE_STATE");
+                            cop.setEnabled(false);
+                        }   
+            
+                        if(temp.getX() > 200 && !guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled())
+                        {
+                            cop.setState("VISIBLE_STATE");
+                            cop.setEnabled(true);
+                        }
+                    }
+           }
         }
     }
     
@@ -912,7 +934,6 @@ public class pathXMiniGame extends MiniGame{
     public void switchToGameScreen()
     {   
         PropertiesManager props = PropertiesManager.getPropertiesManager();
-        audio.stop(pathXPropertyType.TITLE_SONG.toString());
      
         //DEACTIVATE LEVEL SELECT CONTROLS
         guiButtons.get(HOME_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
@@ -1011,6 +1032,8 @@ public class pathXMiniGame extends MiniGame{
             audio.stop(pathXPropertyType.TITLE_SONG.toString());
             audio.play(pathXPropertyType.GAME_SONG.toString(), true);
         }
+        
+        data.pause();
         // PLAY THE GAMEPLAY SCREEN SONG
  //         audio.stop(pathXPropertyType.TITLE_SONG.toString());
 //        audio.play(SortingHatPropertyType.SONG_CUE_GAME_SCREEN.toString(), true);        
