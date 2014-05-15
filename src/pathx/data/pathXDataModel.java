@@ -44,13 +44,15 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private int money = 0;
     
-    private int level;
+    private int levelMoney;
+    
+    private int level = 1;
     
     private int goal = MONEY_GOAL;
     
     private float gameSpeed = 1;
     
-    private Intersection destination;
+    //private Intersection destination;
     
     private pathXLevelPlacement placement = new pathXLevelPlacement();
     
@@ -94,6 +96,7 @@ public class pathXDataModel extends MiniGameDataModel {
     public void initLevel(pathXLevelModel initLevel)
     {
         model = initLevel;
+        levelMoney = model.getMoney();
     }
     
     public void turnOffSoundEffects()
@@ -125,10 +128,11 @@ public class pathXDataModel extends MiniGameDataModel {
     public Player getPlayer()       {   return player;          }
     public int getMoney()           {   return money;           }
     public int getLevel()           {   return level;           }
+    public int getlevelMoney()      {   return levelMoney;    }
     public int getMousePressedX()   {   return mousePressedX;   }
     public int getMousePressedY()   {   return mousePressedY;   }
     public float getGameSpeed()    {   return gameSpeed;       }
-    public boolean getGameWon()     {  return gameWon;          }
+    public boolean isGameWon()     {  return gameWon;          }
     public Intersection getStart()  {   return model.getStartingLocation(); }
     public Intersection getDestination() {  return model.getDestination();  }
     public Iterator getPolice()   {   return police.iterator();   }
@@ -147,6 +151,12 @@ public class pathXDataModel extends MiniGameDataModel {
         String moneyDisplay = "$"+ Integer.toString(money);
         return moneyDisplay;
     }
+    
+    public String getLevelMoneyDisplay()
+    {
+        String moneyDisplay = "$"+ Integer.toString(levelMoney);
+        return moneyDisplay;
+    }
 
     //  CHANGE THE AMOUNT OF MONEY
     public void changeMoney(int moneyChange)
@@ -154,10 +164,34 @@ public class pathXDataModel extends MiniGameDataModel {
         money += moneyChange;
     }
     
+    //CHANGE THE AMOUNT OF MONEY THAT IT IS POSSIBLE TO COME AWAY WITH
+    public void changeLevelMoney(int moneyChange)
+    {
+        levelMoney += moneyChange;
+    }
+    //HAS THE GAME BEEN WON
+    public void setGameWon()
+    {
+        gameWon = true;
+        money += levelMoney;
+    }        
+            
     // CHANGE THE LEVEL
     public void setLevel(int newLevel)
     {
-        level = newLevel;
+        if(level < newLevel)
+        {
+            level = newLevel;
+        }
+    }
+    
+    //CHEATS
+    public void increaseLevel()
+    {
+        if(level <= 19)
+        {
+            level++;  
+        }
     }
     
     // CREATE THE PLAYER
@@ -236,6 +270,7 @@ public class pathXDataModel extends MiniGameDataModel {
         police.clear();
         zombie.clear();
         bandits.clear();
+        gameWon = false;
  //       createPlayer();
     }
 

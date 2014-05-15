@@ -76,6 +76,7 @@ public class pathXLevelModel {
     
         // ACCESSOR METHODS
     public pathXLevel       getLevel()                  {   return level;                   }
+    public int              getMoney()                  {   return level.money;             }
     public boolean          isLevelBeingEdited()        {   return levelBeingEdited;        }
     public String           getBackgroundImageName()    {   return level.backgroundImageFileName;       }
     public Image            getBackgroundImage()        {   return backgroundImage;         }

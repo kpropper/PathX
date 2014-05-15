@@ -316,6 +316,8 @@ public class pathXConstants {
     public static final String LEVEL_INFO_TEXT_1 = "Rob the Bank of ";
     public static final String LEVEL_INFO_TEXT_2 = " and make your getaway to earn ";
     public static final String PERIOD = ".";
+    public static final String GAME_WON_TEXT_1 = "You've sucessfully gotten";
+    public static final String GAME_WON_TEXT_2 = "away with ";
     public static final Color LEVEL_INFO_COLOR = Color.BLACK;
     public static final Font LEVEL_INFO_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 24);
     public static final int LEVEL_INFO_TITLE_X = 175;

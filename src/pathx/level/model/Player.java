@@ -88,6 +88,9 @@ public class Player extends Sprite{
         data = initModel;
         viewport = data.getViewport();
         model = data.getLevelModel();
+        path.clear();
+        targetX = this.x;
+        targetY = this.y;
     }
     
     public void startMovingToTarget (int velocity)
@@ -151,7 +154,10 @@ public class Player extends Sprite{
         now = model.findIntersection((int)x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),(int)y + viewport.getViewportY());
         if(now == model.getDestination())
         {
-
+            if(!data.isGameWon())
+            {
+                data.setGameWon();
+            }
         }
         // IF WE ARE IN A POST-WIN STATE WE ARE PLAYING THE WIN
         // ANIMATION, SO MAKE SURE THIS TILE FOLLOWS THE PATH

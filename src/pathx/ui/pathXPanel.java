@@ -240,6 +240,8 @@ public class pathXPanel extends JPanel{
            img = game.loadImage(imgPath + props.getProperty(pathXPropertyType.IMAGE_MAP));
            tmp = img.getSubimage(x, y, MAP_WIDTH, MAP_HEIGHT);
            g.drawImage(tmp, 0, 100, null);
+           
+           game.enableLevels();
     }
     
     public void renderGame(Graphics g)
@@ -337,48 +339,53 @@ public class pathXPanel extends JPanel{
                 bandits.next().update(game);
             }
         }
-        
-        if(!data.isPaused())
+        if(!data.isGameWon())
         {
-            //CHECK FOR COLLISIONS
-            Iterator<Police> police = data.getPolice();
-            Police cop;
-            while(police.hasNext())
+            if(!data.isPaused())
             {
-                cop = police.next();
-                if(player.aabbsOverlap(cop))
+                //CHECK FOR COLLISIONS
+                Iterator<Police> police = data.getPolice();
+                Police cop;
+                while(police.hasNext())
                 {
-                    game.playPoliceSiren();
-                    data.pause();
-                    data.endGameAsLoss();
-                    game.endGameAsLoss();
-                    data.changeMoney(-Math.round(POLICE_LEVEL_LOSS_PENALTY * data.getMoney()));
-                    renderLoss = true;
+                    cop = police.next();
+                    if(player.aabbsOverlap(cop))
+                    {
+                        game.playPoliceSiren();
+                        data.pause();
+                        data.endGameAsLoss();
+                        game.endGameAsLoss();
+                        data.changeMoney(-Math.round(POLICE_LEVEL_LOSS_PENALTY * data.getMoney()));
+                        renderLoss = true;
+                    }
                 }
-            }
             
-            Iterator<Zombie> zombies = data.getZombie();
-            Zombie zom;    
-            while(zombies.hasNext())
-            {
-                zom = zombies.next();
-                if(player.aabbsOverlap(zom))
+                Iterator<Zombie> zombies = data.getZombie();
+                Zombie zom;    
+                while(zombies.hasNext())
                 {
-                    game.playCarCrash();
+                    zom = zombies.next();
+                    if(player.aabbsOverlap(zom))
+                    {
+                        game.playCarCrash();
+                    }
                 }
-            }
             
-            Iterator<Bandit> bandits = data.getBandits();
-            Bandit bandit;
-            while(bandits.hasNext())
-            {
-                bandit = bandits.next();
-                if(player.aabbsOverlap(bandit))
+                Iterator<Bandit> bandits = data.getBandits();
+                Bandit bandit;
+                while(bandits.hasNext())
                 {
-                    game.playBulletRicochet();
+                    bandit = bandits.next();
+                    if(player.aabbsOverlap(bandit))
+                    {
+                        game.playBulletRicochet();
+                    }
                 }
             }
         }
+        
+        //ENABLES AND DISABLES SPECIALS AS THEY BECOME AVAILABLE
+        game.enableSpecials();
         
         // WE'LL USE THE Graphics2D FEATURES, WHICH IS 
         // THE ACTUAL TYPE OF THE g OBJECT
@@ -392,6 +399,10 @@ public class pathXPanel extends JPanel{
             
             renderInfoText(g2);
 
+        }
+        else if(data.isGameWon())
+        {
+            renderGameWon(g);
         }
         else if(renderLoss)
         {
@@ -413,6 +424,7 @@ public class pathXPanel extends JPanel{
             renderStats(g2);
             
         }
+      
     }
        
     /**
@@ -845,6 +857,24 @@ public class pathXPanel extends JPanel{
         g.drawString(data.getMoneyDisplay(), PLAYER_MONEY_X , PLAYER_MONEY_Y);
         g.drawString(data.getGoalDisplay(), GOAL_X, GOAL_Y);
 
+    }
+    
+    public void renderGameWon(Graphics g)
+    {
+        Sprite gameWon = game.getGUIDialogs().get(LEVEL_INFO_DIALOG_TYPE);
+        gameWon.setState(pathXTileState.VISIBLE_STATE.toString());
+        renderSprite(g,gameWon);
+        
+        gameWon = game.getGUIButtons().get(LEVEL_INFO_CLOSE_BUTTON_TYPE);
+        gameWon.setState(pathXTileState.VISIBLE_STATE.toString());
+        gameWon.setEnabled(true);
+        renderSprite(g,gameWon);
+        
+        g.setColor(LEVEL_INFO_COLOR);
+        g.setFont(LEVEL_INFO_FONT);
+        g.drawString(model.getLevelName(), LEVEL_INFO_TITLE_X, LEVEL_INFO_TITLE_Y);
+        g.drawString(GAME_WON_TEXT_1, LEVEL_INFO_LINE1_X, LEVEL_INFO_LINE1_Y);
+        g.drawString(GAME_WON_TEXT_2 + data.getLevelMoneyDisplay(), LEVEL_INFO_LINE2_X, LEVEL_INFO_LINE2_Y );
     }
     
 }

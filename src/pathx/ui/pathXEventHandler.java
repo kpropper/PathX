@@ -162,5 +162,13 @@ public class pathXEventHandler {
         {
             respondToRightRequest();
         }
+        if(keyCode == KeyEvent.VK_F5)
+        {
+            game.cheatIncreaseLevels();
+        }
+        if(keyCode == KeyEvent.VK_F6)
+        {
+            game.cheatIncreaseMoney();
+        }
     }
 }
