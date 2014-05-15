@@ -131,6 +131,16 @@ public class pathXEventHandler {
         game.startGameLevel();
     }
     
+    public void respondToLeaveTownRequest()
+    {
+        game.switchToLevelSelectScreen();
+    }
+    
+    public void respondToTryAgainRequest()
+    {
+        
+    }
+    
     public void respondToKeyPress(int keyCode)
     {
         if(keyCode == KeyEvent.VK_UP)

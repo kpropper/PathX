@@ -27,6 +27,8 @@ import pathx.file.pathXFileIO;
 import pathx.level.model.Police;
 import pathx.level.model.Zombie;
 import pathx.level.model.Bandit;
+import pathx.ui.pathXTileState;
+import java.math.RoundingMode;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -76,6 +78,8 @@ public class pathXPanel extends JPanel{
     private Player player;
     
     private pathXLevelSelector levelPath;
+    
+    private boolean renderLoss;
     
     
     
@@ -240,10 +244,14 @@ public class pathXPanel extends JPanel{
     
     public void renderGame(Graphics g)
     {
-        viewport = data.getViewport();
+  //      renderLoss = false;
+  //      viewport = data.getViewport();
         BufferedImage img;
         if (renderGameField == 0)
         {
+            renderLoss = false;
+            viewport = data.getViewport();
+            
             renderGameField++;
             File testFile = new File(levelPath.getLevelPath());
             if(testFile.canRead())
@@ -343,6 +351,9 @@ public class pathXPanel extends JPanel{
                     game.playPoliceSiren();
                     data.pause();
                     data.endGameAsLoss();
+                    game.endGameAsLoss();
+                    data.changeMoney(-Math.round(POLICE_LEVEL_LOSS_PENALTY * data.getMoney()));
+                    renderLoss = true;
                 }
             }
             
@@ -381,6 +392,10 @@ public class pathXPanel extends JPanel{
             
             renderInfoText(g2);
 
+        }
+        else if(renderLoss)
+        {
+            renderLossDialog(g);
         }
         else
         {
@@ -793,6 +808,17 @@ public class pathXPanel extends JPanel{
         g2.drawString("Player Target" + player.getTargetX() + ", " + player.getTargetY(),
                 300, 150);
         g2.drawString("Playyer AABY "+ player.getAABBheight() + ", " + player.getAABBwidth(), 300, 180);
+    }
+    
+    public void renderLossDialog(Graphics g)
+    {
+        Sprite gameLoss = game.getGUIDialogs().get(LOSS_DIALOG_TYPE);
+        gameLoss.setState(pathXTileState.VISIBLE_STATE.toString());
+        renderSprite(g,gameLoss);
+        gameLoss = game.getGUIButtons().get(TRY_AGAIN_BUTTON_TYPE);
+        renderSprite(g, gameLoss);
+        gameLoss = game.getGUIButtons().get(LEAVE_TOWN_BUTTON_TYPE);
+        renderSprite(g, gameLoss);
     }
     
     public void renderLevelInfo(Graphics g)

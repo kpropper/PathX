@@ -50,6 +50,8 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private float gameSpeed = 1;
     
+    private Intersection destination;
+    
     private pathXLevelPlacement placement = new pathXLevelPlacement();
     
     private boolean soundEffectsOn = true;
@@ -63,6 +65,8 @@ public class pathXDataModel extends MiniGameDataModel {
     private ArrayList<Sprite> NPCs = new ArrayList();
     
     private Iterator NPC;
+    
+    private boolean gameWon = false;
     
     private int mousePressedX;
     private int mousePressedY;
@@ -124,6 +128,7 @@ public class pathXDataModel extends MiniGameDataModel {
     public int getMousePressedX()   {   return mousePressedX;   }
     public int getMousePressedY()   {   return mousePressedY;   }
     public float getGameSpeed()    {   return gameSpeed;       }
+    public boolean getGameWon()     {  return gameWon;          }
     public Intersection getStart()  {   return model.getStartingLocation(); }
     public Intersection getDestination() {  return model.getDestination();  }
     public Iterator getPolice()   {   return police.iterator();   }

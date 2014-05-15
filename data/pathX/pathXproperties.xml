@@ -41,6 +41,10 @@
         <property name="IMAGE_BUTTON_LEVEL_INFO_CLOSE_MOUSE_OVER" value="./pathX/ButtonLevelInfoCloseMouseOver.png"></property>
         <property name="IMAGE_BUTTON_BACK"                  value="./pathX/ButtonBack.png"></property>
         <property name="IMAGE_BUTTON_BACK_MOUSE_OVER"       value="./pathX/ButtonBackMouseOver.png"></property>
+        <property name="IMAGE_BUTTON_TRY_AGAIN"             value="./pathX/ButtonTryAgain.png"></property>
+        <property name="IMAGE_BUTTON_TRY_AGAIN_MOUSE_OVER"  value="./pathX/ButtonTryAgainMouseOver.png"></property>
+        <property name="IMAGE_BUTTON_LEAVE_TOWN"            value="./pathX/ButtonLeaveTown.png"></property>
+        <property name="IMAGE_BUTTON_LEAVE_TOWN_MOUSE_OVER" value="./pathX/ButtonLeaveTownMouseOver.png"></property>
         <property name="IMAGE_MAP"                          value="./pathX/Map.png"></property>
         <property name="IMAGE_BUTTON_LOCATION_MARKER"       value="./pathX/ButtonLocationMarker.png"></property>
         <property name="IMAGE_BUTTON_GAME_ARROW_LEFT"       value="./pathX/ButtonGameLeft.png"></property>
@@ -89,13 +93,8 @@
         <property name="IMAGE_ZOMBIE"                       value="./pathX/ImageZombie.png"></property>
         <property name="IMAGE_BANDIT"                       value="./pathX/ImageBandit.png"></property>
         
-        
-        
-        
-        <property name="IMAGE_BUTTON_DELETE_ME"        value="./pathX/photo.png"></property>
-        
-        <property name="IMAGE_DECOR_TIME"                   value="./pathX/DecorTime.png"></property>
-        <property name="IMAGE_DIALOG_LEVEL_INFO"            value="./pathX/DialogLevelInfo.png"></property>
+        <property name="IMAGE_DIALOG_LEVEL_INFO"            value="./pathX/DialogLevelInfo.png"></property>        
+        <property name="IMAGE_DIALOG_LOSS"                  value="./pathX/DialogLoss.png"></property>
         <property name="IMAGE_DIALOG_STATS"                 value="./pathX/DialogStats.png"></property>
         <property name="IMAGE_DIALOG_WIN"                   value="./pathX/DialogWin.png"></property>
         <property name="IMAGE_SPRITE_SHEET_CHARACTER_TILES" value="./pathX/SpriteSheetCharacterTiles.png"></property>

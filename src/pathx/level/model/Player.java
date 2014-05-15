@@ -32,9 +32,15 @@ public class Player extends Sprite{
     
     private Intersection next;
     
+    private Intersection now;
+    
+    private Intersection last;
+    
     private Iterator pathIt;
     
     private pathXDataModel data;
+    
+    private pathXLevelModel model;
     
     private Viewport viewport;
     
@@ -81,6 +87,7 @@ public class Player extends Sprite{
     {
         data = initModel;
         viewport = data.getViewport();
+        model = data.getLevelModel();
     }
     
     public void startMovingToTarget (int velocity)
@@ -141,6 +148,11 @@ public class Player extends Sprite{
     @Override
     public void update(MiniGame game)
     {
+        now = model.findIntersection((int)x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),(int)y + viewport.getViewportY());
+        if(now == model.getDestination())
+        {
+
+        }
         // IF WE ARE IN A POST-WIN STATE WE ARE PLAYING THE WIN
         // ANIMATION, SO MAKE SURE THIS TILE FOLLOWS THE PATH
       //  if (game.getDataModel().won())
@@ -149,6 +161,7 @@ public class Player extends Sprite{
       //  }
         // IF NOT, IF THIS TILE IS ALMOST AT ITS TARGET DESTINATION,
         // JUST GO TO THE TARGET AND THEN STOP MOVING
+        
         if(!movingToTarget && !path.isEmpty() && pathIt.hasNext())
         {
             next = (Intersection)pathIt.next();

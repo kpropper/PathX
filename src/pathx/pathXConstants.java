@@ -49,6 +49,8 @@ public class pathXConstants {
     public static final String NEW_GAME_BUTTON_TYPE = "NEW_GAME_BUTTON_TYPE";
     public static final String BACK_BUTTON_TYPE = "BACK_BUTTON_TYPE";
     public static final String LEVEL_INFO_CLOSE_BUTTON_TYPE = "LEVEL_INFO_CLOSE_BUTTON_TYPE";
+    public static final String TRY_AGAIN_BUTTON_TYPE = "TRY_AGAIN_BUTTON_TYPE";
+    public static final String LEAVE_TOWN_BUTTON_TYPE = "LEAVE_TOWN_BUTTON_TYPE";
     public static final String GAME_UP_ARROW_BUTTON_TYPE = "GAME_UP_ARROW_BUTTON_TYPE";
     public static final String GAME_DOWN_ARROW_BUTTON_TYPE = "GAME_DOWN_ARROW_BUTTON_TYPE";
     public static final String GAME_LEFT_ARROW_BUTTON_TYPE = "GAME_LEFT_ARROW_BUTTON_TYPE";
@@ -96,6 +98,7 @@ public class pathXConstants {
 
     // DIALOG TYPES
     public static final String LEVEL_INFO_DIALOG_TYPE = "LEVEL_INFO_DIALOG_TYPE";
+    public static final String LOSS_DIALOG_TYPE = "LOSS_DIALOG_TYPE";
     public static final String WIN_DIALOG_TYPE = "WIN_DIALOG_TYPE";
     public static final String STATS_DIALOG_TYPE = "STATS_DIALOG_TYPE";
     
@@ -293,6 +296,7 @@ public class pathXConstants {
     public static final int FLY_BUTTON_Y = STEAL_BUTTON_Y;
     public static final int INVINCIBLE_BUTTON_X = GAS_BUTTON_X;
     public static final int INVINCIBLE_BUTTON_Y = STEAL_BUTTON_Y;
+    public static final float POLICE_LEVEL_LOSS_PENALTY = 0.1f;
 
     
     public static final int VIEWABLE_GAMEWORLD_OFFSET = 220;
@@ -301,8 +305,14 @@ public class pathXConstants {
     //LEVEL INFO DIALOG COORDINATES
     public static final int LEVEL_INFO_DIALOG_X = 120;
     public static final int LEVEL_INFO_DIALOG_Y = 10;
+    public static final int LOSS_DIALOG_X = 120;
+    public static final int LOSS_DIALOG_Y = 10;
     public static final int LEVEL_INFO_CLOSE_BUTTON_X = 252;
     public static final int LEVEL_INFO_CLOSE_BUTTON_Y = 300;
+    public static final int TRY_AGAIN_BUTTON_X = 150;
+    public static final int TRY_AGAIN_BUTTON_Y = 300;
+    public static final int LEAVE_TOWN_BUTTON_X = TRY_AGAIN_BUTTON_X + 225;
+    public static final int LEAVE_TOWN_BUTTON_Y = TRY_AGAIN_BUTTON_Y;
     public static final String LEVEL_INFO_TEXT_1 = "Rob the Bank of ";
     public static final String LEVEL_INFO_TEXT_2 = " and make your getaway to earn ";
     public static final String PERIOD = ".";

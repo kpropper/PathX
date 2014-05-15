@@ -587,6 +587,17 @@ public class pathXMiniGame extends MiniGame{
             data.unpause();
         }
     }
+    
+    public void endGameAsLoss()
+    {
+        //SETUP LOSS DISPLAY
+        Sprite gameLoss = getGUIButtons().get(TRY_AGAIN_BUTTON_TYPE);
+        gameLoss.setState(pathXTileState.VISIBLE_STATE.toString());
+        gameLoss.setEnabled(true);
+        gameLoss = getGUIButtons().get(LEAVE_TOWN_BUTTON_TYPE);
+        gameLoss.setState(pathXTileState.VISIBLE_STATE.toString());
+        gameLoss.setEnabled(true);
+    }
        
      // SERVICE METHODS
         // - displayStats
@@ -660,6 +671,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(RIGHT_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(RIGHT_ARROW_BUTTON_TYPE).setEnabled(false);
         guiDialogs.get(LEVEL_INFO_DIALOG_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiDialogs.get(LOSS_DIALOG_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(GAME_SPEED_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(GAME_SPEED_BUTTON_TYPE).setEnabled(false);
         guiDecor.get(MAP_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
@@ -676,6 +688,10 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(PAUSE_BUTTON_TYPE).setEnabled(false);
         guiButtons.get(START_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(START_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(LEAVE_TOWN_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(LEAVE_TOWN_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(TRY_AGAIN_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(TRY_AGAIN_BUTTON_TYPE).setEnabled(false);
         
         // AND THE LEVEL BUTTONS
         guiButtons.get(LA_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
@@ -868,6 +884,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).setEnabled(false);
         guiDialogs.get(LEVEL_INFO_DIALOG_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiDialogs.get(LOSS_DIALOG_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(GAME_UP_ARROW_BUTTON_TYPE).setEnabled(false);
         guiButtons.get(GAME_DOWN_ARROW_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
@@ -914,6 +931,10 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(FLY_BUTTON_TYPE).setEnabled(false);
         guiButtons.get(INVINCIBLE_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.get(INVINCIBLE_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(LEAVE_TOWN_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(LEAVE_TOWN_BUTTON_TYPE).setEnabled(false);
+        guiButtons.get(TRY_AGAIN_BUTTON_TYPE).setState(pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.get(TRY_AGAIN_BUTTON_TYPE).setEnabled(false);
         
         //RESET THE VIEWPORT FOR THE MAP
         initMapViewport();
@@ -1345,6 +1366,7 @@ public class pathXMiniGame extends MiniGame{
         s = new Sprite(sT, CLOSE_BUTTON_X, CLOSE_BUTTON_Y, 0, 0, pathXTileState.VISIBLE_STATE.toString());
         guiButtons.put(CLOSE_BUTTON_TYPE, s);
         
+        
         //HOME BUTTON FOR MULTIPULE SCREENS
         String homeButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_HOME);
         sT = new SpriteType(HOME_BUTTON_TYPE);
@@ -1436,7 +1458,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.put(BACK_BUTTON_TYPE, s);
         guiButtons.get(BACK_BUTTON_TYPE).setEnabled(false);
         
-        //BACK BUTTON FOR GAMESCREEN
+        //LEVEL DIALOG CLOSE
         String levelInfoCloseButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_LEVEL_INFO_CLOSE);
         sT = new SpriteType(BACK_BUTTON_TYPE);
 	img = loadImage(imgPath + levelInfoCloseButton);
@@ -1447,6 +1469,31 @@ public class pathXMiniGame extends MiniGame{
         s = new Sprite(sT, LEVEL_INFO_CLOSE_BUTTON_X, LEVEL_INFO_CLOSE_BUTTON_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
         guiButtons.put(LEVEL_INFO_CLOSE_BUTTON_TYPE, s);
         guiButtons.get(LEVEL_INFO_CLOSE_BUTTON_TYPE).setEnabled(false);
+        
+        // THE LOSS DIALOG BUTTONS
+        //TRY AGAIN
+        String tryAgainButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_TRY_AGAIN);
+        sT = new SpriteType(TRY_AGAIN_BUTTON_TYPE);
+	img = loadImage(imgPath + tryAgainButton);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        String tryAgainMouseOverButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_TRY_AGAIN_MOUSE_OVER);
+        img = loadImage(imgPath + tryAgainMouseOverButton);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, TRY_AGAIN_BUTTON_X, TRY_AGAIN_BUTTON_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(TRY_AGAIN_BUTTON_TYPE, s);
+        guiButtons.get(TRY_AGAIN_BUTTON_TYPE).setEnabled(false);
+        
+        //LEAVE TOWN
+        String leaveTownButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_LEAVE_TOWN);
+        sT = new SpriteType(LEAVE_TOWN_BUTTON_TYPE);
+	img = loadImage(imgPath + leaveTownButton);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        String leaveTownMouseOverButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_LEAVE_TOWN_MOUSE_OVER);
+        img = loadImage(imgPath + leaveTownMouseOverButton);
+        sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
+        s = new Sprite(sT, LEAVE_TOWN_BUTTON_X, LEAVE_TOWN_BUTTON_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiButtons.put(LEAVE_TOWN_BUTTON_TYPE, s);
+        guiButtons.get(LEAVE_TOWN_BUTTON_TYPE).setEnabled(false);
         
         String startButton = props.getProperty(pathXPropertyType.IMAGE_BUTTON_START);
         sT = new SpriteType(START_BUTTON_TYPE);
@@ -1904,10 +1951,16 @@ public class pathXMiniGame extends MiniGame{
         sT = new SpriteType(LEVEL_INFO_DIALOG_TYPE);
         img = loadImageWithColorKey(imgPath + levelInfoDialog, COLOR_KEY);
         sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
-//        x = (viewport.getScreenWidth()/2) - (img.getWidth(null)/2);
-//        y = (viewport.getScreenHeight()/2) - (img.getHeight(null)/2);
         s = new Sprite(sT, LEVEL_INFO_DIALOG_X, LEVEL_INFO_DIALOG_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
         guiDialogs.put(LEVEL_INFO_DIALOG_TYPE, s);
+        
+        // THE LOSS DIALOG DISPLAY
+        String lossDialog = props.getProperty(pathXPropertyType.IMAGE_DIALOG_LOSS);
+        sT = new SpriteType(LOSS_DIALOG_TYPE);
+        img = loadImageWithColorKey(imgPath + lossDialog, COLOR_KEY);
+        sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
+        s = new Sprite(sT, LOSS_DIALOG_X, LOSS_DIALOG_Y, 0, 0, pathXTileState.INVISIBLE_STATE.toString());
+        guiDialogs.put(LOSS_DIALOG_TYPE, s);
     }		
         
     
@@ -2139,6 +2192,18 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(PAUSE_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
                 {   eventHandler.respondToPauseRequest();  }
+        });
+        
+        //LEAVE TOWN EVENT HANDLER
+        guiButtons.get(LEAVE_TOWN_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToLeaveTownRequest();  }
+        });
+        
+        //PAUSE PRESS EVENT HANDLER
+        guiButtons.get(TRY_AGAIN_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToTryAgainRequest();  }
         });
         
         
