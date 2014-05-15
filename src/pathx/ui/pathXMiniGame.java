@@ -44,6 +44,7 @@ import pathx.level.model.Intersection;
 import pathx.level.model.Police;
 import pathx.level.model.Zombie;
 import pathx.level.model.Bandit;
+import pathx.data.pathXSpecialsType;
 
 /**
  *
@@ -70,6 +71,9 @@ public class pathXMiniGame extends MiniGame{
     
     // THIS IS THE VIEWPORT
     private Viewport viewport;
+    
+    //THIS IS THE SPECIALS TIMER
+    private long endSpecial;
     
     //THIS IS THE LEVEL SELECTOR
     private pathXLevelSelector path = new pathXLevelSelector();
@@ -609,6 +613,28 @@ public class pathXMiniGame extends MiniGame{
         {
             guiButtons.get(PAUSE_BUTTON_TYPE).setState(pathXTileState.VISIBLE_STATE.toString());
             data.unpause();
+        }
+    }
+    
+    public void respondToSpecialsRequest(String special, long time)
+    {
+        if(special.compareTo(pathXSpecialsType.FREEZE_TIME.toString())==0)
+        {
+            if(data.isPaused())    {data.unpause();}
+            else data.pause();
+            ((pathXDataModel)data).changeLevelMoney(-10);
+        }
+        
+        if(special.compareTo(pathXSpecialsType.INTANGIBILITY.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special/*pathXSpecialsType.INTANGIBILITY.toString()*/);
+            endSpecial = time + ((pathXDataModel)data).getTime();
+        }
+        
+        if(special.compareTo(pathXSpecialsType.FLYING.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            endSpecial = THIRTY_SECONDS + ((pathXDataModel)data).getTime();
         }
     }
     
@@ -2615,6 +2641,87 @@ public class pathXMiniGame extends MiniGame{
                 {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
                     eventHandler.respondToGameRequest();  }
         });
+        
+        //SPECIALS HANDLERS
+        guiButtons.get(GREEN_LIGHT_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.GREEN_LIGHT.toString(),GREEN_LIGHT_TIME);  }
+        });
+        
+        guiButtons.get(RED_LIGHT_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(FREEZE_TIME_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.FREEZE_TIME.toString(),0);  }
+        });
+        
+        guiButtons.get(DECREASE_SPEED_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(INCREASE_SPEED_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(INCREASE_PLAYER_SPEED_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(FLAT_TIRE_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(GAS_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(CLOSE_ROAD_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(CLOSE_INTERSECTION_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(OPEN_INTERSECTION_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(STEAL_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(MIND_CONTROL_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
+        
+        guiButtons.get(FLY_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.FLYING.toString(),0);  }
+        });
+        
+        guiButtons.get(INTANGABILITY_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.INTANGIBILITY.toString(),INTANGIBILITY_TIME);  }
+        });
+        
+        guiButtons.get(INVINCIBLE_BUTTON_TYPE).setActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae)
+                {   eventHandler.respondToCloseRequest();  }
+        });
 
         // KEY LISTENER - LET'S US PROVIDE CUSTOM RESPONSES
         this.setKeyListener(new KeyAdapter(){
@@ -2675,6 +2782,16 @@ public class pathXMiniGame extends MiniGame{
             {
                 guiButtons.get(GAME_SPEED_BUTTON_TYPE).setX(((pathXDataModel)data).getMousePressedX());
                ((pathXDataModel)data).setGameSpeed(((pathXDataModel)data).getMousePressedX()/(float)GAME_SPEED_MIDDLE);
+            }
+        }
+        
+        if(((pathXDataModel)data).getCurrentSpecial() != NONE)
+        {
+            long time = ((pathXDataModel)data).getTime();
+            long test = endSpecial - time;
+            if(endSpecial <= time)
+            {
+               ((pathXDataModel)data).setSpecial(NONE);
             }
         }
     }    

@@ -16,6 +16,8 @@ import pathx.level.model.Intersection;
 import java.util.Iterator;
 import mini_game.Viewport;
 import pathx.data.pathXDataModel;
+import java.math.RoundingMode;
+import pathx.data.pathXSpecialsType;
 
 /**
  *
@@ -42,7 +44,10 @@ public class Player extends Sprite{
     
     private pathXLevelModel model;
     
+    private int speed = 100;
+    
     private Viewport viewport;
+    
     
     //IS THE PLAYER CURRENTLY MOVING
     boolean movingToTarget;
@@ -60,6 +65,7 @@ public class Player extends Sprite{
     public float getTargetX()   {   return targetX;  }
     public float getTargetY()   {   return targetY;  }
     public Iterator getPathIterator() {return path.iterator(); }
+    public int GetSpeed()       {   return speed;   }
     
     public void setImage(BufferedImage img)
     {
@@ -148,6 +154,16 @@ public class Player extends Sprite{
         return distance;
     }
     
+    public void decreaseSpeed()
+    {
+        speed -= 10;
+    }
+    
+    public void increaseSpeed()
+    {
+        speed += 20;
+    }
+    
     @Override
     public void update(MiniGame game)
     {
@@ -159,21 +175,26 @@ public class Player extends Sprite{
                 data.setGameWon();
             }
         }
-        // IF WE ARE IN A POST-WIN STATE WE ARE PLAYING THE WIN
-        // ANIMATION, SO MAKE SURE THIS TILE FOLLOWS THE PATH
-      //  if (game.getDataModel().won())
-      //  {
-      //      updateWinPath(game);
-      //  }
-        // IF NOT, IF THIS TILE IS ALMOST AT ITS TARGET DESTINATION,
-        // JUST GO TO THE TARGET AND THEN STOP MOVING
         
-        if(!movingToTarget && !path.isEmpty() && pathIt.hasNext())
+        if(data.getCurrentSpecial().compareTo(pathXSpecialsType.FLYING.toString())==0)
+        {
+            now = model.findIntersection(data.getMousePressedX() - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),data.getMousePressedY() + viewport.getViewportY());
+            if(now != null)
+            {
+                targetX = now.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
+                targetY = now.y - viewport.getViewportY();
+                path.clear();
+                this.x = now.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
+                this.y = now.y - viewport.getViewportY();
+                data.setSpecial(NONE);
+            }
+        }     
+        else if(!movingToTarget && !path.isEmpty() && pathIt.hasNext())
         {
             next = (Intersection)pathIt.next();
             targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
             targetY = next.y - viewport.getViewportY();
-            startMovingToTarget(6);
+            startMovingToTarget(Math.round(speed/10 * data.getGameSpeed()));
             if(!pathIt.hasNext())
             {
                 path.clear();

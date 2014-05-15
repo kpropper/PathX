@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import pathx.ui.pathXTile;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
@@ -27,6 +28,7 @@ import pathx.level.model.Police;
 import pathx.level.model.Zombie;
 import pathx.level.model.Bandit;
 import pathx.level.model.pathXLevelPlacement;
+import pathx.data.pathXSpecialsType;
 
 
 /**
@@ -41,6 +43,8 @@ public class pathXDataModel extends MiniGameDataModel {
     private pathXLevelModel model;
     
     private Player player;
+    
+    private String currentSpecial = NONE;
     
     private int money = 0;
     
@@ -72,6 +76,8 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private int mousePressedX;
     private int mousePressedY;
+    
+    private GregorianCalendar startTime;
 
 
     /**
@@ -128,11 +134,12 @@ public class pathXDataModel extends MiniGameDataModel {
     public Player getPlayer()       {   return player;          }
     public int getMoney()           {   return money;           }
     public int getLevel()           {   return level;           }
-    public int getlevelMoney()      {   return levelMoney;    }
+    public int getLevelMoney()      {   return levelMoney;    }
     public int getMousePressedX()   {   return mousePressedX;   }
     public int getMousePressedY()   {   return mousePressedY;   }
     public float getGameSpeed()    {   return gameSpeed;       }
     public boolean isGameWon()     {  return gameWon;          }
+    public String getCurrentSpecial() {   return currentSpecial; }
     public Intersection getStart()  {   return model.getStartingLocation(); }
     public Intersection getDestination() {  return model.getDestination();  }
     public Iterator getPolice()   {   return police.iterator();   }
@@ -183,6 +190,19 @@ public class pathXDataModel extends MiniGameDataModel {
         {
             level = newLevel;
         }
+    }
+    
+    // SET THE SPECIAL
+    public void setSpecial(String special)
+    {
+        currentSpecial = special;
+    }
+    
+    //GET A TIMER
+    public long getTime()
+    {
+        startTime = new GregorianCalendar();
+        return startTime.getTimeInMillis();
     }
     
     //CHEATS

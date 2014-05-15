@@ -43,6 +43,7 @@ import java.awt.geom.Line2D;
 import java.util.HashMap;
 import java.util.Iterator;
 import pathx.PathX;
+import pathx.data.pathXSpecialsType;
 import pathx.level.model.Road;
 import pathx.level.model.Intersection;
 import pathx.level.model.Player;
@@ -341,44 +342,58 @@ public class pathXPanel extends JPanel{
         }
         if(!data.isGameWon())
         {
-            if(!data.isPaused())
+            if(data.getCurrentSpecial().compareTo(pathXSpecialsType.INTANGIBILITY.toString()) != 0)
             {
-                //CHECK FOR COLLISIONS
-                Iterator<Police> police = data.getPolice();
-                Police cop;
-                while(police.hasNext())
+                if(!data.isPaused())
                 {
-                    cop = police.next();
-                    if(player.aabbsOverlap(cop))
+                    //CHECK FOR COLLISIONS
+                    Iterator<Police> police = data.getPolice();
+                    Police cop;
+                    while(police.hasNext())
                     {
-                        game.playPoliceSiren();
-                        data.pause();
-                        data.endGameAsLoss();
-                        game.endGameAsLoss();
-                        data.changeMoney(-Math.round(POLICE_LEVEL_LOSS_PENALTY * data.getMoney()));
-                        renderLoss = true;
+                        cop = police.next();
+                        if(player.aabbsOverlap(cop))
+                        {
+                            game.playPoliceSiren();
+                            data.pause();
+                            data.endGameAsLoss();
+                            game.endGameAsLoss();
+                            data.changeMoney(-Math.round(POLICE_LEVEL_LOSS_PENALTY * data.getMoney()));
+                            renderLoss = true;
+                        }
                     }
-                }
             
-                Iterator<Zombie> zombies = data.getZombie();
-                Zombie zom;    
-                while(zombies.hasNext())
-                {
-                    zom = zombies.next();
-                    if(player.aabbsOverlap(zom))
+                    Iterator<Zombie> zombies = data.getZombie();
+                    Zombie zom;    
+                    while(zombies.hasNext())
                     {
-                        game.playCarCrash();
+                        zom = zombies.next();
+                        if(player.aabbsOverlap(zom))
+                        {
+                            game.playCarCrash();
+                            player.decreaseSpeed();
+                            if(player.GetSpeed() == 0)
+                            {
+                                game.endGameAsLoss();
+                                renderLoss = true;
+                            }
+                            //Gives THE PLAYER ICON TIME TO GET AWAY FROM COLLISION
+                            game.respondToSpecialsRequest(pathXSpecialsType.INTANGIBILITY.toString(), 1000);
+                        }
                     }
-                }
             
-                Iterator<Bandit> bandits = data.getBandits();
-                Bandit bandit;
-                while(bandits.hasNext())
-                {
-                    bandit = bandits.next();
-                    if(player.aabbsOverlap(bandit))
+                    Iterator<Bandit> bandits = data.getBandits();
+                    Bandit bandit;
+                    while(bandits.hasNext())
                     {
-                        game.playBulletRicochet();
+                        bandit = bandits.next();
+                        if(player.aabbsOverlap(bandit))
+                        {
+                            game.playBulletRicochet();
+                            data.changeLevelMoney(-Math.round(BANDIT_LEVEL_LOSS_PENALTY * data.getLevelMoney()));
+                            //Gives THE PLAYER ICON TIME TO GET AWAY FROM COLLISION
+                            game.respondToSpecialsRequest(pathXSpecialsType.INTANGIBILITY.toString(), 1000);
+                        }
                     }
                 }
             }
@@ -400,7 +415,7 @@ public class pathXPanel extends JPanel{
             renderInfoText(g2);
 
         }
-        else if(data.isGameWon())
+        else if(data.isGameWon()/*|| data.getCurrentSpecial().compareTo(pathXSpecialsType.FLYING.toString())== 0*/)
         {
             renderGameWon(g);
         }

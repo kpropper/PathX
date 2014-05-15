@@ -8,6 +8,7 @@ import static pathx.pathXConstants.MENU_SCREEN_STATE;
 import static pathx.pathXConstants.*;
 import pathx.PathX;
 import pathx.data.pathXDataModel;
+import pathx.data.pathXSpecialsType;
 //import pathx.file.pathXFileManager;
 
 
@@ -141,6 +142,12 @@ public class pathXEventHandler {
         
     }
     
+    //SPECIALS HANDLING
+    public void respondToSpecialsRequest(String Special, long time)
+    {
+        game.respondToSpecialsRequest(Special, time);
+    }
+    
     public void respondToKeyPress(int keyCode)
     {
         if(keyCode == KeyEvent.VK_UP)
@@ -169,6 +176,10 @@ public class pathXEventHandler {
         if(keyCode == KeyEvent.VK_F6)
         {
             game.cheatIncreaseMoney();
+        }
+        if(keyCode == KeyEvent.VK_F)
+        {
+            game.respondToSpecialsRequest(pathXSpecialsType.FLYING.toString(), 0);
         }
     }
 }

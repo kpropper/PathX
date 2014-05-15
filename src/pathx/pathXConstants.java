@@ -297,7 +297,7 @@ public class pathXConstants {
     public static final int INVINCIBLE_BUTTON_X = GAS_BUTTON_X;
     public static final int INVINCIBLE_BUTTON_Y = STEAL_BUTTON_Y;
     public static final float POLICE_LEVEL_LOSS_PENALTY = 0.1f;
-
+    public static final float BANDIT_LEVEL_LOSS_PENALTY = 0.1f;
     
     public static final int VIEWABLE_GAMEWORLD_OFFSET = 220;
     
@@ -392,5 +392,17 @@ public class pathXConstants {
     public static final String MOUSE_SCREEN_POSITION_TITLE = "Screen Mouse Position: ";
     public static final String MOUSE_LEVEL_POSITION_TITLE = "Level Mouse Position: ";
     public static final String VIEWPORT_POSITION_TITLE = "Viewport Position: ";
+    
+    //SPECIALS TIMES
+    public static final long GREEN_LIGHT_TIME = 10000;
+    public static final long RED_LIGHT_TIME = 10000;
+    public static final long FLAT_TIRE_TIME = 10000;
+    public static final long GAS_TIME = 20000;
+    public static final long Steal_TIME = 10000;
+    public static final long MIND_CONTROL = 20000;
+    public static final long INTANGIBILITY_TIME = 10000;
+    public static final long INVINCIBILITY_TIME = 10000;
+    public static final String NONE = "NONE";
+    public static final long THIRTY_SECONDS = 30000;
     
 }
