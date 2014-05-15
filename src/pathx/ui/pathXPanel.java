@@ -59,7 +59,7 @@ import pathx.ui.pathXGameController;
 public class pathXPanel extends JPanel{
      // THIS IS ACTUALLY OUR pathX APP, WE NEED THIS
     // BECAUSE IT HAS THE GUI STUFF THAT WE NEED TO RENDER
-    private MiniGame game;
+    private pathXMiniGame game;
     
     // AND HERE IS ALL THE GAME DATA THAT WE NEED TO RENDER
     private pathXDataModel data;
@@ -88,7 +88,7 @@ public class pathXPanel extends JPanel{
      * 
      * @param initData pathX game data.
      */
-    public pathXPanel(MiniGame initGame, pathXDataModel initData, pathXLevelSelector initLevelSelector)
+    public pathXPanel(pathXMiniGame initGame, pathXDataModel initData, pathXLevelSelector initLevelSelector)
     {
         game = initGame;
         data = initData;
@@ -127,6 +127,7 @@ public class pathXPanel extends JPanel{
             // RENDER THE BACKGROUND, WHICHEVER SCREEN WE'RE ON
             renderBackground(g);
             
+            
             //RENDER THE MAP IF THE CURRENT STATE IN LEVEL SELECT
             Sprite map = game.getGUIDecor().get(MAP_TYPE);
             if(map.isEnabled())
@@ -155,6 +156,7 @@ public class pathXPanel extends JPanel{
 
                 // AND THE BUTTONS AND DECOR
                 renderGUIControls(g);
+
                 
             }    
 
@@ -164,7 +166,9 @@ public class pathXPanel extends JPanel{
 
             // AND THE BUTTONS AND DECOR
  //           renderGUIControls(g);
-
+            
+            
+            
         }
         finally
         {
@@ -190,6 +194,8 @@ public class pathXPanel extends JPanel{
         // THERE IS ONLY ONE CURRENTLY SET
         Sprite bg = game.getGUIDecor().get(BACKGROUND_TYPE);
         renderSprite(g, bg);
+        
+
     }
 
     /**
@@ -321,6 +327,45 @@ public class pathXPanel extends JPanel{
             while(bandits.hasNext())
             {
                 bandits.next().update(game);
+            }
+        }
+        
+        if(!data.isPaused())
+        {
+            //CHECK FOR COLLISIONS
+            Iterator<Police> police = data.getPolice();
+            Police cop;
+            while(police.hasNext())
+            {
+                cop = police.next();
+                if(player.aabbsOverlap(cop))
+                {
+                    game.playPoliceSiren();
+                    data.pause();
+                    data.endGameAsLoss();
+                }
+            }
+            
+            Iterator<Zombie> zombies = data.getZombie();
+            Zombie zom;    
+            while(zombies.hasNext())
+            {
+                zom = zombies.next();
+                if(player.aabbsOverlap(zom))
+                {
+                    game.playCarCrash();
+                }
+            }
+            
+            Iterator<Bandit> bandits = data.getBandits();
+            Bandit bandit;
+            while(bandits.hasNext())
+            {
+                bandit = bandits.next();
+                if(player.aabbsOverlap(bandit))
+                {
+                    game.playBulletRicochet();
+                }
             }
         }
         
@@ -741,12 +786,13 @@ public class pathXPanel extends JPanel{
         int levelMouseY = data.getLastMouseY() + viewport.getViewportY();
         g2.drawString(MOUSE_LEVEL_POSITION_TITLE + levelMouseX + ", " + levelMouseY,
                 300, 60);
-        g2.drawString(VIEWPORT_POSITION_TITLE + viewport.getViewportX() + ", " + viewport.getViewportY(),
-                300, 90);
+  //      g.drawString(VIEWPORT_POSITION_TITLE + viewport.getViewportX() + ", " + viewport.getViewportY(),
+  //              300, 90);
         g2.drawString("Player Position" + player.getX() + ", " + player.getY(),
-                400, 120);
+                300, 120);
         g2.drawString("Player Target" + player.getTargetX() + ", " + player.getTargetY(),
                 300, 150);
+        g2.drawString("Playyer AABY "+ player.getAABBheight() + ", " + player.getAABBwidth(), 300, 180);
     }
     
     public void renderLevelInfo(Graphics g)
@@ -770,8 +816,9 @@ public class pathXPanel extends JPanel{
     {
         g.setColor(LEVEL_SELECT_COLOR);
         g.setFont(LEVEL_SELECT_FONT);
-        g.drawString(model.getLevelMoneyDisplay(), PLAYER_MONEY_X , PLAYER_MONEY_Y);
+        g.drawString(data.getMoneyDisplay(), PLAYER_MONEY_X , PLAYER_MONEY_Y);
         g.drawString(data.getGoalDisplay(), GOAL_X, GOAL_Y);
 
     }
+    
 }

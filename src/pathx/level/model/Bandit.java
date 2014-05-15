@@ -17,6 +17,7 @@ import java.util.Iterator;
 import mini_game.Viewport;
 import pathx.data.pathXDataModel;
 import java.util.Random;
+import java.math.RoundingMode;
 
 /**
  *
@@ -176,7 +177,7 @@ public class Bandit extends Sprite{
                 targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
                 targetY = next.y - viewport.getViewportY();
                 road = levelModel.getRoad(now, next);
-                startMovingToTarget(road.speedLimit/10);
+                startMovingToTarget(Math.round((road.getSpeedLimit()/10) * data.getGameSpeed()));
                 now = next;
             }
             else

@@ -17,6 +17,7 @@ import java.util.Iterator;
 import mini_game.Viewport;
 import pathx.data.pathXDataModel;
 import java.util.Random;
+import java.math.RoundingMode;
 
 /**
  *
@@ -63,6 +64,7 @@ public class Police extends Sprite {
     public void setImage(BufferedImage img)
     {
         SpriteType sT = this.getSpriteType();
+        sT.setDimensions(50, 50);
         sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
         sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
         this.setState(pathXTileState.VISIBLE_STATE.toString());
@@ -140,7 +142,8 @@ public class Police extends Sprite {
             targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
             targetY = next.y - viewport.getViewportY();
             path = levelModel.getRoad(now, next);
-            startMovingToTarget(path.speedLimit/10);
+            int speed = Math.round((path.getSpeedLimit()/10) * data.getGameSpeed());
+            startMovingToTarget(Math.round((path.getSpeedLimit()/10) * data.getGameSpeed()));
         }
         if (calculateDistanceToTarget() < MAX_TILE_VELOCITY)
         {

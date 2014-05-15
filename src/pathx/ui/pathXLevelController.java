@@ -52,6 +52,9 @@ public class pathXLevelController implements MouseListener, MouseMotionListener
         int canvasX = me.getX();
         int canvasY = me.getY();
         
+        data.setMousePressedX(canvasX);
+        data.setMousePressedY(canvasY);
+        
         
                 //Update to pull from properties later
         

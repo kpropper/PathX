@@ -42,11 +42,13 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private Player player;
     
-    private int money;
+    private int money = 0;
     
     private int level;
     
     private int goal = MONEY_GOAL;
+    
+    private float gameSpeed = 1;
     
     private pathXLevelPlacement placement = new pathXLevelPlacement();
     
@@ -62,6 +64,8 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private Iterator NPC;
     
+    private int mousePressedX;
+    private int mousePressedY;
 
 
     /**
@@ -98,10 +102,28 @@ public class pathXDataModel extends MiniGameDataModel {
         soundEffectsOn = true;
     }
     
+    public void setMousePressedX(int x)
+    {
+        mousePressedX = x;
+    }
+    
+    public void setMousePressedY(int y)
+    {
+        mousePressedY = y;
+    }
+    
+    public void setGameSpeed(float gS)
+    {
+        gameSpeed = gS;
+    }
+            
     public boolean soundEffectsOn() {   return soundEffectsOn;  }
     public Player getPlayer()       {   return player;          }
     public int getMoney()           {   return money;           }
     public int getLevel()           {   return level;           }
+    public int getMousePressedX()   {   return mousePressedX;   }
+    public int getMousePressedY()   {   return mousePressedY;   }
+    public float getGameSpeed()    {   return gameSpeed;       }
     public Intersection getStart()  {   return model.getStartingLocation(); }
     public Intersection getDestination() {  return model.getDestination();  }
     public Iterator getPolice()   {   return police.iterator();   }
@@ -113,6 +135,12 @@ public class pathXDataModel extends MiniGameDataModel {
     {
         String goalMoney = "$" + Integer.toString(goal);
         return goalMoney;
+    }
+    
+    public String getMoneyDisplay()
+    {
+        String moneyDisplay = "$"+ Integer.toString(money);
+        return moneyDisplay;
     }
 
     //  CHANGE THE AMOUNT OF MONEY
@@ -131,6 +159,7 @@ public class pathXDataModel extends MiniGameDataModel {
     public void createPlayer()
     {
         SpriteType sT = new SpriteType(PLAYER_TYPE);
+        sT.setDimensions(50, 50);
         player = new Player(sT,0,0,0,0,pathXTileState.INVISIBLE_STATE.toString());
     }
     
@@ -140,6 +169,7 @@ public class pathXDataModel extends MiniGameDataModel {
     {
         NPC = placement.getPolice(model.getLevelName());
         SpriteType sT = new SpriteType(POLICE_TYPE);
+        sT.setDimensions(POLICE_SPRITE_HEIGHT, POLICE_SPRITE_WIDTH);
         for(int c = 1; c <= model.getNumPolice(); c++)
         {
             
@@ -159,6 +189,7 @@ public class pathXDataModel extends MiniGameDataModel {
     public void createZombies(BufferedImage p)
     {
         SpriteType sT = new SpriteType(ZOMBIE_TYPE);
+        sT.setDimensions(ZOMBIE_SPRITE_HEIGHT, ZOMBIE_SPRITE_WIDTH);
         for(int z = 1; z <= model.getNumZombies(); z++)
         {
             
@@ -177,7 +208,8 @@ public class pathXDataModel extends MiniGameDataModel {
     //CREATE BANDIT SPRITES
     public void createBandits(BufferedImage p)
     {
-        SpriteType sT = new SpriteType(BANDIT_TYPE);        
+        SpriteType sT = new SpriteType(BANDIT_TYPE);
+        sT.setDimensions(BANDIT_SPRITE_HEIGHT, BANDIT_SPRITE_WIDTH);
         for(int b = 1; b <= model.getNumBandits(); b++)
         {
             

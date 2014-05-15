@@ -155,6 +155,12 @@ public class pathXConstants {
     public static final int SOUND_BUTTON_Y = MUSIC_BUTTON_Y -50;
     public static final int GAME_SPEED_BUTTON_X = 300;
     public static final int GAME__SPEED_BUTTON_Y = 310;
+    public static final int GAME_SPEED_MIN_X = 134;
+    public static final int GAME_SPEED_MAX_X = 484;
+    public static final int GAME_SPEED_MIN_Y = 311;
+    public static final int GAME_SPEED_MAX_Y = 347;
+    public static final int GAME_SPEED_MIDDLE = 306;
+    
     
     // UI CONTROLS FOR THE LEVEL SELECT SCREEN
     public static final int UP_BUTTON_X = 100;
@@ -213,6 +219,14 @@ public class pathXConstants {
     public static final String POLICE_TYPE = "POLICE_TYPE";
     public static final String ZOMBIE_TYPE = "ZOMBIE_TYPE";
     public static final String BANDIT_TYPE = "BANDIT_TYPE";
+    public static final int    PLAYER_SPRITE_HEIGHT = 50;
+    public static final int    PLAYER_SPRITE_WIDTH = 50;
+    public static final int    POLICE_SPRITE_HEIGHT = PLAYER_SPRITE_HEIGHT;
+    public static final int    POLICE_SPRITE_WIDTH = PLAYER_SPRITE_WIDTH;
+    public static final int    BANDIT_SPRITE_HEIGHT = PLAYER_SPRITE_HEIGHT;
+    public static final int    BANDIT_SPRITE_WIDTH = PLAYER_SPRITE_WIDTH;
+    public static final int    ZOMBIE_SPRITE_HEIGHT = 50;
+    public static final int    ZOMBIE_SPRITE_WIDTH = 29; 
     public static final String GREEN_LIGHT_BUTTON_TYPE = "GREEN_LIGHT_BUTTON_TYPE";
     public static final String RED_LIGHT_BUTTON_TYPE = "RED_LIGHT_BUTTON_TYPE";
     public static final String FLAT_TIRE_BUTTON_TYPE = "FLAT_TIRE_BUTTON_TYPE";

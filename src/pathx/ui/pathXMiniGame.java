@@ -1957,6 +1957,30 @@ public class pathXMiniGame extends MiniGame{
             audio.play(pathXPropertyType.AUDIO_CUE_CAR_START.toString(), true);
         }
     }
+    
+    public void playPoliceSiren()
+    {
+        if(((pathXDataModel)data).soundEffectsOn())
+        {
+            audio.play(pathXPropertyType.AUDIO_CUE_POLICE_SIREN.toString(), true);
+        }
+    }
+    
+    public void playCarCrash()
+    {
+        if(((pathXDataModel)data).soundEffectsOn())
+        {
+            audio.play(pathXPropertyType.AUDIO_CUE_CAR_CRASH.toString(), true);
+        }
+    }
+    
+    public void playBulletRicochet()
+    {
+        if(((pathXDataModel)data).soundEffectsOn())
+        {
+            audio.play(pathXPropertyType.AUDIO_CUE_BULLET_RICOCHET.toString(), true);
+        }
+    }
     /**
      * Initializes the game event handlers for things like
      * game gui buttons.
@@ -2308,6 +2332,16 @@ public class pathXMiniGame extends MiniGame{
                 {
                     button.setState(pathXTileState.VISIBLE_STATE.toString());
                 }
+            }
+        }
+        
+        if(currentScreenState == SETTINGS_SCREEN_STATE)
+        {
+            if(((((pathXDataModel)data).getMousePressedX() < GAME_SPEED_MAX_X) && ((pathXDataModel)data).getMousePressedX() > GAME_SPEED_MIN_X)
+                    && ((((pathXDataModel)data).getMousePressedY() < GAME_SPEED_MAX_Y) && ((pathXDataModel)data).getMousePressedY() > GAME_SPEED_MIN_Y))
+            {
+                guiButtons.get(GAME_SPEED_BUTTON_TYPE).setX(((pathXDataModel)data).getMousePressedX());
+               ((pathXDataModel)data).setGameSpeed(((pathXDataModel)data).getMousePressedX()/(float)GAME_SPEED_MIDDLE);
             }
         }
     }    

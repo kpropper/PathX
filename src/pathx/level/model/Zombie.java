@@ -167,7 +167,7 @@ public class Zombie extends Sprite{
                 next = (Intersection)pathIt.next();
                 targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
                 targetY = next.y - viewport.getViewportY();
-                startMovingToTarget(1);
+                startMovingToTarget(Math.round(data.getGameSpeed()));
             }
             else
             {

@@ -92,7 +92,7 @@ public class pathXLevelModel {
     public Intersection     getStartingLocation()       {   return level.startingLocation;  }
     public Intersection     getDestination()            {   return level.destination;       }
     public String           getLevelName()              {   return level.getLevelName();    }
-    public String           getLevelMoneyDisplay()
+    public String getLevelMoneyDisplay()
     {
         String moneyDisplay = "$"+ Integer.toString(level.getMoney());
         return moneyDisplay;

@@ -58,6 +58,7 @@ public class Player extends Sprite{
     public void setImage(BufferedImage img)
     {
         SpriteType sT = this.getSpriteType();
+        sT.setDimensions(PLAYER_SPRITE_HEIGHT, PLAYER_SPRITE_WIDTH);
         sT.addState(pathXTileState.VISIBLE_STATE.toString(), img);
         sT.addState(pathXTileState.MOUSE_OVER_STATE.toString(), img);
         this.setState(pathXTileState.VISIBLE_STATE.toString());
