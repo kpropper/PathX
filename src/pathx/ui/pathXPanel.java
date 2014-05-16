@@ -82,6 +82,7 @@ public class pathXPanel extends JPanel{
     
     private boolean renderLoss;
     
+    private int renderPlayer;
     
     
     /**
@@ -355,11 +356,29 @@ public class pathXPanel extends JPanel{
                         if(player.aabbsOverlap(cop))
                         {
                             game.playPoliceSiren();
-                            data.pause();
-                            data.endGameAsLoss();
-                            game.endGameAsLoss();
-                            data.changeMoney(-Math.round(POLICE_LEVEL_LOSS_PENALTY * data.getMoney()));
-                            renderLoss = true;
+                            if(((pathXDataModel)data).getCurrentSpecial().compareTo(pathXSpecialsType.INVINCIBILITY.toString()) == 0)
+                            {
+                                cop.setAlive(false);
+                                cop.setEnabled(false);
+                                cop.setState(pathXTileState.INVISIBLE_STATE.toString());
+                                cop.setX(1000000000);
+                                cop.setY(1000000000);
+                                cop.setTarget(1000000000, 1000000000);
+                                
+                            }
+                            else if(((pathXDataModel)data).getCurrentSpecial().compareTo(pathXSpecialsType.STEAL.toString()) == 0)
+                            {   
+                                int get = cop.takeMoney();
+                                if(get > 0) data.changeLevelMoney(get);
+                            }
+                            else
+                            {
+                                data.pause();
+                                data.endGameAsLoss();
+                                game.endGameAsLoss();
+                                data.changeMoney(-Math.round(POLICE_LEVEL_LOSS_PENALTY * data.getMoney()));
+                                renderLoss = true;
+                            }
                         }
                     }
             
@@ -371,14 +390,31 @@ public class pathXPanel extends JPanel{
                         if(player.aabbsOverlap(zom))
                         {
                             game.playCarCrash();
-                            player.decreaseSpeed();
-                            if(player.GetSpeed() == 0)
+                            if(((pathXDataModel)data).getCurrentSpecial().compareTo(pathXSpecialsType.INVINCIBILITY.toString()) == 0)
                             {
-                                game.endGameAsLoss();
-                                renderLoss = true;
+                                zom.setAlive(false);
+                                zom.setEnabled(false);
+                                zom.setState(pathXTileState.INVISIBLE_STATE.toString());
+                                zom.setX(1000000000);
+                                zom.setY(1000000000);
+                                zom.setTarget(1000000000, 1000000000);
                             }
-                            //Gives THE PLAYER ICON TIME TO GET AWAY FROM COLLISION
-                            game.respondToSpecialsRequest(pathXSpecialsType.INTANGIBILITY.toString(), 1000);
+                            else if(((pathXDataModel)data).getCurrentSpecial().compareTo(pathXSpecialsType.STEAL.toString()) == 0)
+                            {
+                                int get = zom.takeMoney();
+                                if(get > 0) data.changeLevelMoney(get);
+                            }
+                            else
+                            {
+                                player.decreaseSpeed();
+                                if(player.GetSpeed() == 0)
+                                {
+                                    game.endGameAsLoss();
+                                    renderLoss = true;
+                                }
+                                //Gives THE PLAYER ICON TIME TO GET AWAY FROM COLLISION
+                                game.respondToSpecialsRequest(pathXSpecialsType.INTANGIBILITY.toString(), 1000);
+                            }
                         }
                     }
             
@@ -390,9 +426,26 @@ public class pathXPanel extends JPanel{
                         if(player.aabbsOverlap(bandit))
                         {
                             game.playBulletRicochet();
-                            data.changeLevelMoney(-Math.round(BANDIT_LEVEL_LOSS_PENALTY * data.getLevelMoney()));
-                            //Gives THE PLAYER ICON TIME TO GET AWAY FROM COLLISION
-                            game.respondToSpecialsRequest(pathXSpecialsType.INTANGIBILITY.toString(), 1000);
+                            if(((pathXDataModel)data).getCurrentSpecial().compareTo(pathXSpecialsType.INVINCIBILITY.toString()) == 0)
+                            {
+                                bandit.setAlive(false);
+                                bandit.setEnabled(false);
+                                bandit.setState(pathXTileState.INVISIBLE_STATE.toString());
+                                bandit.setX(1000000000);
+                                bandit.setY(1000000000);
+                                bandit.setTarget(1000000000, 1000000000);
+                            }
+                            else if(((pathXDataModel)data).getCurrentSpecial().compareTo(pathXSpecialsType.STEAL.toString()) == 0)
+                            {
+                                int get = bandit.takeMoney();
+                                if(get > 0) data.changeLevelMoney(get);
+                            }
+                            else
+                            {
+                                data.changeLevelMoney(-Math.round(BANDIT_LEVEL_LOSS_PENALTY * data.getLevelMoney()));
+                                //Gives THE PLAYER ICON TIME TO GET AWAY FROM COLLISION
+                                game.respondToSpecialsRequest(pathXSpecialsType.INTANGIBILITY.toString(), 1000);
+                            }
                         }
                     }
                 }
@@ -408,14 +461,14 @@ public class pathXPanel extends JPanel{
         
         //BUTTONS AND DIOLOGS ARE RERENDERED DUE TO CLIPPPING OF THE ROADS
         renderGUIControls(g);
-        if(game.getGUIButtons().get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled())
+        if(game.getGUIButtons().get(LEVEL_INFO_CLOSE_BUTTON_TYPE).isEnabled()&& !data.isGameWon())
         {
             renderLevelInfo(g);
             
             renderInfoText(g2);
 
         }
-        else if(data.isGameWon()/*|| data.getCurrentSpecial().compareTo(pathXSpecialsType.FLYING.toString())== 0*/)
+        else if(data.isGameWon())
         {
             renderGameWon(g);
         }
@@ -432,7 +485,44 @@ public class pathXPanel extends JPanel{
             renderIntersections(g2);
         
             //renderSprite(g, player);
-            renderPlayer(g, player);
+            if(((pathXDataModel)data).getCurrentSpecial().compareTo(pathXSpecialsType.INTANGIBILITY.toString()) == 0 || 
+                    ((pathXDataModel)data).getCurrentSpecial().compareTo(pathXSpecialsType.STEAL.toString()) == 0)
+            {
+                if(renderPlayer < 4)
+                {
+                    renderPlayer++;
+                    renderPlayer(g, player);
+                }
+                else if(renderPlayer < 8)
+                {
+                    renderPlayer++;
+                }
+                else
+                {
+                    renderPlayer = 0;
+                }
+            }
+            else if(((pathXDataModel)data).getCurrentSpecial().compareTo(pathXSpecialsType.INVINCIBILITY.toString()) == 0)
+            {
+                if(renderPlayer < 1)
+                {
+                    renderPlayer++;
+                    renderPlayer(g, player);
+                }
+                else if(renderPlayer < 2)
+                {
+                    renderPlayer++;
+                }
+                else
+                {
+                    renderPlayer = 0;
+                }
+            }
+            else
+            {
+                renderPlayer(g, player);
+            }
+
             
             renderNPCs(g2);
         
@@ -729,6 +819,11 @@ public class pathXPanel extends JPanel{
                 Stroke s = recyclableStrokes.get(INT_STROKE);
                 g2.setStroke(s);
                 g2.draw(recyclableCircle);
+            }
+            if(intersection.toggleTime <= data.getTime())
+            {
+                intersection.toggleOpen();
+                intersection.setChangedTime(999999999999999999L);
             }
         }
 

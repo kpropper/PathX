@@ -394,15 +394,15 @@ public class pathXConstants {
     public static final String VIEWPORT_POSITION_TITLE = "Viewport Position: ";
     
     //SPECIALS TIMES
-    public static final long GREEN_LIGHT_TIME = 10000;
-    public static final long RED_LIGHT_TIME = 10000;
-    public static final long FLAT_TIRE_TIME = 10000;
-    public static final long GAS_TIME = 20000;
-    public static final long Steal_TIME = 10000;
-    public static final long MIND_CONTROL = 20000;
-    public static final long INTANGIBILITY_TIME = 10000;
-    public static final long INVINCIBILITY_TIME = 10000;
+    public static final long GREEN_LIGHT_TIME = 10000L;
+    public static final long RED_LIGHT_TIME = 10000L;
+    public static final long FLAT_TIRE_TIME = 10000L;
+    public static final long GAS_TIME = 20000L;
+    public static final long STEAL_TIME = 10000L;
+    public static final long MIND_CONTROL = 20000L;
+    public static final long INTANGIBILITY_TIME = 10000L;
+    public static final long INVINCIBILITY_TIME = 10000L;
     public static final String NONE = "NONE";
-    public static final long THIRTY_SECONDS = 30000;
+    public static final long THIRTY_SECONDS = 30000L;
     
 }

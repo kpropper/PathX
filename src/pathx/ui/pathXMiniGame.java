@@ -506,13 +506,6 @@ public class pathXMiniGame extends MiniGame{
                     temp.setX(temp.getX()- x);
                     temp.setY(temp.getY() - y);
                     temp.setTarget(temp.getTargetX() - x,temp.getTargetY()- y);
-                //    Iterator playerPath = temp.getPathIterator();
-               //     while(playerPath.hasNext())
-                 //   {
-                   //     Intersection pathNode = (Intersection)playerPath.next();
-                     //   pathNode.setX(pathNode.getX() + x);
-                       // pathNode.setX(pathNode.getY() + y);
-                    //}
                     if(temp.getX() < 200)
                     {
                         temp.setState("INVISIBLE_STATE");
@@ -629,13 +622,61 @@ public class pathXMiniGame extends MiniGame{
         {
             ((pathXDataModel)data).setSpecial(special/*pathXSpecialsType.INTANGIBILITY.toString()*/);
             endSpecial = time + ((pathXDataModel)data).getTime();
+            ((pathXDataModel)data).changeLevelMoney(-30);
         }
         
         if(special.compareTo(pathXSpecialsType.FLYING.toString())==0)
         {
             ((pathXDataModel)data).setSpecial(special);
             endSpecial = THIRTY_SECONDS + ((pathXDataModel)data).getTime();
+            ((pathXDataModel)data).changeLevelMoney(-40);
         }
+        
+        if(special.compareTo(pathXSpecialsType.INCREASE_PLAYER_SPEED.toString())==0)
+        {
+            ((pathXDataModel)data).getPlayer().increaseSpeed();
+            ((pathXDataModel)data).changeLevelMoney(-20);
+        }
+        
+        if(special.compareTo(pathXSpecialsType.GREEN_LIGHT.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            ((pathXDataModel)data).changeLevelMoney(-5);
+            endSpecial = time + ((pathXDataModel)data).getTime();
+        }
+        if(special.compareTo(pathXSpecialsType.RED_LIGHT.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            ((pathXDataModel)data).changeLevelMoney(-5);
+            endSpecial = time + ((pathXDataModel)data).getTime();
+        }
+        if(special.compareTo(pathXSpecialsType.INVINCIBILITY.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            ((pathXDataModel)data).changeLevelMoney(-40);
+            endSpecial = time + ((pathXDataModel)data).getTime();
+        }
+        if(special.compareTo(pathXSpecialsType.EMPTY_TANK.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            ((pathXDataModel)data).setTimeStopped(time);
+            ((pathXDataModel)data).changeLevelMoney(-20);
+            endSpecial = time + ((pathXDataModel)data).getTime();
+        }
+        if(special.compareTo(pathXSpecialsType.FLAT_TIRE.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            ((pathXDataModel)data).setTimeStopped(time);
+            ((pathXDataModel)data).changeLevelMoney(-20);
+            endSpecial = time + ((pathXDataModel)data).getTime();
+        }
+        if(special.compareTo(pathXSpecialsType.STEAL.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            ((pathXDataModel)data).changeLevelMoney(-30);
+            endSpecial = time + ((pathXDataModel)data).getTime();
+        }
+        
     }
     
     public void endGameAsLoss()
@@ -2650,7 +2691,7 @@ public class pathXMiniGame extends MiniGame{
         
         guiButtons.get(RED_LIGHT_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
-                {   eventHandler.respondToCloseRequest();  }
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.RED_LIGHT.toString(),RED_LIGHT_TIME);  }
         });
         
         guiButtons.get(FREEZE_TIME_BUTTON_TYPE).setActionListener(new ActionListener() {
@@ -2670,17 +2711,17 @@ public class pathXMiniGame extends MiniGame{
         
         guiButtons.get(INCREASE_PLAYER_SPEED_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
-                {   eventHandler.respondToCloseRequest();  }
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.INCREASE_PLAYER_SPEED.toString(),0);  }
         });
         
         guiButtons.get(FLAT_TIRE_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
-                {   eventHandler.respondToCloseRequest();  }
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.FLAT_TIRE.toString(),FLAT_TIRE_TIME);  }
         });
         
         guiButtons.get(GAS_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
-                {   eventHandler.respondToCloseRequest();  }
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.EMPTY_TANK.toString(),GAS_TIME);  }
         });
         
         guiButtons.get(CLOSE_ROAD_BUTTON_TYPE).setActionListener(new ActionListener() {
@@ -2700,7 +2741,7 @@ public class pathXMiniGame extends MiniGame{
         
         guiButtons.get(STEAL_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
-                {   eventHandler.respondToCloseRequest();  }
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.STEAL.toString(),STEAL_TIME);  }
         });
         
         guiButtons.get(MIND_CONTROL_BUTTON_TYPE).setActionListener(new ActionListener() {
@@ -2720,7 +2761,7 @@ public class pathXMiniGame extends MiniGame{
         
         guiButtons.get(INVINCIBLE_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
-                {   eventHandler.respondToCloseRequest();  }
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.INVINCIBILITY.toString(),INVINCIBILITY_TIME);  }
         });
 
         // KEY LISTENER - LET'S US PROVIDE CUSTOM RESPONSES

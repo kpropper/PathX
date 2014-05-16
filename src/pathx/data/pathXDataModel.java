@@ -56,6 +56,8 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private float gameSpeed = 1;
     
+    private long timeStopped;
+    
     //private Intersection destination;
     
     private pathXLevelPlacement placement = new pathXLevelPlacement();
@@ -94,6 +96,8 @@ public class pathXDataModel extends MiniGameDataModel {
         
         //SETUP THE PLAYER
         createPlayer();
+        
+        startTime = new GregorianCalendar();
 
     }
 
@@ -161,8 +165,8 @@ public class pathXDataModel extends MiniGameDataModel {
     
     public String getLevelMoneyDisplay()
     {
-        String moneyDisplay = "$"+ Integer.toString(levelMoney);
-        return moneyDisplay;
+        String levelMoneyDisplay = "$" + Integer.toString(levelMoney);
+        return levelMoneyDisplay;
     }
 
     //  CHANGE THE AMOUNT OF MONEY
@@ -196,6 +200,11 @@ public class pathXDataModel extends MiniGameDataModel {
     public void setSpecial(String special)
     {
         currentSpecial = special;
+    }
+    
+    public void setTimeStopped(long time)
+    {
+        timeStopped = time;
     }
     
     //GET A TIMER
@@ -315,11 +324,80 @@ public class pathXDataModel extends MiniGameDataModel {
             Intersection guess = model.findIntersection(x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),y + viewport.getViewportY());
             if(guess != null)
             {
-               if(!player.isMoving())
+               if(currentSpecial.compareTo(pathXSpecialsType.GREEN_LIGHT.toString()) == 0)
+               {
+                   if(!guess.isOpen())
+                   {
+                       guess.toggleOpen();
+                       currentSpecial = NONE;
+                       guess.toggleTime = getTime() + GREEN_LIGHT_TIME;
+                   }
+               }
+               else if(currentSpecial.compareTo(pathXSpecialsType.RED_LIGHT.toString()) == 0)
+               {
+                   if(guess.isOpen())
+                   {
+                       guess.toggleOpen();
+                       currentSpecial = NONE;
+                       guess.toggleTime = getTime() + GREEN_LIGHT_TIME;
+                   }
+               }
+               else if(!player.isMoving())
                {   player.setPath(model.findShortestPathToIntersection(guess));
                  //  player.setTarget(guess.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX(),guess.y - viewport.getViewportY());
                 //    player.startMovingToTarget(4);
                }
+            }
+            if(currentSpecial.compareTo(pathXSpecialsType.FLAT_TIRE.toString()) == 0  || currentSpecial.compareTo(pathXSpecialsType.EMPTY_TANK.toString()) == 0)
+            {
+                Iterator NPC = NPCs.iterator();
+                Sprite s;
+                Sprite selectedSprite = null;
+                int xNow = x;
+                int yNow = y;
+                while(NPC.hasNext())
+                {
+                    s = (Sprite)NPC.next();
+                    if(s.getX() < xNow + 35 && s.getX() > xNow - 35 && s.getY() < yNow + 35 && s.getY() > yNow - 35)
+                    {
+                        selectedSprite = s;
+                    }
+                }
+                if(selectedSprite != null)
+                {
+                    Iterator p = police.iterator();
+                    while(p.hasNext())
+                    {
+                        s = (Sprite)p.next();
+                        if(selectedSprite.getID() == s.getID())
+                        {
+                           Police temp = (Police)s;
+                           temp.setStopped(getTime(), timeStopped);                          
+                        }          
+                    }
+                    
+                    Iterator z = zombie.iterator();
+                    while(z.hasNext())
+                    {
+                        s = (Sprite)z.next();
+                        if(selectedSprite.getID() == s.getID())
+                        {
+                           Zombie temp = (Zombie)s;
+                           temp.setStopped(getTime(), timeStopped);                          
+                        }          
+                    }
+                    
+                    Iterator b = bandits.iterator();
+                    while(b.hasNext())
+                    {
+                        s = (Sprite)b.next();
+                        if(selectedSprite.getID() == s.getID())
+                        {
+                           Bandit temp = (Bandit)s;
+                           temp.setStopped(getTime(), timeStopped);                          
+                        }          
+                    }
+                }
             }
         }
     }

@@ -1,4 +1,6 @@
 package pathx.level.model;
+import static pathx.pathXConstants.*;
+
 
 /**
  * This class represents an intersection in a level. Note that an intersection
@@ -14,6 +16,8 @@ public class Intersection {
     
     // IS IT OPEN OR NOT
     public boolean open;
+    
+    public long toggleTime = 999999999999999999L;
 
     /**
      * Constructor allows for a custom location, note that all
@@ -30,6 +34,7 @@ public class Intersection {
     public int getX()       {   return x;       }
     public int getY()       {   return y;       }
     public boolean isOpen() {   return open;    }
+    public long getToggleTime() { return toggleTime; }
     
     // MUTATOR METHODS
     public void setX(int x)
@@ -45,6 +50,11 @@ public class Intersection {
     public void toggleOpen()
     {
         open = !open;
+    }
+    
+    public void setChangedTime(long time)
+    {
+        toggleTime = time;
     }
     
     /**

@@ -53,7 +53,15 @@ public class Bandit extends Sprite{
     
     private Road road;
     
+    private int money;
+    
     private Random caller = new Random();
+    
+    private boolean alive = true;
+    
+    private long stopped;
+    
+    private boolean notStopped = true;
     
     
     //IS THE PLAYER CURRENTLY MOVING
@@ -65,11 +73,15 @@ public class Bandit extends Sprite{
         super(sT, 0, 0,0,0, pathXTileState.VISIBLE_STATE.toString());
 
         movingToTarget = false;
+        Random moneyGenerator = new Random();
+        money = moneyGenerator.nextInt(100) + 1;
     }
     
     public boolean isMoving()   {   return movingToTarget;   }
     public float getTargetX()   {   return targetX;  }
     public float getTargetY()   {   return targetY;  }
+    public long getTimeStopped()    {   return stopped;     }
+    public boolean getNotStopped() { return notStopped; }
     
     public void setImage(BufferedImage img)
     {
@@ -166,33 +178,53 @@ public class Bandit extends Sprite{
         pathIt = path.iterator();
     }
     
+    public int takeMoney()
+    {
+        int stolen = money;
+        money = 0;
+        return stolen;
+    }
+    
+    public void setStopped(long time, long timeStopped)
+    {
+        stopped = time + timeStopped;
+        notStopped = false;
+    }
+    
+    public void setAlive(boolean dead)
+    {
+        alive = dead;
+    }
+    
     @Override
     public void update(MiniGame game)
     {
-        if(!movingToTarget)
+        if(alive && notStopped)
         {
-            if(pathIt.hasNext())
+            if(!movingToTarget)
             {
-                next = (Intersection)pathIt.next();
-                targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
-                targetY = next.y - viewport.getViewportY();
-                road = levelModel.getRoad(now, next);
-                startMovingToTarget(Math.round((road.getSpeedLimit()/10) * data.getGameSpeed()));
-                now = next;
-            }
-            else
-            {
-                if((next.x == data.getDestination().x) && (next.y == data.getDestination().y) )
+                if(pathIt.hasNext())
                 {
-                    destination = data.getStart();
-                    getBanditPath();
+                    next = (Intersection)pathIt.next();
+                    targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
+                    targetY = next.y - viewport.getViewportY();
+                    road = levelModel.getRoad(now, next);
+                    startMovingToTarget(Math.round((road.getSpeedLimit()/10) * data.getGameSpeed()));
+                    now = next;
                 }
                 else
                 {
-                    destination = data.getDestination();
-                    getBanditPath();
+                    if((next.x == data.getDestination().x) && (next.y == data.getDestination().y) )
+                    {
+                        destination = data.getStart();
+                        getBanditPath();
+                    }
+                    else
+                    {
+                        destination = data.getDestination();
+                        getBanditPath();
+                    }
                 }
-            }
    //         now = levelModel.findIntersection((int)x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),(int)y + viewport.getViewportY());
   //          nextStops = levelModel.getNeighbors(now);
   //          next = nextStops.get(caller.nextInt((nextStops.size())));
@@ -200,20 +232,30 @@ public class Bandit extends Sprite{
   //          targetY = next.y + viewport.getViewportY();
   //          path = levelModel.getRoad(now, next);
   //          startMovingToTarget(1);
+            }
+            if (calculateDistanceToTarget() < MAX_TILE_VELOCITY)
+            {
+                vX = 0;
+                vY = 0;
+                x = targetX;
+                y = targetY;
+                movingToTarget = false;
+            }
+            // OTHERWISE, JUST DO A NORMAL UPDATE, WHICH WILL CHANGE ITS POSITION
+            // USING ITS CURRENT VELOCITY.
+            else
+            {
+                super.update(game);
+            }
         }
-        if (calculateDistanceToTarget() < MAX_TILE_VELOCITY)
-        {
-            vX = 0;
-            vY = 0;
-            x = targetX;
-            y = targetY;
-            movingToTarget = false;
-        }
-        // OTHERWISE, JUST DO A NORMAL UPDATE, WHICH WILL CHANGE ITS POSITION
-        // USING ITS CURRENT VELOCITY.
         else
         {
-            super.update(game);
+            if(!notStopped)
+            {
+                long timenow = data.getTime();
+                if(data.getTime() >= stopped) notStopped = true;
+                int a = 1+1;
+            }
         }
     }
     

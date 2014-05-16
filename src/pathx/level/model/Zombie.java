@@ -48,7 +48,16 @@ public class Zombie extends Sprite{
     
     private Road road;
     
+    private int money;
+    
+    private boolean alive = true;
+    
     private Random caller = new Random();
+    
+    private long stopped;
+    
+    private boolean notStopped = true;
+    
     
     
     //IS THE PLAYER CURRENTLY MOVING
@@ -60,11 +69,15 @@ public class Zombie extends Sprite{
         super(sT, 0, 0,0,0, pathXTileState.VISIBLE_STATE.toString());
 
         movingToTarget = false;
+        Random moneyGenerator = new Random();
+        money = moneyGenerator.nextInt(200) + 1;
     }
     
     public boolean isMoving()   {   return movingToTarget;   }
     public float getTargetX()   {   return targetX;  }
     public float getTargetY()   {   return targetY;  }
+    public long getTimeStopped()    {   return stopped;     }
+    public boolean getNotStopped() { return notStopped; }
     
     public void setImage(BufferedImage img)
     {
@@ -121,6 +134,12 @@ public class Zombie extends Sprite{
         this.y = y;
     }
     
+    public void setStopped(long time, long timeStopped)
+    {
+        stopped = time + timeStopped;
+        notStopped = false;
+    }
+    
     public float calculateDistanceToTarget()
     {
         // GET THE X-AXIS DISTANCE TO GO
@@ -157,22 +176,36 @@ public class Zombie extends Sprite{
         pathIt = path.iterator();
     }
     
+    public int takeMoney()
+    {
+        int stolen = money;
+        money = 0;
+        return stolen;
+    }
+    
+    public void setAlive(boolean undead)
+    {
+        alive = undead;
+    }
+    
     @Override
     public void update(MiniGame game)
     {
-        if(!movingToTarget)
+        if(alive && notStopped)
         {
-            if(pathIt.hasNext())
+            if(!movingToTarget)
             {
-                next = (Intersection)pathIt.next();
-                targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
-                targetY = next.y - viewport.getViewportY();
-                startMovingToTarget(Math.round(data.getGameSpeed()));
-            }
-            else
-            {
-                newIter();
-            }
+                if(pathIt.hasNext())
+                {
+                    next = (Intersection)pathIt.next();
+                    targetX = next.x + VIEWABLE_GAMEWORLD_OFFSET - viewport.getViewportX();
+                    targetY = next.y - viewport.getViewportY();
+                    startMovingToTarget(Math.round(data.getGameSpeed()));
+                }
+                else
+                {
+                    newIter();
+                }
    //         now = levelModel.findIntersection((int)x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(),(int)y + viewport.getViewportY());
   //          nextStops = levelModel.getNeighbors(now);
   //          next = nextStops.get(caller.nextInt((nextStops.size())));
@@ -180,21 +213,29 @@ public class Zombie extends Sprite{
   //          targetY = next.y + viewport.getViewportY();
   //          path = levelModel.getRoad(now, next);
   //          startMovingToTarget(1);
+            }
+            if (calculateDistanceToTarget() < MAX_TILE_VELOCITY)
+            {
+                vX = 0;
+                vY = 0;
+                x = targetX;
+                y = targetY;
+                movingToTarget = false;
+            }
+            // OTHERWISE, JUST DO A NORMAL UPDATE, WHICH WILL CHANGE ITS POSITION
+            // USING ITS CURRENT VELOCITY.
+            else
+            {
+                super.update(game);
+            }
         }
-        if (calculateDistanceToTarget() < MAX_TILE_VELOCITY)
-        {
-            vX = 0;
-            vY = 0;
-            x = targetX;
-            y = targetY;
-            movingToTarget = false;
-        }
-        // OTHERWISE, JUST DO A NORMAL UPDATE, WHICH WILL CHANGE ITS POSITION
-        // USING ITS CURRENT VELOCITY.
         else
         {
-            super.update(game);
+            if(!notStopped)
+            {
+                long timenow = data.getTime();
+                if(data.getTime() >= stopped) notStopped = true;
+            }
         }
-    }
-    
+    }    
 }
