@@ -1,6 +1,7 @@
 package pathx.data;
 
 import java.awt.Graphics;
+import java.awt.geom.Line2D;
 import pathx.ui.pathXTile;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ import pathx.level.model.Zombie;
 import pathx.level.model.Bandit;
 import pathx.level.model.pathXLevelPlacement;
 import pathx.data.pathXSpecialsType;
+import pathx.level.model.Road;
+import pathx.level.model.pathXLevel;
 
 
 /**
@@ -78,6 +81,8 @@ public class pathXDataModel extends MiniGameDataModel {
     
     private int mousePressedX;
     private int mousePressedY;
+    
+    private int levelUnlock;
     
     private GregorianCalendar startTime;
 
@@ -179,6 +184,11 @@ public class pathXDataModel extends MiniGameDataModel {
     public void changeLevelMoney(int moneyChange)
     {
         levelMoney += moneyChange;
+    }
+    
+    public void setLevelUnlock(int unlev)
+    {
+        levelUnlock = unlev; 
     }
     //HAS THE GAME BEEN WON
     public void setGameWon()
@@ -399,6 +409,47 @@ public class pathXDataModel extends MiniGameDataModel {
                     }
                 }
             }
+            if(currentSpecial.compareTo(pathXSpecialsType.INCREASE_SPEED_LIMIT.toString()) == 0  || 
+                    currentSpecial.compareTo(pathXSpecialsType.DECREASE_SPEED_LIMIT.toString()) == 0 ||
+                    currentSpecial.compareTo(pathXSpecialsType.CLOSE_ROAD.toString()) == 0)
+            {
+                Road selectedRoad;
+                pathXLevel currLevel = model.getLevel();
+                Iterator<Road> it = currLevel.getRoads().iterator();
+                Line2D.Double tempLine = new Line2D.Double();
+                while (it.hasNext())
+                {
+                    Road r = it.next();
+                    tempLine.x1 = r.getNode1().x;
+                    tempLine.y1 = r.getNode1().y;
+                    tempLine.x2 = r.getNode2().x;
+                    tempLine.y2 = r.getNode2().y;
+                    double distance = tempLine.ptSegDist(x - VIEWABLE_GAMEWORLD_OFFSET + viewport.getViewportX(), y + viewport.getViewportY());
+            
+                    // IS IT CLOSE ENOUGH?
+                    if (distance <= INT_STROKE)
+                    {
+                        // SELECT IT
+                        selectedRoad = r;
+                        if(currentSpecial.compareTo(pathXSpecialsType.INCREASE_SPEED_LIMIT.toString()) == 0)
+                        {   
+                            selectedRoad.setSpeedLimit(selectedRoad.getSpeedLimit() + 15);
+                            currentSpecial = NONE;
+                        }
+                        if(currentSpecial.compareTo(pathXSpecialsType.DECREASE_SPEED_LIMIT.toString()) == 0)
+                        {   
+                            selectedRoad.setSpeedLimit(selectedRoad.getSpeedLimit() - 15);
+                            currentSpecial = NONE;
+                        }
+                        if(currentSpecial.compareTo(pathXSpecialsType.CLOSE_ROAD.toString()) == 0)
+                        {   
+                            selectedRoad.setOpen(false); 
+                            currentSpecial = NONE;
+                        }   
+                    }
+                }
+
+            }
         }
     }
     
@@ -411,7 +462,10 @@ public class pathXDataModel extends MiniGameDataModel {
     @Override
     public void endGameAsWin()
     {
-
+        if(levelUnlock > level)
+        {
+            level = levelUnlock;
+        }
     }
     
     /**

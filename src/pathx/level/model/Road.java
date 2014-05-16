@@ -15,6 +15,8 @@ public class Road {
     // false IF IT'S TWO-WAY, true IF IT'S ONE WAY
     boolean oneWay;
     
+    boolean roadOpen = true;
+    
     // ROAD SPEED LIMIT
     int speedLimit;
     
@@ -25,12 +27,14 @@ public class Road {
     public Intersection getNode2()  {   return node2;       }
     public boolean isOneWay()       {   return oneWay;      }
     public int getSpeedLimit()      {   return speedLimit;  }
+    public boolean roadOpen()       {   return roadOpen;    }
     
     // MUTATOR METHODS
     public void setNode1(Intersection node1)    {   this.node1 = node1;             }
     public void setNode2(Intersection node2)    {   this.node2 = node2;             }
     public void setOneWay(boolean oneWay)       {   this.oneWay = oneWay;           }
     public void setSpeedLimit(int speedLimit)   {   this.speedLimit = speedLimit;   }
+    public void setOpen(boolean isOpen)         {   this.roadOpen = isOpen;         }
 
     public void calculateDistance()
     {

@@ -315,18 +315,6 @@ public class pathXLevelModel {
         return neighborRoads;
     }
     
-    public Road getShortestRoad(ArrayList<Road> roads)
-    {
-        Road shortestRoad = roads.get(0);
-        for (Road r : roads)
-        {
-            if (shortestRoad.distance > r.distance)
-            {
-                shortestRoad = r;
-            }
-        }
-        return shortestRoad;
-    }
     
     public Road getRoad(Intersection i1, Intersection i2)
     {
@@ -378,5 +366,18 @@ public class pathXLevelModel {
            return closestRoad;
      //   }
     //    return null;
+    }
+    
+    public Road getShortestRoad(ArrayList<Road> roads)
+    {
+        Road shortestRoad = roads.get(0);
+        for (Road r : roads)
+        {
+            if (shortestRoad.distance > r.distance)
+            {
+                shortestRoad = r;
+            }
+        }
+        return shortestRoad;
     }
 }

@@ -742,7 +742,10 @@ public class pathXPanel extends JPanel{
         {
             Road road = it.next();
         //    if (model.isSelectedRoad(road))
+            if(road.roadOpen())
                 renderRoad(g2, road, INT_OUTLINE_COLOR);
+            else
+                renderRoad(g2, road, CLOSED_INT_COLOR);
         }
         
 

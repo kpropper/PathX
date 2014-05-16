@@ -676,7 +676,24 @@ public class pathXMiniGame extends MiniGame{
             ((pathXDataModel)data).changeLevelMoney(-30);
             endSpecial = time + ((pathXDataModel)data).getTime();
         }
-        
+        if(special.compareTo(pathXSpecialsType.INCREASE_SPEED_LIMIT.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            ((pathXDataModel)data).changeLevelMoney(-15);
+            endSpecial = ((pathXDataModel)data).getTime() + THIRTY_SECONDS;
+        }
+        if(special.compareTo(pathXSpecialsType.DECREASE_SPEED_LIMIT.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            ((pathXDataModel)data).changeLevelMoney(-15);
+            endSpecial = ((pathXDataModel)data).getTime() + THIRTY_SECONDS;
+        }
+        if(special.compareTo(pathXSpecialsType.CLOSE_ROAD.toString())==0)
+        {
+            ((pathXDataModel)data).setSpecial(special);
+            ((pathXDataModel)data).changeLevelMoney(-25);
+            endSpecial = ((pathXDataModel)data).getTime() + THIRTY_SECONDS;
+        }
     }
     
     public void endGameAsLoss()
@@ -2547,6 +2564,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(LA_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "LosAngles.bin");
+                    ((pathXDataModel)data).setLevelUnlock(2);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2554,6 +2572,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(NY_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "NewYork.bin");
+                ((pathXDataModel)data).setLevelUnlock(3);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2561,6 +2580,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(CH_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                ((pathXDataModel)data).setLevelUnlock(4);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2568,6 +2588,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(HOU_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Houston.bin");
+                ((pathXDataModel)data).setLevelUnlock(5);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2575,6 +2596,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(SA_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "SanAntonio.bin");
+                ((pathXDataModel)data).setLevelUnlock(6);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2582,6 +2604,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(PHIL_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                ((pathXDataModel)data).setLevelUnlock(7);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2589,6 +2612,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(PHE_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Phoenix.bin");
+                ((pathXDataModel)data).setLevelUnlock(8);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2596,6 +2620,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(SD_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "SanDiego.bin");
+                ((pathXDataModel)data).setLevelUnlock(9);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2603,6 +2628,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(DALL_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Dallas.bin");
+                ((pathXDataModel)data).setLevelUnlock(10);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2610,6 +2636,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(SJ_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "SANJOSE.bin");
+                ((pathXDataModel)data).setLevelUnlock(11);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2617,6 +2644,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(AUS_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Austin.bin");
+                ((pathXDataModel)data).setLevelUnlock(12);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2624,6 +2652,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(JAC_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                ((pathXDataModel)data).setLevelUnlock(13);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2631,6 +2660,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(IND_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                ((pathXDataModel)data).setLevelUnlock(14);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2638,6 +2668,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(SF_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "SANFRANCISICO.bin");
+                ((pathXDataModel)data).setLevelUnlock(15);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2645,6 +2676,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(CO_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Columbus.bin");
+                ((pathXDataModel)data).setLevelUnlock(16);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2652,6 +2684,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(FW_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "FortWorth.bin");
+                ((pathXDataModel)data).setLevelUnlock(17);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2659,6 +2692,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(CHAR_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Cali.bin");
+                ((pathXDataModel)data).setLevelUnlock(18);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2666,6 +2700,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(DET_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "Detroit.bin");
+                ((pathXDataModel)data).setLevelUnlock(19);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2673,6 +2708,7 @@ public class pathXMiniGame extends MiniGame{
         guiButtons.get(EP_BUTTON_TYPE).setActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent ae)
                 {   path.setLevelPath(PATH_LEVELS + "ElPaso.bin");
+                ((pathXDataModel)data).setLevelUnlock(20);
                     eventHandler.respondToGameRequest();  }
         });
         
@@ -2701,12 +2737,12 @@ public class pathXMiniGame extends MiniGame{
         
         guiButtons.get(DECREASE_SPEED_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
-                {   eventHandler.respondToCloseRequest();  }
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.DECREASE_SPEED_LIMIT.toString(),0);  }
         });
         
         guiButtons.get(INCREASE_SPEED_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
-                {   eventHandler.respondToCloseRequest();  }
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.INCREASE_SPEED_LIMIT.toString(),0);  }
         });
         
         guiButtons.get(INCREASE_PLAYER_SPEED_BUTTON_TYPE).setActionListener(new ActionListener() {
@@ -2726,7 +2762,7 @@ public class pathXMiniGame extends MiniGame{
         
         guiButtons.get(CLOSE_ROAD_BUTTON_TYPE).setActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae)
-                {   eventHandler.respondToCloseRequest();  }
+                {   eventHandler.respondToSpecialsRequest(pathXSpecialsType.CLOSE_ROAD.toString(),0);  }
         });
         
         guiButtons.get(CLOSE_INTERSECTION_BUTTON_TYPE).setActionListener(new ActionListener() {
